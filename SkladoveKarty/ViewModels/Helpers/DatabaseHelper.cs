@@ -45,7 +45,7 @@
             return this.db.Stores.OrderBy(s => s.Name).ToList();
         }
 
-        public void UpdateStorageCards(StorageCard newStorageCard)
+        public void UpdateStorageCard(StorageCard newStorageCard)
         {
             var storageCard = this.db.StorageCards.Where(s => s.Id == newStorageCard.Id).SingleOrDefault();
 
