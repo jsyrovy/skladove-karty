@@ -33,9 +33,6 @@
             foreach (var customer in this.Database.GetCustomers())
                 this.Customers.Add(customer);
 
-            foreach (var item in this.Database.GetItems())
-                this.Items.Add(item);
-
             foreach (var storageCard in this.Database.GetStorageCards())
                 this.StorageCards.Add(storageCard);
 

@@ -122,7 +122,7 @@
             <ListView
                 Grid.Row="1"
                 Grid.Column="0"
-                ItemsSource="{Binding Items}">
+                ItemsSource="{Binding SelectedStorageCard.Items}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn DisplayMemberBinding="{Binding DateTime}" Header="Datum" />
