@@ -8,7 +8,7 @@ using SkladoveKarty;
 
 namespace SkladoveKarty.Migrations
 {
-    [DbContext(typeof(DatabaseContext))]
+    [DbContext(typeof(Models.DatabaseContext))]
     [Migration("20210111181339_InitialMigration")]
     partial class InitialMigration
     {

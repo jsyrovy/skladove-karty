@@ -1,10 +1,9 @@
 ﻿namespace SkladoveKarty.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class Customer
+    public class StorageCardSupplier
     {
         [Required]
         public long Id { get; set; }
@@ -13,8 +12,9 @@
         public DateTime DateTime { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public StorageCard StorageCard { get; set; }
 
-        public List<Item> Items { get; } = new List<Item>();
+        [Required]
+        public Supplier Supplier { get; set; }
     }
 }

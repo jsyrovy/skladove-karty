@@ -1,4 +1,4 @@
-﻿namespace SkladoveKarty
+﻿namespace SkladoveKarty.Models
 {
     using Microsoft.EntityFrameworkCore;
 

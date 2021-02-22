@@ -7,7 +7,7 @@ using SkladoveKarty;
 
 namespace SkladoveKarty.Migrations
 {
-    [DbContext(typeof(DatabaseContext))]
+    [DbContext(typeof(Models.DatabaseContext))]
     partial class DatabaseContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

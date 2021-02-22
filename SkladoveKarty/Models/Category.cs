@@ -1,4 +1,4 @@
-﻿namespace SkladoveKarty
+﻿namespace SkladoveKarty.Models
 {
     using System;
     using System.Collections.Generic;
