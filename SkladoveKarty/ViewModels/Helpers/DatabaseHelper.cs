@@ -54,6 +54,20 @@
             return this.db.Stores.OrderBy(s => s.Name).ToList();
         }
 
+        public void UpdateItem(Item newItem)
+        {
+            var item = this.db.Items.Where(i => i.Id == newItem.Id).SingleOrDefault();
+
+            item.Name = newItem.Name;
+            item.Movement = newItem.Movement;
+            item.Qty = newItem.Qty;
+            item.Price = newItem.Price;
+            item.Invoice = newItem.Invoice;
+            item.Customer = newItem.Customer;
+
+            this.db.SaveChanges();
+        }
+
         public void UpdateStorageCard(StorageCard newStorageCard)
         {
             var storageCard = this.db.StorageCards.Where(s => s.Id == newStorageCard.Id).SingleOrDefault();

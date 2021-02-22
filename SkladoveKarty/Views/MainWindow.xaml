@@ -125,19 +125,65 @@
                 ItemsSource="{Binding SelectedStorageCard.Items}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding DateTime}" Header="Datum" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Název" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Movement}" Header="Pohyb" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Qty}" Header="Počet" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Price}" Header="Cena" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Invoice}" Header="Faktura" />
+                        <GridViewColumn Header="Datum">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox IsReadOnly="True" Text="{Binding DateTime}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Název">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding Name, Mode=TwoWay}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Pohyb">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding Movement, Mode=TwoWay}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Počet">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding Qty, Mode=TwoWay}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Cena">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding Price, Mode=TwoWay}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Faktura">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding Invoice, Mode=TwoWay}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                         <GridViewColumn Header="Dodavatel">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <ComboBox
                                         DisplayMemberPath="Name"
                                         ItemsSource="{Binding Source={StaticResource vm}, Path=Customers}"
-                                        SelectedItem="{Binding Customer}" />
+                                        SelectedItem="{Binding Customer, Mode=TwoWay}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button
+                                        Command="{Binding Source={StaticResource vm}, Path=UpdateItemCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Content="Uložit" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

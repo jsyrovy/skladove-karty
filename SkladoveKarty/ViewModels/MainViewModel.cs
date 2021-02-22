@@ -21,7 +21,7 @@
 
         public MainViewModel()
         {
-            if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject()))
+            if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
                 return;
 
             foreach (var account in this.Database.GetAccounts())
@@ -41,6 +41,7 @@
 
             this.SelectedStorageCard = this.StorageCards.FirstOrDefault();
 
+            this.UpdateItemCommand = new UpdateItemCommand(this);
             this.UpdateStorageCardCommand = new UpdateStorageCardCommand(this);
         }
 
@@ -65,6 +66,8 @@
         public ObservableCollection<StorageCard> StorageCards { get; set; } = new();
 
         public ObservableCollection<Store> Stores { get; set; } = new();
+
+        public UpdateItemCommand UpdateItemCommand { get; set; }
 
         public UpdateStorageCardCommand UpdateStorageCardCommand { get; set; }
 
