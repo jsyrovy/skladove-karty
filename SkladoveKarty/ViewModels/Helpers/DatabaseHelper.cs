@@ -10,11 +10,6 @@
     {
         private readonly DatabaseContext db = new();
 
-        public List<StorageCard> GetStorageCards()
-        {
-            return this.db.StorageCards.OrderBy(s => s.Name).ToList();
-        }
-
         public List<Item> GetItems()
         {
             return this.db.Items
@@ -38,6 +33,20 @@
         public List<Customer> GetCustomers()
         {
             return this.db.Customers.OrderBy(c => c.Name).ToList();
+        }
+
+        public List<StorageCard> GetStorageCards()
+        {
+            return this.db.StorageCards
+                .Include(s => s.Account)
+                .Include(s => s.Category)
+                .Include(s => s.Store)
+                .Include(s => s.Items)
+                .ThenInclude(i => i.Customer)
+                .Include(s => s.StorageCardSuppliers)
+                .ThenInclude(s => s.Supplier)
+                .OrderBy(s => s.Name)
+                .ToList();
         }
 
         public List<Store> GetStores()
