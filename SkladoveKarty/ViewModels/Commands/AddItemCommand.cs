@@ -15,7 +15,6 @@
             this.ViewModel.NewItem.StorageCard = this.ViewModel.SelectedStorageCard;
             this.ViewModel.Database.AddItem(this.ViewModel.NewItem);
             this.ViewModel.LoadItems();
-            this.ViewModel.SelectedItem = this.ViewModel.NewItem;
             this.ViewModel.NewItem = new();
             this.ViewModel.LastActionStatus = "Položka byla přidána.";
         }
