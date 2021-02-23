@@ -68,6 +68,15 @@
             this.db.SaveChanges();
         }
 
+        public void DeleteItem(Item newItem)
+        {
+            var item = this.db.Items.Where(i => i.Id == newItem.Id).SingleOrDefault();
+
+            this.db.Items.Remove(item);
+
+            this.db.SaveChanges();
+        }
+
         public void UpdateStorageCard(StorageCard newStorageCard)
         {
             var storageCard = this.db.StorageCards.Where(s => s.Id == newStorageCard.Id).SingleOrDefault();

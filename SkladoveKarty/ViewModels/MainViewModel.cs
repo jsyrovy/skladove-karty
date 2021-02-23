@@ -42,6 +42,7 @@
             this.SelectedStorageCard = this.StorageCards.FirstOrDefault();
 
             this.UpdateItemCommand = new UpdateItemCommand(this);
+            this.DeleteItemCommand = new DeleteItemCommand(this);
             this.UpdateStorageCardCommand = new UpdateStorageCardCommand(this);
         }
 
@@ -68,6 +69,8 @@
         public ObservableCollection<Store> Stores { get; set; } = new();
 
         public UpdateItemCommand UpdateItemCommand { get; set; }
+
+        public DeleteItemCommand DeleteItemCommand { get; set; }
 
         public UpdateStorageCardCommand UpdateStorageCardCommand { get; set; }
 
