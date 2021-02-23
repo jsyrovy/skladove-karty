@@ -7,16 +7,24 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SkladoveKarty.ViewModels"
     Title="Skladové Karty"
-    Width="800"
-    Height="450"
+    Width="1200"
+    Height="800"
     mc:Ignorable="d">
 
     <Window.Resources>
         <vm:MainViewModel x:Key="vm" />
 
-        <SolidColorBrush x:Key="darkColor" Color="#264653" />
-        <SolidColorBrush x:Key="mediumColor" Color="#2a9d8f" />
-        <SolidColorBrush x:Key="lightColor" Color="#ffffff" />
+        <SolidColorBrush x:Key="colorWhite" Color="#ffffff" />
+        <SolidColorBrush x:Key="colorBlack" Color="#0a0a0a" />
+        <SolidColorBrush x:Key="colorLight" Color="#f5f5f5" />
+        <SolidColorBrush x:Key="colorDark" Color="#363636" />
+        <SolidColorBrush x:Key="colorPrimary" Color="#00d1b2" />
+        <SolidColorBrush x:Key="colorLink" Color="#3273dc" />
+        <SolidColorBrush x:Key="colorInfo" Color="#209cee" />
+        <SolidColorBrush x:Key="colorSuccess" Color="#48c774" />
+        <SolidColorBrush x:Key="colorWarning" Color="#ffdd57" />
+        <SolidColorBrush x:Key="colorDanger" Color="#ff3860" />
+
 
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="5" />
@@ -40,21 +48,34 @@
             <Setter Property="Margin" Value="5" />
             <Setter Property="Padding" Value="5,0" />
             <Setter Property="Height" Value="25" />
-            <Setter Property="Foreground" Value="{StaticResource lightColor}" />
-            <Setter Property="Background" Value="{StaticResource mediumColor}" />
+            <Setter Property="Foreground" Value="{StaticResource colorWhite}" />
+            <Setter Property="Background" Value="{StaticResource colorPrimary}" />
         </Style>
 
         <Style TargetType="ListView">
             <Setter Property="Margin" Value="5" />
+
+            <Style.Resources>
+                <Style TargetType="TextBox">
+                    <Setter Property="Padding" Value="2,0" />
+                    <Setter Property="Height" Value="25" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                </Style>
+
+                <Style TargetType="ComboBox">
+                    <Setter Property="Height" Value="25" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                </Style>
+            </Style.Resources>
         </Style>
 
         <Style TargetType="StatusBar">
-            <Setter Property="Background" Value="{StaticResource darkColor}" />
+            <Setter Property="Background" Value="{StaticResource colorDark}" />
 
             <Style.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="Margin" Value="5,0" />
-                    <Setter Property="Foreground" Value="{StaticResource lightColor}" />
+                    <Setter Property="Foreground" Value="{StaticResource colorLight}" />
                 </Style>
             </Style.Resources>
         </Style>
@@ -117,7 +138,10 @@
                     ItemsSource="{Binding Source={StaticResource vm}, Path=Accounts}"
                     SelectedItem="{Binding SelectedStorageCard.Account, Mode=TwoWay}" />
 
-                <Button Command="{Binding UpdateStorageCardCommand}" Content="Uložit" />
+                <Button
+                    Background="{StaticResource colorInfo}"
+                    Command="{Binding UpdateStorageCardCommand}"
+                    Content="Uložit" />
             </StackPanel>
 
             <ListView
@@ -129,42 +153,42 @@
                         <GridViewColumn Header="Datum">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox IsReadOnly="True" Text="{Binding DateTime}" />
+                                    <TextBox IsReadOnly="True" Text="{Binding DateTime, StringFormat={}{0:dd.MM.yyyy hh:mm:ss}}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Název">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding Name, Mode=TwoWay}" />
+                                    <TextBox Width="400" Text="{Binding Name, Mode=TwoWay}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Pohyb">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding Movement, Mode=TwoWay}" />
+                                    <TextBox Width="25" Text="{Binding Movement, Mode=TwoWay}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Počet">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding Qty, Mode=TwoWay}" />
+                                    <TextBox Width="45" Text="{Binding Qty, Mode=TwoWay}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Cena">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding Price, Mode=TwoWay}" />
+                                    <TextBox Width="65" Text="{Binding Price, Mode=TwoWay}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Faktura">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding Invoice, Mode=TwoWay}" />
+                                    <TextBox Width="100" Text="{Binding Invoice, Mode=TwoWay}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -172,6 +196,7 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <ComboBox
+                                        Width="200"
                                         DisplayMemberPath="Name"
                                         ItemsSource="{Binding Source={StaticResource vm}, Path=Customers}"
                                         SelectedItem="{Binding Customer, Mode=TwoWay}" />
@@ -182,6 +207,7 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button
+                                        Background="{StaticResource colorInfo}"
                                         Command="{Binding Source={StaticResource vm}, Path=UpdateItemCommand}"
                                         CommandParameter="{Binding .}"
                                         Content="Uložit" />
