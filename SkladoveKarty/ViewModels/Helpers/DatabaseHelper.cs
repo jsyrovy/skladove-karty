@@ -10,16 +10,6 @@
     {
         private readonly DatabaseContext db = new();
 
-        public List<Item> GetItems()
-        {
-            return this.db.Items
-                .Include(i => i.StorageCard)
-                .Include(i => i.Customer)
-                .OrderBy(i => i.DateTime)
-                .ThenBy(i => i.Name)
-                .ToList();
-        }
-
         public List<Account> GetAccounts()
         {
             return this.db.Accounts.OrderBy(a => a.Name).ToList();

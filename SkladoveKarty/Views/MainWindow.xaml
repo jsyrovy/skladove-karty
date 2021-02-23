@@ -108,7 +108,7 @@
                     Grid.Row="0"
                     Grid.Column="1"
                     DisplayMemberPath="Name"
-                    ItemsSource="{Binding Source={StaticResource vm}, Path=StorageCards}"
+                    ItemsSource="{Binding StorageCards}"
                     SelectedItem="{Binding SelectedStorageCard, Mode=TwoWay}" />
 
                 <TextBlock Text="Kategorie:" />
@@ -148,7 +148,7 @@
             <ListView
                 Grid.Row="1"
                 Grid.Column="0"
-                ItemsSource="{Binding SelectedStorageCard.Items}">
+                ItemsSource="{Binding Items}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Datum">
@@ -209,16 +209,16 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <Button
-                                        Background="{StaticResource colorInfo}"
-                                        Command="{Binding Source={StaticResource vm}, Path=UpdateItemCommand}"
-                                        CommandParameter="{Binding .}"
-                                        Content="Uložit" />
+                                            Background="{StaticResource colorInfo}"
+                                            Command="{Binding Source={StaticResource vm}, Path=UpdateItemCommand}"
+                                            CommandParameter="{Binding .}"
+                                            Content="Uložit" />
 
                                         <Button
-                                        Background="{StaticResource colorDanger}"
-                                        Command="{Binding Source={StaticResource vm}, Path=DeleteItemCommand}"
-                                        CommandParameter="{Binding .}"
-                                        Content="Smazat" />
+                                            Background="{StaticResource colorDanger}"
+                                            Command="{Binding Source={StaticResource vm}, Path=DeleteItemCommand}"
+                                            CommandParameter="{Binding .}"
+                                            Content="Smazat" />
                                     </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>

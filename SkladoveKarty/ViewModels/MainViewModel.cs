@@ -8,15 +8,9 @@
     using SkladoveKarty.ViewModels.Commands;
     using SkladoveKarty.ViewModels.Helpers;
 
-    public class MainViewModel : DependencyObject, INotifyPropertyChanged
+    public class MainViewModel : INotifyPropertyChanged
     {
-        public static readonly DependencyProperty SelectedStorageCardProperty =
-           DependencyProperty.Register(
-               nameof(SelectedStorageCard),
-               typeof(StorageCard),
-               typeof(MainViewModel),
-               new PropertyMetadata(new StorageCard()));
-
+        private StorageCard selectedStorageCard;
         private string lastActionStatus;
 
         public MainViewModel()
@@ -50,12 +44,6 @@
 
         public DatabaseHelper Database { get; private set; } = new();
 
-        public StorageCard SelectedStorageCard
-        {
-            get { return (StorageCard)this.GetValue(SelectedStorageCardProperty); }
-            set { this.SetValue(SelectedStorageCardProperty, value); }
-        }
-
         public ObservableCollection<Account> Accounts { get; set; } = new();
 
         public ObservableCollection<Category> Categories { get; set; } = new();
@@ -86,6 +74,29 @@
                 this.lastActionStatus = value;
                 this.OnPropertyChanged(nameof(this.LastActionStatus));
             }
+        }
+
+        public StorageCard SelectedStorageCard
+        {
+            get
+            {
+                return this.selectedStorageCard;
+            }
+
+            set
+            {
+                this.selectedStorageCard = value;
+                this.OnPropertyChanged(nameof(this.SelectedStorageCard));
+                this.LoadItems();
+            }
+        }
+
+        public void LoadItems()
+        {
+            this.Items.Clear();
+
+            foreach (var item in this.SelectedStorageCard.Items)
+                this.Items.Add(item);
         }
 
         private void OnPropertyChanged(string propertyName)

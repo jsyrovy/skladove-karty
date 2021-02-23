@@ -12,6 +12,7 @@
         public override void Execute(object parameter)
         {
             this.ViewModel.Database.DeleteItem((Item)parameter);
+            this.ViewModel.LoadItems();
             this.ViewModel.LastActionStatus = "Položka byla smazána.";
         }
     }
