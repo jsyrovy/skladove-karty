@@ -2,7 +2,9 @@
     x:Class="SkladoveKarty.Views.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:bhv="clr-namespace:SkladoveKarty.Behaviors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:SkladoveKarty.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SkladoveKarty.ViewModels"
@@ -151,6 +153,9 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 ItemsSource="{Binding Items}">
+                <i:Interaction.Behaviors>
+                    <bhv:ScrollIntoViewBehavior />
+                </i:Interaction.Behaviors>
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Datum">
