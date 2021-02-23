@@ -25,6 +25,10 @@
         <SolidColorBrush x:Key="colorWarning" Color="#ffdd57" />
         <SolidColorBrush x:Key="colorDanger" Color="#ff3860" />
 
+        <Style TargetType="StackPanel">
+            <Setter Property="Margin" Value="5,0" />
+            <Setter Property="Orientation" Value="Horizontal" />
+        </Style>
 
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="5" />
@@ -92,16 +96,14 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <StackPanel
-                Grid.Row="0"
-                Grid.Column="0"
-                Orientation="Horizontal">
+            <StackPanel Grid.Row="0" Grid.Column="0">
                 <TextBlock Text="Název:" />
 
                 <ComboBox
@@ -154,7 +156,10 @@
                         <GridViewColumn Header="Datum">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox IsReadOnly="True" Text="{Binding DateTime, StringFormat={}{0:dd.MM.yyyy hh:mm:ss}}" />
+                                    <TextBox
+                                        Width="115"
+                                        IsReadOnly="True"
+                                        Text="{Binding DateTime, StringFormat={}{0:dd.MM.yyyy hh:mm:ss}}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -226,6 +231,44 @@
                     </GridView>
                 </ListView.View>
             </ListView>
+
+            <StackPanel Grid.Row="2" Grid.Column="0">
+                <TextBox
+                    Width="115"
+                    Margin="10,0,0,5"
+                    IsReadOnly="True"
+                    Text="{Binding CurrentDateTime, StringFormat={}{0:dd.MM.yyyy hh:mm:ss}}" />
+                <TextBox
+                    Width="400"
+                    Margin="12,0,0,5"
+                    Text="{Binding NewItem.Name, Mode=TwoWay}" />
+                <TextBox
+                    Width="25"
+                    Margin="12,0,0,5"
+                    Text="{Binding NewItem.Movement, Mode=TwoWay}" />
+                <TextBox
+                    Width="45"
+                    Margin="12,0,0,5"
+                    Text="{Binding NewItem.Qty, Mode=TwoWay}" />
+                <TextBox
+                    Width="65"
+                    Margin="12,0,0,5"
+                    Text="{Binding NewItem.Price, Mode=TwoWay}" />
+                <TextBox
+                    Width="100"
+                    Margin="12,0,0,5"
+                    Text="{Binding NewItem.Invoice, Mode=TwoWay}" />
+                <ComboBox
+                    Width="200"
+                    Margin="12,0,0,5"
+                    DisplayMemberPath="Name"
+                    ItemsSource="{Binding Source={StaticResource vm}, Path=Customers}"
+                    SelectedItem="{Binding NewItem.Customer, Mode=TwoWay}" />
+                <Button
+                    Margin="17,0,0,5"
+                    Command="{Binding Source={StaticResource vm}, Path=AddItemCommand}"
+                    Content="Přidat" />
+            </StackPanel>
         </Grid>
     </DockPanel>
 </Window>

@@ -1,17 +1,29 @@
 ﻿namespace SkladoveKarty.ViewModels
 {
+    using System;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
     using System.Windows;
+    using System.Windows.Threading;
     using SkladoveKarty.Models;
     using SkladoveKarty.ViewModels.Commands;
     using SkladoveKarty.ViewModels.Helpers;
 
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : DependencyObject, INotifyPropertyChanged
     {
+        public static readonly DependencyProperty NewItemProperty =
+           DependencyProperty.Register(
+               nameof(NewItem),
+               typeof(Item),
+               typeof(MainViewModel),
+               new PropertyMetadata(new Item()));
+
+        private readonly DispatcherTimer newItemTimer;
+
         private StorageCard selectedStorageCard;
         private string lastActionStatus;
+        private DateTime currentDateTime;
 
         public MainViewModel()
         {
@@ -35,9 +47,15 @@
 
             this.SelectedStorageCard = this.StorageCards.FirstOrDefault();
 
+            this.AddItemCommand = new AddItemCommand(this);
             this.UpdateItemCommand = new UpdateItemCommand(this);
             this.DeleteItemCommand = new DeleteItemCommand(this);
             this.UpdateStorageCardCommand = new UpdateStorageCardCommand(this);
+
+            this.newItemTimer = new();
+            this.newItemTimer.Tick += (s, e) => this.CurrentDateTime = DateTime.Now;
+            this.newItemTimer.Interval = TimeSpan.FromMilliseconds(200);
+            this.newItemTimer.Start();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -57,6 +75,8 @@
         public ObservableCollection<Store> Stores { get; set; } = new();
 
         public UpdateItemCommand UpdateItemCommand { get; set; }
+
+        public AddItemCommand AddItemCommand { get; set; }
 
         public DeleteItemCommand DeleteItemCommand { get; set; }
 
@@ -89,6 +109,26 @@
                 this.OnPropertyChanged(nameof(this.SelectedStorageCard));
                 this.LoadItems();
             }
+        }
+
+        public DateTime CurrentDateTime
+        {
+            get
+            {
+                return this.currentDateTime;
+            }
+
+            set
+            {
+                this.currentDateTime = value;
+                this.OnPropertyChanged(nameof(this.CurrentDateTime));
+            }
+        }
+
+        public Item NewItem
+        {
+            get { return (Item)this.GetValue(NewItemProperty); }
+            set { this.SetValue(NewItemProperty, value); }
         }
 
         public void LoadItems()

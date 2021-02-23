@@ -44,6 +44,13 @@
             return this.db.Stores.OrderBy(s => s.Name).ToList();
         }
 
+        public void AddItem(Item newItem)
+        {
+            this.db.Items.Add(newItem);
+
+            this.db.SaveChanges();
+        }
+
         public void UpdateItem(Item newItem)
         {
             var item = this.db.Items.Where(i => i.Id == newItem.Id).SingleOrDefault();
