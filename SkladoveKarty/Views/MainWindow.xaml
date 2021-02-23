@@ -178,7 +178,10 @@
                         <GridViewColumn Header="Pohyb">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Width="25" Text="{Binding Movement, Mode=TwoWay}" />
+                                    <ComboBox
+                                        Width="50"
+                                        ItemsSource="{Binding Source={StaticResource vm}, Path=Movements}"
+                                        SelectedItem="{Binding Movement, Mode=TwoWay}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -247,10 +250,11 @@
                     Width="400"
                     Margin="12,0,0,5"
                     Text="{Binding NewItem.Name, Mode=TwoWay}" />
-                <TextBox
-                    Width="25"
+                <ComboBox
+                    Width="50"
                     Margin="12,0,0,5"
-                    Text="{Binding NewItem.Movement, Mode=TwoWay}" />
+                    ItemsSource="{Binding Source={StaticResource vm}, Path=Movements}"
+                    SelectedItem="{Binding NewItem.Movement, Mode=TwoWay}" />
                 <TextBox
                     Width="45"
                     Margin="12,0,0,5"

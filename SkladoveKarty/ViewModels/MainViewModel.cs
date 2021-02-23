@@ -17,7 +17,7 @@
                nameof(NewItem),
                typeof(Item),
                typeof(MainViewModel),
-               new PropertyMetadata(new Item()));
+               new PropertyMetadata(new Item() { Movement = 1 }));
 
         private readonly DispatcherTimer newItemTimer;
 
@@ -73,6 +73,8 @@
         public ObservableCollection<StorageCard> StorageCards { get; set; } = new();
 
         public ObservableCollection<Store> Stores { get; set; } = new();
+
+        public int[] Movements => new[] { 1, -1 };
 
         public UpdateItemCommand UpdateItemCommand { get; set; }
 
