@@ -1,6 +1,7 @@
 ﻿namespace SkladoveKarty.ViewModels
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
@@ -74,7 +75,7 @@
 
         public ObservableCollection<Store> Stores { get; set; } = new();
 
-        public int[] Movements => new[] { 1, -1 };
+        public Dictionary<int, string> Movements => new() { [1] = "Příjem", [-1] = "Výdej" };
 
         public UpdateItemCommand UpdateItemCommand { get; set; }
 

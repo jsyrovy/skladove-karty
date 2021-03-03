@@ -179,9 +179,11 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <ComboBox
-                                        Width="50"
+                                        Width="62"
+                                        DisplayMemberPath="Value"
                                         ItemsSource="{Binding Source={StaticResource vm}, Path=Movements}"
-                                        SelectedItem="{Binding Movement, Mode=TwoWay}" />
+                                        SelectedValue="{Binding Movement, Mode=TwoWay}"
+                                        SelectedValuePath="Key" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -251,10 +253,12 @@
                     Margin="12,0,0,5"
                     Text="{Binding NewItem.Name, Mode=TwoWay}" />
                 <ComboBox
-                    Width="50"
+                    Width="62"
                     Margin="12,0,0,5"
+                    DisplayMemberPath="Value"
                     ItemsSource="{Binding Source={StaticResource vm}, Path=Movements}"
-                    SelectedItem="{Binding NewItem.Movement, Mode=TwoWay}" />
+                    SelectedValue="{Binding NewItem.Movement, Mode=TwoWay}"
+                    SelectedValuePath="Key" />
                 <TextBox
                     Width="45"
                     Margin="12,0,0,5"
