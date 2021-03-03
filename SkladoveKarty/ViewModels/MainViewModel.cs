@@ -19,6 +19,13 @@
                typeof(MainViewModel),
                new PropertyMetadata(CreateDefaultItem()));
 
+        public static readonly DependencyProperty SelectedStorageCardPriceProperty =
+           DependencyProperty.Register(
+               nameof(SelectedStorageCardPrice),
+               typeof(decimal),
+               typeof(MainViewModel),
+               new PropertyMetadata(0M));
+
         private StorageCard selectedStorageCard;
         private string lastActionStatus;
 
@@ -102,6 +109,7 @@
                 this.selectedStorageCard = value;
                 this.OnPropertyChanged(nameof(this.SelectedStorageCard));
                 this.LoadItems();
+                this.CalculateStorageCardPrice();
             }
         }
 
@@ -109,6 +117,12 @@
         {
             get { return (Item)this.GetValue(NewItemProperty); }
             set { this.SetValue(NewItemProperty, value); }
+        }
+
+        public decimal SelectedStorageCardPrice
+        {
+            get { return (decimal)this.GetValue(SelectedStorageCardPriceProperty); }
+            set { this.SetValue(SelectedStorageCardPriceProperty, value); }
         }
 
         public static Item CreateDefaultItem()
@@ -122,6 +136,11 @@
 
             foreach (var item in this.SelectedStorageCard.Items.OrderBy(i => i.DateTime))
                 this.Items.Add(item);
+        }
+
+        public void CalculateStorageCardPrice()
+        {
+            this.SelectedStorageCardPrice = ReportHelper.GetStorageCardPrice(this.SelectedStorageCard);
         }
 
         private void OnPropertyChanged(string propertyName)

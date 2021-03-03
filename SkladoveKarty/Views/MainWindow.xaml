@@ -119,6 +119,13 @@
             <StatusBarItem>
                 <TextBlock Text="{Binding LastActionStatus}" />
             </StatusBarItem>
+
+            <StatusBarItem HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Hodnota skladové karty:" />
+                    <TextBlock Text="{Binding SelectedStorageCardPrice}" />
+                </StackPanel>
+            </StatusBarItem>
         </StatusBar>
 
         <Grid>
