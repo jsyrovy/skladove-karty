@@ -6,7 +6,6 @@
     using System.ComponentModel;
     using System.Linq;
     using System.Windows;
-    using System.Windows.Threading;
     using SkladoveKarty.Models;
     using SkladoveKarty.ViewModels.Commands;
     using SkladoveKarty.ViewModels.Helpers;
@@ -18,13 +17,10 @@
                nameof(NewItem),
                typeof(Item),
                typeof(MainViewModel),
-               new PropertyMetadata(new Item() { Movement = 1 }));
-
-        private readonly DispatcherTimer newItemTimer;
+               new PropertyMetadata(CreateDefaultItem()));
 
         private StorageCard selectedStorageCard;
         private string lastActionStatus;
-        private DateTime currentDateTime;
 
         public MainViewModel()
         {
@@ -52,11 +48,6 @@
             this.UpdateItemCommand = new UpdateItemCommand(this);
             this.DeleteItemCommand = new DeleteItemCommand(this);
             this.UpdateStorageCardCommand = new UpdateStorageCardCommand(this);
-
-            this.newItemTimer = new();
-            this.newItemTimer.Tick += (s, e) => this.CurrentDateTime = DateTime.Now;
-            this.newItemTimer.Interval = TimeSpan.FromMilliseconds(200);
-            this.newItemTimer.Start();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -114,31 +105,22 @@
             }
         }
 
-        public DateTime CurrentDateTime
-        {
-            get
-            {
-                return this.currentDateTime;
-            }
-
-            set
-            {
-                this.currentDateTime = value;
-                this.OnPropertyChanged(nameof(this.CurrentDateTime));
-            }
-        }
-
         public Item NewItem
         {
             get { return (Item)this.GetValue(NewItemProperty); }
             set { this.SetValue(NewItemProperty, value); }
         }
 
+        public static Item CreateDefaultItem()
+        {
+            return new Item() { DateTime = DateTime.Today, Movement = 1 };
+        }
+
         public void LoadItems()
         {
             this.Items.Clear();
 
-            foreach (var item in this.SelectedStorageCard.Items)
+            foreach (var item in this.SelectedStorageCard.Items.OrderBy(i => i.DateTime))
                 this.Items.Add(item);
         }
 

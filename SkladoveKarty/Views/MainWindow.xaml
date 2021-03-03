@@ -50,12 +50,18 @@
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
 
-        <Style TargetType="Button">
+        <Style TargetType="DatePicker">
             <Setter Property="Margin" Value="5" />
-            <Setter Property="Padding" Value="5,0" />
+            <Setter Property="Padding" Value="0" />
             <Setter Property="Height" Value="25" />
-            <Setter Property="Foreground" Value="{StaticResource colorWhite}" />
-            <Setter Property="Background" Value="{StaticResource colorPrimary}" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+
+            <Style.Resources>
+                <Style TargetType="DatePickerTextBox">
+                    <Setter Property="Height" Value="17" />
+                    <Setter Property="Padding" Value="2,0" />
+                </Style>
+            </Style.Resources>
         </Style>
 
         <Style TargetType="ListView">
@@ -66,6 +72,19 @@
                     <Setter Property="Padding" Value="2,0" />
                     <Setter Property="Height" Value="25" />
                     <Setter Property="VerticalContentAlignment" Value="Center" />
+                </Style>
+
+                <Style TargetType="DatePicker">
+                    <Setter Property="Padding" Value="0" />
+                    <Setter Property="Height" Value="25" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+
+                    <Style.Resources>
+                        <Style TargetType="DatePickerTextBox">
+                            <Setter Property="Height" Value="17" />
+                            <Setter Property="Padding" Value="2,0" />
+                        </Style>
+                    </Style.Resources>
                 </Style>
 
                 <Style TargetType="ComboBox">
@@ -84,6 +103,14 @@
                     <Setter Property="Foreground" Value="{StaticResource colorLight}" />
                 </Style>
             </Style.Resources>
+        </Style>
+
+        <Style x:Key="buttonPrimary" TargetType="Button">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5,0" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Foreground" Value="{StaticResource colorWhite}" />
+            <Setter Property="Background" Value="{StaticResource colorPrimary}" />
         </Style>
     </Window.Resources>
 
@@ -145,7 +172,8 @@
                 <Button
                     Background="{StaticResource colorInfo}"
                     Command="{Binding UpdateStorageCardCommand}"
-                    Content="Uložit" />
+                    Content="Uložit"
+                    Style="{StaticResource buttonPrimary}" />
 
             </StackPanel>
 
@@ -161,10 +189,7 @@
                         <GridViewColumn Header="Datum">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox
-                                        Width="115"
-                                        IsReadOnly="True"
-                                        Text="{Binding DateTime, StringFormat={}{0:dd.MM.yyyy hh:mm:ss}}" />
+                                    <DatePicker Width="100" SelectedDate="{Binding DateTime}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -227,13 +252,15 @@
                                             Background="{StaticResource colorInfo}"
                                             Command="{Binding Source={StaticResource vm}, Path=UpdateItemCommand}"
                                             CommandParameter="{Binding .}"
-                                            Content="Uložit" />
+                                            Content="Uložit"
+                                            Style="{StaticResource buttonPrimary}" />
 
                                         <Button
                                             Background="{StaticResource colorDanger}"
                                             Command="{Binding Source={StaticResource vm}, Path=DeleteItemCommand}"
                                             CommandParameter="{Binding .}"
-                                            Content="Smazat" />
+                                            Content="Smazat"
+                                            Style="{StaticResource buttonPrimary}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
@@ -242,45 +269,48 @@
                 </ListView.View>
             </ListView>
 
-            <StackPanel Grid.Row="2" Grid.Column="0">
-                <TextBox
-                    Width="115"
+            <StackPanel
+                Grid.Row="2"
+                Grid.Column="0"
+                DataContext="{Binding NewItem}">
+                <DatePicker
+                    Width="100"
                     Margin="10,0,0,5"
-                    IsReadOnly="True"
-                    Text="{Binding CurrentDateTime, StringFormat={}{0:dd.MM.yyyy hh:mm:ss}}" />
+                    SelectedDate="{Binding DateTime}" />
                 <TextBox
                     Width="400"
                     Margin="12,0,0,5"
-                    Text="{Binding NewItem.Name, Mode=TwoWay}" />
+                    Text="{Binding Name, Mode=TwoWay}" />
                 <ComboBox
                     Width="62"
                     Margin="12,0,0,5"
                     DisplayMemberPath="Value"
                     ItemsSource="{Binding Source={StaticResource vm}, Path=Movements}"
-                    SelectedValue="{Binding NewItem.Movement, Mode=TwoWay}"
+                    SelectedValue="{Binding Movement, Mode=TwoWay}"
                     SelectedValuePath="Key" />
                 <TextBox
                     Width="45"
                     Margin="12,0,0,5"
-                    Text="{Binding NewItem.Qty, Mode=TwoWay}" />
+                    Text="{Binding Qty, Mode=TwoWay}" />
                 <TextBox
                     Width="65"
                     Margin="12,0,0,5"
-                    Text="{Binding NewItem.Price, Mode=TwoWay}" />
+                    Text="{Binding Price, Mode=TwoWay}" />
                 <TextBox
                     Width="100"
                     Margin="12,0,0,5"
-                    Text="{Binding NewItem.Invoice, Mode=TwoWay}" />
+                    Text="{Binding Invoice, Mode=TwoWay}" />
                 <ComboBox
                     Width="200"
                     Margin="12,0,0,5"
                     DisplayMemberPath="Name"
                     ItemsSource="{Binding Source={StaticResource vm}, Path=Customers}"
-                    SelectedItem="{Binding NewItem.Customer, Mode=TwoWay}" />
+                    SelectedItem="{Binding Customer, Mode=TwoWay}" />
                 <Button
                     Margin="17,0,0,5"
                     Command="{Binding Source={StaticResource vm}, Path=AddItemCommand}"
-                    Content="Přidat" />
+                    Content="Přidat"
+                    Style="{StaticResource buttonPrimary}" />
             </StackPanel>
         </Grid>
     </DockPanel>

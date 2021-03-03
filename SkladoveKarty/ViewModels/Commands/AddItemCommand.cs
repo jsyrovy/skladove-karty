@@ -11,11 +11,10 @@
 
         public override void Execute(object parameter)
         {
-            this.ViewModel.NewItem.DateTime = DateTime.Now;
             this.ViewModel.NewItem.StorageCard = this.ViewModel.SelectedStorageCard;
             this.ViewModel.Database.AddItem(this.ViewModel.NewItem);
             this.ViewModel.LoadItems();
-            this.ViewModel.NewItem = new();
+            this.ViewModel.NewItem = MainViewModel.CreateDefaultItem();
             this.ViewModel.LastActionStatus = "Položka byla přidána.";
         }
     }
