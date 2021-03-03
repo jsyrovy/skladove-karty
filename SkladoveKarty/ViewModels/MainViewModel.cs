@@ -127,7 +127,7 @@
 
         public static Item CreateDefaultItem()
         {
-            return new Item() { DateTime = DateTime.Today, Movement = 1 };
+            return new Item() { DateTime = DateTime.Today, Movement = 1, Qty = 1 };
         }
 
         public void LoadItems()
