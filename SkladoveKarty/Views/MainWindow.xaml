@@ -122,8 +122,14 @@
 
             <StatusBarItem HorizontalAlignment="Right">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Hodnota skladové karty:" />
-                    <TextBlock Text="{Binding SelectedStorageCardPrice, StringFormat='c', ConverterCulture='cs-CZ'}" />
+                    <TextBlock Text="Množství:" />
+                    <TextBlock Text="{Binding SelectedStorageCardItemsQty}" />
+                    <TextBlock Text="Příjmy:" />
+                    <TextBlock Text="{Binding SelectedStorageCardItemsIncomingPrice, StringFormat='c', ConverterCulture='cs-CZ'}" />
+                    <TextBlock Text="Výdeje:" />
+                    <TextBlock Text="{Binding SelectedStorageCardItemsOutgoingPrice, StringFormat='c', ConverterCulture='cs-CZ'}" />
+                    <TextBlock Text="Hodnota:" />
+                    <TextBlock Text="{Binding SelectedStorageCardItemsPrice, StringFormat='c', ConverterCulture='cs-CZ'}" />
                 </StackPanel>
             </StatusBarItem>
         </StatusBar>

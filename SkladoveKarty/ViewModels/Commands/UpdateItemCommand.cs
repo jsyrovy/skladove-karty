@@ -12,7 +12,7 @@
         public override void Execute(object parameter)
         {
             this.ViewModel.Database.UpdateItem((Item)parameter);
-            this.ViewModel.CalculateStorageCardPrice();
+            this.ViewModel.CalculateStorageCardReports();
             this.ViewModel.LastActionStatus = "Položka byla aktualizována.";
         }
     }

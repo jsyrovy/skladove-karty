@@ -19,9 +19,30 @@
                typeof(MainViewModel),
                new PropertyMetadata(CreateDefaultItem()));
 
+        public static readonly DependencyProperty SelectedStorageCardItemsQtyProperty =
+           DependencyProperty.Register(
+               nameof(SelectedStorageCardItemsQty),
+               typeof(int),
+               typeof(MainViewModel),
+               new PropertyMetadata(0));
+
+        public static readonly DependencyProperty SelectedStorageCardItemsIncomingPriceProperty =
+           DependencyProperty.Register(
+               nameof(SelectedStorageCardItemsIncomingPrice),
+               typeof(decimal),
+               typeof(MainViewModel),
+               new PropertyMetadata(0M));
+
+        public static readonly DependencyProperty SelectedStorageCardItemsOutgoingPriceProperty =
+           DependencyProperty.Register(
+               nameof(SelectedStorageCardItemsOutgoingPrice),
+               typeof(decimal),
+               typeof(MainViewModel),
+               new PropertyMetadata(0M));
+
         public static readonly DependencyProperty SelectedStorageCardPriceProperty =
            DependencyProperty.Register(
-               nameof(SelectedStorageCardPrice),
+               nameof(SelectedStorageCardItemsPrice),
                typeof(decimal),
                typeof(MainViewModel),
                new PropertyMetadata(0M));
@@ -109,7 +130,7 @@
                 this.selectedStorageCard = value;
                 this.OnPropertyChanged(nameof(this.SelectedStorageCard));
                 this.LoadItems();
-                this.CalculateStorageCardPrice();
+                this.CalculateStorageCardReports();
             }
         }
 
@@ -119,7 +140,25 @@
             set { this.SetValue(NewItemProperty, value); }
         }
 
-        public decimal SelectedStorageCardPrice
+        public decimal SelectedStorageCardItemsIncomingPrice
+        {
+            get { return (decimal)this.GetValue(SelectedStorageCardItemsIncomingPriceProperty); }
+            set { this.SetValue(SelectedStorageCardItemsIncomingPriceProperty, value); }
+        }
+
+        public int SelectedStorageCardItemsQty
+        {
+            get { return (int)this.GetValue(SelectedStorageCardItemsQtyProperty); }
+            set { this.SetValue(SelectedStorageCardItemsQtyProperty, value); }
+        }
+
+        public decimal SelectedStorageCardItemsOutgoingPrice
+        {
+            get { return (decimal)this.GetValue(SelectedStorageCardItemsOutgoingPriceProperty); }
+            set { this.SetValue(SelectedStorageCardItemsOutgoingPriceProperty, value); }
+        }
+
+        public decimal SelectedStorageCardItemsPrice
         {
             get { return (decimal)this.GetValue(SelectedStorageCardPriceProperty); }
             set { this.SetValue(SelectedStorageCardPriceProperty, value); }
@@ -138,9 +177,12 @@
                 this.Items.Add(item);
         }
 
-        public void CalculateStorageCardPrice()
+        public void CalculateStorageCardReports()
         {
-            this.SelectedStorageCardPrice = ReportHelper.GetStorageCardPrice(this.SelectedStorageCard);
+            this.SelectedStorageCardItemsQty = ReportHelper.GetStorageCardItemsQty(this.SelectedStorageCard);
+            this.SelectedStorageCardItemsIncomingPrice = ReportHelper.GetStorageCardItemsPrice(this.SelectedStorageCard, 1);
+            this.SelectedStorageCardItemsOutgoingPrice = ReportHelper.GetStorageCardItemsPrice(this.SelectedStorageCard, -1);
+            this.SelectedStorageCardItemsPrice = ReportHelper.GetStorageCardItemsPrice(this.SelectedStorageCard);
         }
 
         private void OnPropertyChanged(string propertyName)

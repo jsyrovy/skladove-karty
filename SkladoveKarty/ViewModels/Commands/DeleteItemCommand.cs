@@ -13,7 +13,7 @@
         {
             this.ViewModel.Database.DeleteItem((Item)parameter);
             this.ViewModel.LoadItems();
-            this.ViewModel.CalculateStorageCardPrice();
+            this.ViewModel.CalculateStorageCardReports();
             this.ViewModel.LastActionStatus = "Položka byla smazána.";
         }
     }
