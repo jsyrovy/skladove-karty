@@ -123,7 +123,7 @@
             <StatusBarItem HorizontalAlignment="Right">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Hodnota skladové karty:" />
-                    <TextBlock Text="{Binding SelectedStorageCardPrice}" />
+                    <TextBlock Text="{Binding SelectedStorageCardPrice, StringFormat='c', ConverterCulture='cs-CZ'}" />
                 </StackPanel>
             </StatusBarItem>
         </StatusBar>
@@ -229,7 +229,7 @@
                         <GridViewColumn Header="Cena">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Width="65" Text="{Binding Price, Mode=TwoWay}" />
+                                    <TextBox Width="65" Text="{Binding Price, Mode=TwoWay, ConverterCulture='cs-CZ'}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
