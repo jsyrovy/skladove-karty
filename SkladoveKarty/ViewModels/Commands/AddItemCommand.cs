@@ -1,12 +1,15 @@
 ﻿namespace SkladoveKarty.ViewModels.Commands
 {
-    using System;
-
     public class AddItemCommand : BaseCommand
     {
         public AddItemCommand(MainViewModel viewModel)
             : base(viewModel)
         {
+        }
+
+        public override bool CanExecute(object parameter)
+        {
+            return this.ViewModel.SelectedStorageCard != null;
         }
 
         public override void Execute(object parameter)
