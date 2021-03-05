@@ -9,6 +9,15 @@
         {
         }
 
+        public override bool CanExecute(object parameter)
+        {
+            var item = (Item)parameter;
+
+            return !string.IsNullOrWhiteSpace(item.Name)
+                && item.Price > 0
+                && item.Qty > 0;
+        }
+
         public override void Execute(object parameter)
         {
             this.ViewModel.Database.UpdateItem((Item)parameter);

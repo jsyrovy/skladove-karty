@@ -9,7 +9,10 @@
 
         public override bool CanExecute(object parameter)
         {
-            return this.ViewModel.SelectedStorageCard != null;
+            return this.ViewModel.SelectedStorageCard != null
+                && !string.IsNullOrWhiteSpace(this.ViewModel.NewItem.Name)
+                && this.ViewModel.NewItem.Price > 0
+                && this.ViewModel.NewItem.Qty > 0;
         }
 
         public override void Execute(object parameter)
