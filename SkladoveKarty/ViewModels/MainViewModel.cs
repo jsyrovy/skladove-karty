@@ -48,6 +48,13 @@
                typeof(MainViewModel),
                new PropertyMetadata(0M));
 
+        public static readonly DependencyProperty SelectedStorageCardItemProperty =
+           DependencyProperty.Register(
+               nameof(SelectedStorageCardItem),
+               typeof(Item),
+               typeof(MainViewModel),
+               new PropertyMetadata(CreateDefaultItem()));
+
         private StorageCard selectedStorageCard;
         private string lastActionStatus;
 
@@ -163,14 +170,20 @@
             set { this.SetValue(SelectedStorageCardPriceProperty, value); }
         }
 
+        public Item SelectedStorageCardItem
+        {
+            get { return (Item)this.GetValue(SelectedStorageCardItemProperty); }
+            set { this.SetValue(SelectedStorageCardItemProperty, value); }
+        }
+
         public static Item CreateDefaultItem()
         {
             return new Item() { DateTime = DateTime.Today, Movement = 1, Qty = 1 };
         }
 
-        public async void LoadItemsAsync()
+        public async void LoadItemsAsync(Item itemToSelect = null)
         {
-            await this.LoadItemsTask();
+            await this.LoadItemsTask(itemToSelect);
         }
 
         public void CalculateStorageCardReports()
@@ -181,23 +194,26 @@
             this.SelectedStorageCardItemsPrice = ReportHelper.GetStorageCardItemsPrice(this.SelectedStorageCard);
         }
 
-        private Task LoadItemsTask()
+        private Task LoadItemsTask(Item itemToSelect)
         {
             return Task.Run(() =>
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    this.LoadItems();
+                    this.LoadItems(itemToSelect);
                 });
             });
         }
 
-        private void LoadItems()
+        private void LoadItems(Item itemToSelect)
         {
             this.Items.Clear();
 
             foreach (var item in this.SelectedStorageCard.Items.OrderBy(i => i.DateTime))
                 this.Items.Add(item);
+
+            if (itemToSelect != null)
+                this.SelectedStorageCardItem = itemToSelect;
         }
 
         private void OnPropertyChanged(string propertyName)

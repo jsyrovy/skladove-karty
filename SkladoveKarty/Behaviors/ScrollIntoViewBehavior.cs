@@ -1,29 +1,26 @@
 ﻿namespace SkladoveKarty.Behaviors
 {
-    using System.Collections.Specialized;
     using System.Windows.Controls;
     using Microsoft.Xaml.Behaviors;
+    using SkladoveKarty.Models;
 
     public class ScrollIntoViewBehavior : Behavior<ListView>
     {
         protected override void OnAttached()
         {
-            var listBox = this.AssociatedObject;
-            ((INotifyCollectionChanged)listBox.Items).CollectionChanged += this.OnCollectionChanged;
+            this.AssociatedObject.SelectionChanged += this.OnSelectionChanged;
         }
 
         protected override void OnDetaching()
         {
-            var listBox = this.AssociatedObject;
-            ((INotifyCollectionChanged)listBox.Items).CollectionChanged -= this.OnCollectionChanged;
+            this.AssociatedObject.SelectionChanged -= this.OnSelectionChanged;
         }
 
-        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var listView = this.AssociatedObject;
-            if (e.Action == NotifyCollectionChangedAction.Add)
+            if (e.AddedItems.Count == 1 && e.AddedItems[0] is Item)
             {
-                listView.ScrollIntoView(e.NewItems[0]);
+                this.AssociatedObject.ScrollIntoView(this.AssociatedObject.SelectedItem);
             }
         }
     }

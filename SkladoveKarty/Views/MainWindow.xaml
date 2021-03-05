@@ -193,7 +193,8 @@
             <ListView
                 Grid.Row="1"
                 Grid.Column="0"
-                ItemsSource="{Binding Items}">
+                ItemsSource="{Binding Items}"
+                SelectedItem="{Binding SelectedStorageCardItem, Mode=TwoWay}">
                 <i:Interaction.Behaviors>
                     <bhv:ScrollIntoViewBehavior />
                 </i:Interaction.Behaviors>
