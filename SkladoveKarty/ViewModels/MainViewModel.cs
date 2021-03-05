@@ -70,8 +70,6 @@
             foreach (var store in this.Database.GetStores())
                 this.Stores.Add(store);
 
-            this.SelectedStorageCard = this.StorageCards.FirstOrDefault();
-
             this.AddItemCommand = new AddItemCommand(this);
             this.UpdateItemCommand = new UpdateItemCommand(this);
             this.DeleteItemCommand = new DeleteItemCommand(this);
