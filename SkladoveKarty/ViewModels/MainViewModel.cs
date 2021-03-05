@@ -5,6 +5,7 @@
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Windows;
     using SkladoveKarty.Models;
     using SkladoveKarty.ViewModels.Commands;
@@ -127,7 +128,7 @@
             {
                 this.selectedStorageCard = value;
                 this.OnPropertyChanged(nameof(this.SelectedStorageCard));
-                this.LoadItems();
+                this.LoadItemsAsync();
                 this.CalculateStorageCardReports();
             }
         }
@@ -167,12 +168,9 @@
             return new Item() { DateTime = DateTime.Today, Movement = 1, Qty = 1 };
         }
 
-        public void LoadItems()
+        public async void LoadItemsAsync()
         {
-            this.Items.Clear();
-
-            foreach (var item in this.SelectedStorageCard.Items.OrderBy(i => i.DateTime))
-                this.Items.Add(item);
+            await this.LoadItemsTask();
         }
 
         public void CalculateStorageCardReports()
@@ -181,6 +179,25 @@
             this.SelectedStorageCardItemsIncomingPrice = ReportHelper.GetStorageCardItemsPrice(this.SelectedStorageCard, 1);
             this.SelectedStorageCardItemsOutgoingPrice = ReportHelper.GetStorageCardItemsPrice(this.SelectedStorageCard, -1);
             this.SelectedStorageCardItemsPrice = ReportHelper.GetStorageCardItemsPrice(this.SelectedStorageCard);
+        }
+
+        private Task LoadItemsTask()
+        {
+            return Task.Run(() =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    this.LoadItems();
+                });
+            });
+        }
+
+        private void LoadItems()
+        {
+            this.Items.Clear();
+
+            foreach (var item in this.SelectedStorageCard.Items.OrderBy(i => i.DateTime))
+                this.Items.Add(item);
         }
 
         private void OnPropertyChanged(string propertyName)

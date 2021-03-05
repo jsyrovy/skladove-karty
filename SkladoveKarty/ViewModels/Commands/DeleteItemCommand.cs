@@ -12,7 +12,7 @@
         public override void Execute(object parameter)
         {
             this.ViewModel.Database.DeleteItem((Item)parameter);
-            this.ViewModel.LoadItems();
+            this.ViewModel.LoadItemsAsync();
             this.ViewModel.CalculateStorageCardReports();
             this.ViewModel.LastActionStatus = "Položka byla smazána.";
         }
