@@ -4,5 +4,137 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:SkladoveKarty"
     StartupUri="Views/MainWindow.xaml">
-    <Application.Resources />
+
+    <Application.Resources>
+        <SolidColorBrush x:Key="colorWhite" Color="#ffffff" />
+        <SolidColorBrush x:Key="colorBlack" Color="#0a0a0a" />
+        <SolidColorBrush x:Key="colorLight" Color="#f5f5f5" />
+        <SolidColorBrush x:Key="colorDark" Color="#363636" />
+        <SolidColorBrush x:Key="colorPrimary" Color="#00d1b2" />
+        <SolidColorBrush x:Key="colorLink" Color="#3273dc" />
+        <SolidColorBrush x:Key="colorInfo" Color="#209cee" />
+        <SolidColorBrush x:Key="colorSuccess" Color="#48c774" />
+        <SolidColorBrush x:Key="colorWarning" Color="#ffdd57" />
+        <SolidColorBrush x:Key="colorDanger" Color="#ff3860" />
+
+        <Style x:Key="stackPanelStyle" TargetType="StackPanel">
+            <Setter Property="Margin" Value="5,0" />
+            <Setter Property="Orientation" Value="Horizontal" />
+        </Style>
+
+        <Style x:Key="textBlockStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+        <Style
+            x:Key="textBlockHeaderStyle"
+            BasedOn="{StaticResource textBlockStyle}"
+            TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+
+        <Style x:Key="textBoxStyle" TargetType="TextBox">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="2,0" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="buttonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5,0" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Foreground" Value="{StaticResource colorWhite}" />
+        </Style>
+
+        <Style
+            x:Key="buttonPrimaryStyle"
+            BasedOn="{StaticResource buttonStyle}"
+            TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource colorPrimary}" />
+        </Style>
+
+        <Style
+            x:Key="buttonInfoStyle"
+            BasedOn="{StaticResource buttonStyle}"
+            TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource colorInfo}" />
+        </Style>
+
+        <Style
+            x:Key="buttonLinkStyle"
+            BasedOn="{StaticResource buttonStyle}"
+            TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource colorLink}" />
+        </Style>
+
+        <Style
+            x:Key="buttonDangerStyle"
+            BasedOn="{StaticResource buttonStyle}"
+            TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource colorDanger}" />
+        </Style>
+
+        <Style x:Key="comboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="datePickerStyle" TargetType="DatePicker">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+
+            <Style.Resources>
+                <Style TargetType="DatePickerTextBox">
+                    <Setter Property="Height" Value="17" />
+                    <Setter Property="Padding" Value="2,0" />
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <Style x:Key="listViewStyle" TargetType="ListView">
+            <Setter Property="Margin" Value="5" />
+
+            <Style.Resources>
+                <Style TargetType="TextBox">
+                    <Setter Property="Padding" Value="2,0" />
+                    <Setter Property="Height" Value="25" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                </Style>
+
+                <Style TargetType="DatePicker">
+                    <Setter Property="Padding" Value="0" />
+                    <Setter Property="Height" Value="25" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+
+                    <Style.Resources>
+                        <Style TargetType="DatePickerTextBox">
+                            <Setter Property="Height" Value="17" />
+                            <Setter Property="Padding" Value="2,0" />
+                        </Style>
+                    </Style.Resources>
+                </Style>
+
+                <Style TargetType="ComboBox">
+                    <Setter Property="Height" Value="25" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <Style x:Key="statusBarStyle" TargetType="StatusBar">
+            <Setter Property="Background" Value="{StaticResource colorDark}" />
+
+            <Style.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Margin" Value="5,0" />
+                    <Setter Property="Foreground" Value="{StaticResource colorLight}" />
+                </Style>
+            </Style.Resources>
+        </Style>
+    </Application.Resources>
 </Application>

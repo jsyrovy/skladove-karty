@@ -15,107 +15,10 @@
 
     <Window.Resources>
         <vm:MainViewModel x:Key="vm" />
-
-        <SolidColorBrush x:Key="colorWhite" Color="#ffffff" />
-        <SolidColorBrush x:Key="colorBlack" Color="#0a0a0a" />
-        <SolidColorBrush x:Key="colorLight" Color="#f5f5f5" />
-        <SolidColorBrush x:Key="colorDark" Color="#363636" />
-        <SolidColorBrush x:Key="colorPrimary" Color="#00d1b2" />
-        <SolidColorBrush x:Key="colorLink" Color="#3273dc" />
-        <SolidColorBrush x:Key="colorInfo" Color="#209cee" />
-        <SolidColorBrush x:Key="colorSuccess" Color="#48c774" />
-        <SolidColorBrush x:Key="colorWarning" Color="#ffdd57" />
-        <SolidColorBrush x:Key="colorDanger" Color="#ff3860" />
-
-        <Style TargetType="StackPanel">
-            <Setter Property="Margin" Value="5,0" />
-            <Setter Property="Orientation" Value="Horizontal" />
-        </Style>
-
-        <Style TargetType="TextBlock">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-        </Style>
-
-        <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Padding" Value="2,0" />
-            <Setter Property="Height" Value="25" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-        </Style>
-
-        <Style TargetType="ComboBox">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Height" Value="25" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-        </Style>
-
-        <Style TargetType="DatePicker">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="Height" Value="25" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-
-            <Style.Resources>
-                <Style TargetType="DatePickerTextBox">
-                    <Setter Property="Height" Value="17" />
-                    <Setter Property="Padding" Value="2,0" />
-                </Style>
-            </Style.Resources>
-        </Style>
-
-        <Style TargetType="ListView">
-            <Setter Property="Margin" Value="5" />
-
-            <Style.Resources>
-                <Style TargetType="TextBox">
-                    <Setter Property="Padding" Value="2,0" />
-                    <Setter Property="Height" Value="25" />
-                    <Setter Property="VerticalContentAlignment" Value="Center" />
-                </Style>
-
-                <Style TargetType="DatePicker">
-                    <Setter Property="Padding" Value="0" />
-                    <Setter Property="Height" Value="25" />
-                    <Setter Property="VerticalContentAlignment" Value="Center" />
-
-                    <Style.Resources>
-                        <Style TargetType="DatePickerTextBox">
-                            <Setter Property="Height" Value="17" />
-                            <Setter Property="Padding" Value="2,0" />
-                        </Style>
-                    </Style.Resources>
-                </Style>
-
-                <Style TargetType="ComboBox">
-                    <Setter Property="Height" Value="25" />
-                    <Setter Property="VerticalContentAlignment" Value="Center" />
-                </Style>
-            </Style.Resources>
-        </Style>
-
-        <Style TargetType="StatusBar">
-            <Setter Property="Background" Value="{StaticResource colorDark}" />
-
-            <Style.Resources>
-                <Style TargetType="TextBlock">
-                    <Setter Property="Margin" Value="5,0" />
-                    <Setter Property="Foreground" Value="{StaticResource colorLight}" />
-                </Style>
-            </Style.Resources>
-        </Style>
-
-        <Style x:Key="buttonPrimary" TargetType="Button">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Padding" Value="5,0" />
-            <Setter Property="Height" Value="25" />
-            <Setter Property="Foreground" Value="{StaticResource colorWhite}" />
-            <Setter Property="Background" Value="{StaticResource colorPrimary}" />
-        </Style>
     </Window.Resources>
 
     <DockPanel DataContext="{StaticResource vm}">
-        <StatusBar DockPanel.Dock="Bottom">
+        <StatusBar DockPanel.Dock="Bottom" Style="{StaticResource statusBarStyle}">
             <StatusBarItem>
                 <TextBlock Text="{Binding LastActionStatus}" />
             </StatusBarItem>
@@ -147,54 +50,56 @@
 
             <DockPanel Grid.Row="0" Grid.Column="0">
                 <Button
-                    Background="{StaticResource colorLink}"
                     Command="{Binding ShowSettingsCommand}"
                     Content="Nastavení"
                     DockPanel.Dock="Right"
-                    Style="{StaticResource buttonPrimary}" />
+                    Style="{StaticResource buttonLinkStyle}" />
 
-                <StackPanel>
-                    <TextBlock Text="Název:" />
+                <StackPanel Style="{StaticResource stackPanelStyle}">
+                    <TextBlock Style="{StaticResource textBlockStyle}" Text="Název:" />
 
                     <ComboBox
                         Grid.Row="0"
                         Grid.Column="1"
                         DisplayMemberPath="Name"
                         ItemsSource="{Binding StorageCards}"
-                        SelectedItem="{Binding SelectedStorageCard, Mode=TwoWay}" />
+                        SelectedItem="{Binding SelectedStorageCard, Mode=TwoWay}"
+                        Style="{StaticResource comboBoxStyle}" />
 
-                    <TextBlock Text="Kategorie:" />
+                    <TextBlock Style="{StaticResource textBlockStyle}" Text="Kategorie:" />
 
                     <ComboBox
                         Grid.Row="0"
                         Grid.Column="1"
                         DisplayMemberPath="Name"
                         ItemsSource="{Binding Source={StaticResource vm}, Path=Categories}"
-                        SelectedItem="{Binding SelectedStorageCard.Category, Mode=TwoWay}" />
+                        SelectedItem="{Binding SelectedStorageCard.Category, Mode=TwoWay}"
+                        Style="{StaticResource comboBoxStyle}" />
 
-                    <TextBlock Text="Sklad:" />
+                    <TextBlock Style="{StaticResource textBlockStyle}" Text="Sklad:" />
 
                     <ComboBox
                         Grid.Row="0"
                         Grid.Column="1"
                         DisplayMemberPath="Name"
                         ItemsSource="{Binding Source={StaticResource vm}, Path=Stores}"
-                        SelectedItem="{Binding SelectedStorageCard.Store, Mode=TwoWay}" />
+                        SelectedItem="{Binding SelectedStorageCard.Store, Mode=TwoWay}"
+                        Style="{StaticResource comboBoxStyle}" />
 
-                    <TextBlock Text="Účet:" />
+                    <TextBlock Style="{StaticResource textBlockStyle}" Text="Účet:" />
 
                     <ComboBox
                         Grid.Row="0"
                         Grid.Column="1"
                         DisplayMemberPath="Name"
                         ItemsSource="{Binding Source={StaticResource vm}, Path=Accounts}"
-                        SelectedItem="{Binding SelectedStorageCard.Account, Mode=TwoWay}" />
+                        SelectedItem="{Binding SelectedStorageCard.Account, Mode=TwoWay}"
+                        Style="{StaticResource comboBoxStyle}" />
 
                     <Button
-                        Background="{StaticResource colorInfo}"
                         Command="{Binding UpdateStorageCardCommand}"
                         Content="Uložit"
-                        Style="{StaticResource buttonPrimary}" />
+                        Style="{StaticResource buttonInfoStyle}" />
                 </StackPanel>
             </DockPanel>
 
@@ -202,7 +107,8 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 ItemsSource="{Binding Items}"
-                SelectedItem="{Binding SelectedStorageCardItem, Mode=TwoWay}">
+                SelectedItem="{Binding SelectedStorageCardItem, Mode=TwoWay}"
+                Style="{StaticResource listViewStyle}">
                 <i:Interaction.Behaviors>
                     <bhv:ScrollIntoViewBehavior />
                 </i:Interaction.Behaviors>
@@ -271,18 +177,16 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <Button
-                                            Background="{StaticResource colorInfo}"
                                             Command="{Binding Source={StaticResource vm}, Path=UpdateItemCommand}"
                                             CommandParameter="{Binding .}"
                                             Content="Uložit"
-                                            Style="{StaticResource buttonPrimary}" />
+                                            Style="{StaticResource buttonInfoStyle}" />
 
                                         <Button
-                                            Background="{StaticResource colorDanger}"
                                             Command="{Binding Source={StaticResource vm}, Path=DeleteItemCommand}"
                                             CommandParameter="{Binding .}"
                                             Content="Smazat"
-                                            Style="{StaticResource buttonPrimary}" />
+                                            Style="{StaticResource buttonDangerStyle}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
@@ -294,14 +198,17 @@
             <StackPanel
                 Grid.Row="2"
                 Grid.Column="0"
-                DataContext="{Binding NewItem}">
+                DataContext="{Binding NewItem}"
+                Style="{StaticResource stackPanelStyle}">
                 <DatePicker
                     Width="100"
                     Margin="10,0,0,5"
-                    SelectedDate="{Binding DateTime}" />
+                    SelectedDate="{Binding DateTime}"
+                    Style="{StaticResource datePickerStyle}" />
                 <TextBox
                     Width="400"
                     Margin="12,0,0,5"
+                    Style="{StaticResource textBoxStyle}"
                     Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <ComboBox
                     Width="62"
@@ -309,30 +216,35 @@
                     DisplayMemberPath="Value"
                     ItemsSource="{Binding Source={StaticResource vm}, Path=Movements}"
                     SelectedValue="{Binding Movement, Mode=TwoWay}"
-                    SelectedValuePath="Key" />
+                    SelectedValuePath="Key"
+                    Style="{StaticResource comboBoxStyle}" />
                 <TextBox
                     Width="45"
                     Margin="12,0,0,5"
+                    Style="{StaticResource textBoxStyle}"
                     Text="{Binding Qty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBox
                     Width="65"
                     Margin="12,0,0,5"
+                    Style="{StaticResource textBoxStyle}"
                     Text="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBox
                     Width="100"
                     Margin="12,0,0,5"
+                    Style="{StaticResource textBoxStyle}"
                     Text="{Binding Invoice, Mode=TwoWay}" />
                 <ComboBox
                     Width="200"
                     Margin="12,0,0,5"
                     DisplayMemberPath="Name"
                     ItemsSource="{Binding Source={StaticResource vm}, Path=Customers}"
-                    SelectedItem="{Binding Customer, Mode=TwoWay}" />
+                    SelectedItem="{Binding Customer, Mode=TwoWay}"
+                    Style="{StaticResource comboBoxStyle}" />
                 <Button
                     Margin="17,0,0,5"
                     Command="{Binding Source={StaticResource vm}, Path=AddItemCommand}"
                     Content="Přidat"
-                    Style="{StaticResource buttonPrimary}" />
+                    Style="{StaticResource buttonPrimaryStyle}" />
             </StackPanel>
         </Grid>
     </DockPanel>

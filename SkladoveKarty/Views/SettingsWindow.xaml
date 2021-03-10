@@ -10,74 +10,15 @@
     xmlns:vm="clr-namespace:SkladoveKarty.ViewModels"
     Title="Nastavení"
     Width="800"
-    Height="730"
+    Height="700"
     mc:Ignorable="d">
 
     <Window.Resources>
         <vm:SettingsViewModel x:Key="vm" />
-
-        <SolidColorBrush x:Key="colorWhite" Color="#ffffff" />
-        <SolidColorBrush x:Key="colorBlack" Color="#0a0a0a" />
-        <SolidColorBrush x:Key="colorLight" Color="#f5f5f5" />
-        <SolidColorBrush x:Key="colorDark" Color="#363636" />
-        <SolidColorBrush x:Key="colorPrimary" Color="#00d1b2" />
-        <SolidColorBrush x:Key="colorLink" Color="#3273dc" />
-        <SolidColorBrush x:Key="colorInfo" Color="#209cee" />
-        <SolidColorBrush x:Key="colorSuccess" Color="#48c774" />
-        <SolidColorBrush x:Key="colorWarning" Color="#ffdd57" />
-        <SolidColorBrush x:Key="colorDanger" Color="#ff3860" />
-
-        <Style TargetType="StackPanel">
-            <Setter Property="Margin" Value="5,0" />
-            <Setter Property="Orientation" Value="Horizontal" />
-        </Style>
-
-        <Style TargetType="TextBlock">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-        </Style>
-
-        <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Padding" Value="2,0" />
-            <Setter Property="Height" Value="25" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-        </Style>
-
-        <Style TargetType="ListView">
-            <Setter Property="Margin" Value="5" />
-
-            <Style.Resources>
-                <Style TargetType="TextBox">
-                    <Setter Property="Padding" Value="2,0" />
-                    <Setter Property="Height" Value="25" />
-                    <Setter Property="VerticalContentAlignment" Value="Center" />
-                </Style>
-            </Style.Resources>
-        </Style>
-
-        <Style TargetType="StatusBar">
-            <Setter Property="Background" Value="{StaticResource colorDark}" />
-
-            <Style.Resources>
-                <Style TargetType="TextBlock">
-                    <Setter Property="Margin" Value="5,0" />
-                    <Setter Property="Foreground" Value="{StaticResource colorLight}" />
-                </Style>
-            </Style.Resources>
-        </Style>
-
-        <Style x:Key="buttonPrimary" TargetType="Button">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Padding" Value="5,0" />
-            <Setter Property="Height" Value="25" />
-            <Setter Property="Foreground" Value="{StaticResource colorWhite}" />
-            <Setter Property="Background" Value="{StaticResource colorPrimary}" />
-        </Style>
     </Window.Resources>
 
     <DockPanel DataContext="{StaticResource vm}">
-        <StatusBar DockPanel.Dock="Bottom">
+        <StatusBar DockPanel.Dock="Bottom" Style="{StaticResource statusBarStyle}">
             <StatusBarItem>
                 <TextBlock Text="{Binding LastActionStatus}" />
             </StatusBarItem>
@@ -101,17 +42,18 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Label
+            <TextBlock
                 Grid.Row="0"
                 Grid.Column="0"
-                Content="Kategorie"
-                FontWeight="Bold" />
+                Style="{StaticResource textBlockHeaderStyle}"
+                Text="Kategorie" />
 
             <ListView
                 Grid.Row="1"
                 Grid.Column="0"
                 ItemsSource="{Binding Categories}"
-                SelectedItem="{Binding SelectedCategory, Mode=TwoWay}">
+                SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
+                Style="{StaticResource listViewStyle}">
                 <i:Interaction.Behaviors>
                     <bhv:ScrollIntoViewBehavior />
                 </i:Interaction.Behaviors>
@@ -129,18 +71,16 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <Button
-                                            Background="{StaticResource colorInfo}"
                                             Command="{Binding Source={StaticResource vm}, Path=UpdateCategoryCommand}"
                                             CommandParameter="{Binding .}"
                                             Content="Uložit"
-                                            Style="{StaticResource buttonPrimary}" />
+                                            Style="{StaticResource buttonInfoStyle}" />
 
                                         <Button
-                                            Background="{StaticResource colorDanger}"
                                             Command="{Binding Source={StaticResource vm}, Path=DeleteCategoryCommand}"
                                             CommandParameter="{Binding .}"
                                             Content="Smazat"
-                                            Style="{StaticResource buttonPrimary}" />
+                                            Style="{StaticResource buttonDangerStyle}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
@@ -152,29 +92,32 @@
             <StackPanel
                 Grid.Row="2"
                 Grid.Column="0"
-                DataContext="{Binding NewCategory}">
+                DataContext="{Binding NewCategory}"
+                Style="{StaticResource stackPanelStyle}">
                 <TextBox
                     Width="200"
                     Margin="10,0,0,5"
+                    Style="{StaticResource textBoxStyle}"
                     Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <Button
                     Margin="17,0,0,5"
                     Command="{Binding Source={StaticResource vm}, Path=AddCategoryCommand}"
                     Content="Přidat"
-                    Style="{StaticResource buttonPrimary}" />
+                    Style="{StaticResource buttonPrimaryStyle}" />
             </StackPanel>
 
-            <Label
+            <TextBlock
                 Grid.Row="0"
                 Grid.Column="1"
-                Content="Sklady"
-                FontWeight="Bold" />
+                Style="{StaticResource textBlockHeaderStyle}"
+                Text="Sklady" />
 
             <ListView
                 Grid.Row="1"
                 Grid.Column="1"
                 ItemsSource="{Binding Stores}"
-                SelectedItem="{Binding SelectedStore, Mode=TwoWay}">
+                SelectedItem="{Binding SelectedStore, Mode=TwoWay}"
+                Style="{StaticResource listViewStyle}">
                 <i:Interaction.Behaviors>
                     <bhv:ScrollIntoViewBehavior />
                 </i:Interaction.Behaviors>
@@ -192,18 +135,16 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <Button
-                                            Background="{StaticResource colorInfo}"
                                             Command="{Binding Source={StaticResource vm}, Path=UpdateStoreCommand}"
                                             CommandParameter="{Binding .}"
                                             Content="Uložit"
-                                            Style="{StaticResource buttonPrimary}" />
+                                            Style="{StaticResource buttonInfoStyle}" />
 
                                         <Button
-                                            Background="{StaticResource colorDanger}"
                                             Command="{Binding Source={StaticResource vm}, Path=DeleteStoreCommand}"
                                             CommandParameter="{Binding .}"
                                             Content="Smazat"
-                                            Style="{StaticResource buttonPrimary}" />
+                                            Style="{StaticResource buttonDangerStyle}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
@@ -215,30 +156,32 @@
             <StackPanel
                 Grid.Row="2"
                 Grid.Column="1"
-                DataContext="{Binding NewStore}">
+                DataContext="{Binding NewStore}"
+                Style="{StaticResource stackPanelStyle}">
                 <TextBox
                     Width="200"
                     Margin="10,0,0,5"
+                    Style="{StaticResource textBoxStyle}"
                     Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <Button
                     Margin="17,0,0,5"
                     Command="{Binding Source={StaticResource vm}, Path=AddStoreCommand}"
                     Content="Přidat"
-                    Style="{StaticResource buttonPrimary}" />
+                    Style="{StaticResource buttonPrimaryStyle}" />
             </StackPanel>
 
-            <Label
+            <TextBlock
                 Grid.Row="3"
                 Grid.Column="0"
-                Margin="5,10,5,5"
-                Content="Účty"
-                FontWeight="Bold" />
+                Style="{StaticResource textBlockHeaderStyle}"
+                Text="Účty" />
 
             <ListView
                 Grid.Row="4"
                 Grid.Column="0"
                 ItemsSource="{Binding Accounts}"
-                SelectedItem="{Binding SelectedAccount, Mode=TwoWay}">
+                SelectedItem="{Binding SelectedAccount, Mode=TwoWay}"
+                Style="{StaticResource listViewStyle}">
                 <i:Interaction.Behaviors>
                     <bhv:ScrollIntoViewBehavior />
                 </i:Interaction.Behaviors>
@@ -256,18 +199,16 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <Button
-                                            Background="{StaticResource colorInfo}"
                                             Command="{Binding Source={StaticResource vm}, Path=UpdateAccountCommand}"
                                             CommandParameter="{Binding .}"
                                             Content="Uložit"
-                                            Style="{StaticResource buttonPrimary}" />
+                                            Style="{StaticResource buttonInfoStyle}" />
 
                                         <Button
-                                            Background="{StaticResource colorDanger}"
                                             Command="{Binding Source={StaticResource vm}, Path=DeleteAccountCommand}"
                                             CommandParameter="{Binding .}"
                                             Content="Smazat"
-                                            Style="{StaticResource buttonPrimary}" />
+                                            Style="{StaticResource buttonDangerStyle}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
@@ -279,30 +220,32 @@
             <StackPanel
                 Grid.Row="5"
                 Grid.Column="0"
-                DataContext="{Binding NewAccount}">
+                DataContext="{Binding NewAccount}"
+                Style="{StaticResource stackPanelStyle}">
                 <TextBox
                     Width="200"
                     Margin="10,0,0,5"
+                    Style="{StaticResource textBoxStyle}"
                     Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <Button
                     Margin="17,0,0,5"
                     Command="{Binding Source={StaticResource vm}, Path=AddAccountCommand}"
                     Content="Přidat"
-                    Style="{StaticResource buttonPrimary}" />
+                    Style="{StaticResource buttonPrimaryStyle}" />
             </StackPanel>
 
-            <Label
+            <TextBlock
                 Grid.Row="3"
                 Grid.Column="1"
-                Margin="5,10,5,5"
-                Content="Dodavatelé"
-                FontWeight="Bold" />
+                Style="{StaticResource textBlockHeaderStyle}"
+                Text="Dodavatelé" />
 
             <ListView
                 Grid.Row="4"
                 Grid.Column="1"
                 ItemsSource="{Binding Suppliers}"
-                SelectedItem="{Binding SelectedSupplier, Mode=TwoWay}">
+                SelectedItem="{Binding SelectedSupplier, Mode=TwoWay}"
+                Style="{StaticResource listViewStyle}">
                 <i:Interaction.Behaviors>
                     <bhv:ScrollIntoViewBehavior />
                 </i:Interaction.Behaviors>
@@ -320,18 +263,16 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <Button
-                                            Background="{StaticResource colorInfo}"
                                             Command="{Binding Source={StaticResource vm}, Path=UpdateSupplierCommand}"
                                             CommandParameter="{Binding .}"
                                             Content="Uložit"
-                                            Style="{StaticResource buttonPrimary}" />
+                                            Style="{StaticResource buttonInfoStyle}" />
 
                                         <Button
-                                            Background="{StaticResource colorDanger}"
                                             Command="{Binding Source={StaticResource vm}, Path=DeleteSupplierCommand}"
                                             CommandParameter="{Binding .}"
                                             Content="Smazat"
-                                            Style="{StaticResource buttonPrimary}" />
+                                            Style="{StaticResource buttonDangerStyle}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
@@ -343,32 +284,34 @@
             <StackPanel
                 Grid.Row="5"
                 Grid.Column="1"
-                DataContext="{Binding NewSupplier}">
+                DataContext="{Binding NewSupplier}"
+                Style="{StaticResource stackPanelStyle}">
                 <TextBox
                     Width="200"
                     Margin="10,0,0,5"
+                    Style="{StaticResource textBoxStyle}"
                     Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <Button
                     Margin="17,0,0,5"
                     Command="{Binding Source={StaticResource vm}, Path=AddSupplierCommand}"
                     Content="Přidat"
-                    Style="{StaticResource buttonPrimary}" />
+                    Style="{StaticResource buttonPrimaryStyle}" />
             </StackPanel>
 
-            <Label
+            <TextBlock
                 Grid.Row="6"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                Margin="5,10,5,5"
-                Content="Zákazníci"
-                FontWeight="Bold" />
+                Style="{StaticResource textBlockHeaderStyle}"
+                Text="Zákazníci" />
 
             <ListView
                 Grid.Row="7"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 ItemsSource="{Binding Customers}"
-                SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}">
+                SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}"
+                Style="{StaticResource listViewStyle}">
                 <i:Interaction.Behaviors>
                     <bhv:ScrollIntoViewBehavior />
                 </i:Interaction.Behaviors>
@@ -386,18 +329,16 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <Button
-                                            Background="{StaticResource colorInfo}"
                                             Command="{Binding Source={StaticResource vm}, Path=UpdateCustomerCommand}"
                                             CommandParameter="{Binding .}"
                                             Content="Uložit"
-                                            Style="{StaticResource buttonPrimary}" />
+                                            Style="{StaticResource buttonInfoStyle}" />
 
                                         <Button
-                                            Background="{StaticResource colorDanger}"
                                             Command="{Binding Source={StaticResource vm}, Path=DeleteCustomerCommand}"
                                             CommandParameter="{Binding .}"
                                             Content="Smazat"
-                                            Style="{StaticResource buttonPrimary}" />
+                                            Style="{StaticResource buttonDangerStyle}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
@@ -410,16 +351,18 @@
                 Grid.Row="8"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                DataContext="{Binding NewCustomer}">
+                DataContext="{Binding NewCustomer}"
+                Style="{StaticResource stackPanelStyle}">
                 <TextBox
                     Width="200"
                     Margin="10,0,0,5"
+                    Style="{StaticResource textBoxStyle}"
                     Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <Button
                     Margin="17,0,0,5"
                     Command="{Binding Source={StaticResource vm}, Path=AddCustomerCommand}"
                     Content="Přidat"
-                    Style="{StaticResource buttonPrimary}" />
+                    Style="{StaticResource buttonPrimaryStyle}" />
             </StackPanel>
         </Grid>
     </DockPanel>
