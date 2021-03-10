@@ -15,7 +15,7 @@
         {
             if (items == null) return 0;
 
-            var averageIncomingPrice = items.Where(i => i.Movement == 1).Select(i => i.Price).Average();
+            var averageIncomingPrice = GetStorageCardItemsWeightedAveragePrice(items.Where(i => i.Movement == 1));
             var outgoingPrice = items.Where(i => i.Movement == -1).Select(i => averageIncomingPrice * i.Qty).Sum();
             var incomingPrice = GetStorageCardItemsPrice(items, 1);
 
@@ -25,6 +25,14 @@
         public static int GetStorageCardItemsQty(List<Item> items)
         {
             return items?.Select(i => i.Qty * i.Movement).Sum() ?? 0;
+        }
+
+        private static decimal GetStorageCardItemsWeightedAveragePrice(IEnumerable<Item> items)
+        {
+            var weightedValueSum = items.Select(i => i.Price * i.Qty).Sum();
+            var weightSum = items.Select(i => i.Qty).Sum();
+
+            return weightedValueSum / weightSum;
         }
     }
 }
