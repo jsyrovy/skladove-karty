@@ -1,29 +1,30 @@
 ﻿namespace SkladoveKarty.ViewModels.Helpers
 {
+    using System.Collections.Generic;
     using System.Linq;
     using SkladoveKarty.Models;
 
     public static class ReportHelper
     {
-        public static decimal GetStorageCardItemsPrice(StorageCard storageCard, int movement)
+        public static decimal GetStorageCardItemsPrice(List<Item> items, int movement)
         {
-            return storageCard?.Items.Where(i => i.Movement == movement).Select(i => i.Price * i.Qty).Sum() ?? 0;
+            return items?.Where(i => i.Movement == movement).Select(i => i.Price * i.Qty).Sum() ?? 0;
         }
 
-        public static decimal GetStorageCardItemsPrice(StorageCard storageCard)
+        public static decimal GetStorageCardItemsPrice(List<Item> items)
         {
-            if (storageCard == null) return 0;
+            if (items == null) return 0;
 
-            var averageIncomingPrice = storageCard.Items.Where(i => i.Movement == 1).Select(i => i.Price).Average();
-            var outgoingPrice = storageCard.Items.Where(i => i.Movement == -1).Select(i => averageIncomingPrice * i.Qty).Sum();
-            var incomingPrice = GetStorageCardItemsPrice(storageCard, 1);
+            var averageIncomingPrice = items.Where(i => i.Movement == 1).Select(i => i.Price).Average();
+            var outgoingPrice = items.Where(i => i.Movement == -1).Select(i => averageIncomingPrice * i.Qty).Sum();
+            var incomingPrice = GetStorageCardItemsPrice(items, 1);
 
             return incomingPrice - outgoingPrice;
         }
 
-        public static int GetStorageCardItemsQty(StorageCard storageCard)
+        public static int GetStorageCardItemsQty(List<Item> items)
         {
-            return storageCard?.Items.Select(i => i.Qty * i.Movement).Sum() ?? 0;
+            return items?.Select(i => i.Qty * i.Movement).Sum() ?? 0;
         }
     }
 }
