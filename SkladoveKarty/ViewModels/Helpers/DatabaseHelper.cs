@@ -91,77 +91,6 @@
             this.db.SaveChanges();
         }
 
-        public void UpdateAccount(Account newAccount)
-        {
-            var account = this.db.Accounts.Where(i => i.Id == newAccount.Id).Single();
-
-            account.Name = newAccount.Name;
-
-            this.db.SaveChanges();
-        }
-
-        public void UpdateCategory(Category newCategory)
-        {
-            var category = this.db.Categories.Where(i => i.Id == newCategory.Id).Single();
-
-            category.Name = newCategory.Name;
-
-            this.db.SaveChanges();
-        }
-
-        public void UpdateCustomer(Customer newCustomer)
-        {
-            var customer = this.db.Customers.Where(i => i.Id == newCustomer.Id).Single();
-
-            customer.Name = newCustomer.Name;
-
-            this.db.SaveChanges();
-        }
-
-        public void UpdateItem(Item newItem)
-        {
-            var item = this.db.Items.Where(i => i.Id == newItem.Id).Single();
-
-            item.Name = newItem.Name;
-            item.Movement = newItem.Movement;
-            item.Qty = newItem.Qty;
-            item.Price = newItem.Price;
-            item.Invoice = newItem.Invoice;
-            item.Customer = newItem.Customer;
-
-            this.db.SaveChanges();
-        }
-
-        public void UpdateStore(Store newStore)
-        {
-            var store = this.db.Stores.Where(i => i.Id == newStore.Id).Single();
-
-            store.Name = newStore.Name;
-
-            this.db.SaveChanges();
-        }
-
-        public void UpdateSupplier(Supplier newSupplier)
-        {
-            var supplier = this.db.Suppliers.Where(i => i.Id == newSupplier.Id).Single();
-
-            supplier.Name = newSupplier.Name;
-
-            this.db.SaveChanges();
-        }
-
-        public void UpdateStorageCard(StorageCard newStorageCard)
-        {
-            var storageCard = this.db.StorageCards.Where(s => s.Id == newStorageCard.Id).Single();
-
-            storageCard.Account = newStorageCard.Account;
-            storageCard.Name = newStorageCard.Name;
-            storageCard.Category = newStorageCard.Category;
-            storageCard.Store = newStorageCard.Store;
-
-            this.db.SaveChanges();
-        }
-
         public void DeleteAccount(Account newAccount)
         {
             var account = this.db.Accounts.Where(i => i.Id == newAccount.Id).Single();
@@ -213,6 +142,11 @@
 
             this.db.Items.Remove(item);
 
+            this.db.SaveChanges();
+        }
+
+        public void SaveChanges()
+        {
             this.db.SaveChanges();
         }
     }

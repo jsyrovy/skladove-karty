@@ -95,11 +95,6 @@
                         ItemsSource="{Binding Source={StaticResource vm}, Path=Accounts}"
                         SelectedItem="{Binding SelectedStorageCard.Account, Mode=TwoWay}"
                         Style="{StaticResource comboBoxStyle}" />
-
-                    <Button
-                        Command="{Binding UpdateStorageCardCommand}"
-                        Content="Uložit"
-                        Style="{StaticResource buttonInfoStyle}" />
                 </StackPanel>
             </DockPanel>
 
@@ -175,19 +170,11 @@
                         <GridViewColumn>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button
-                                            Command="{Binding Source={StaticResource vm}, Path=UpdateItemCommand}"
-                                            CommandParameter="{Binding .}"
-                                            Content="Uložit"
-                                            Style="{StaticResource buttonInfoStyle}" />
-
-                                        <Button
-                                            Command="{Binding Source={StaticResource vm}, Path=DeleteItemCommand}"
-                                            CommandParameter="{Binding .}"
-                                            Content="Smazat"
-                                            Style="{StaticResource buttonDangerStyle}" />
-                                    </StackPanel>
+                                    <Button
+                                        Command="{Binding Source={StaticResource vm}, Path=DeleteItemCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Content="Smazat"
+                                        Style="{StaticResource buttonDangerStyle}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -195,57 +182,69 @@
                 </ListView.View>
             </ListView>
 
-            <StackPanel
-                Grid.Row="2"
-                Grid.Column="0"
-                DataContext="{Binding NewItem}"
-                Style="{StaticResource stackPanelStyle}">
-                <DatePicker
-                    Width="100"
-                    Margin="10,0,0,5"
-                    SelectedDate="{Binding DateTime}"
-                    Style="{StaticResource datePickerStyle}" />
-                <TextBox
-                    Width="400"
-                    Margin="12,0,0,5"
-                    Style="{StaticResource textBoxStyle}"
-                    Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <ComboBox
-                    Width="62"
-                    Margin="12,0,0,5"
-                    DisplayMemberPath="Value"
-                    ItemsSource="{Binding Source={StaticResource vm}, Path=Movements}"
-                    SelectedValue="{Binding Movement, Mode=TwoWay}"
-                    SelectedValuePath="Key"
-                    Style="{StaticResource comboBoxStyle}" />
-                <TextBox
-                    Width="45"
-                    Margin="12,0,0,5"
-                    Style="{StaticResource textBoxStyle}"
-                    Text="{Binding Qty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBox
-                    Width="65"
-                    Margin="12,0,0,5"
-                    Style="{StaticResource textBoxStyle}"
-                    Text="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBox
-                    Width="100"
-                    Margin="12,0,0,5"
-                    Style="{StaticResource textBoxStyle}"
-                    Text="{Binding Invoice, Mode=TwoWay}" />
-                <ComboBox
-                    Width="200"
-                    Margin="12,0,0,5"
-                    DisplayMemberPath="Name"
-                    ItemsSource="{Binding Source={StaticResource vm}, Path=Customers}"
-                    SelectedItem="{Binding Customer, Mode=TwoWay}"
-                    Style="{StaticResource comboBoxStyle}" />
+            <DockPanel Grid.Row="2" Grid.Column="0">
                 <Button
-                    Margin="17,0,0,5"
-                    Command="{Binding Source={StaticResource vm}, Path=AddItemCommand}"
-                    Content="Přidat"
-                    Style="{StaticResource buttonPrimaryStyle}" />
-            </StackPanel>
+                    Margin="0,0,5,5"
+                    Command="{Binding Source={StaticResource vm}, Path=SaveChangesMainCommand}"
+                    Content="Uložit změny"
+                    DockPanel.Dock="Right"
+                    Style="{StaticResource buttonInfoStyle}" />
+
+                <StackPanel DataContext="{Binding NewItem}" Style="{StaticResource stackPanelStyle}">
+                    <DatePicker
+                        Width="100"
+                        Margin="10,0,0,5"
+                        SelectedDate="{Binding DateTime}"
+                        Style="{StaticResource datePickerStyle}" />
+
+                    <TextBox
+                        Width="400"
+                        Margin="12,0,0,5"
+                        Style="{StaticResource textBoxStyle}"
+                        Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <ComboBox
+                        Width="62"
+                        Margin="12,0,0,5"
+                        DisplayMemberPath="Value"
+                        ItemsSource="{Binding Source={StaticResource vm}, Path=Movements}"
+                        SelectedValue="{Binding Movement, Mode=TwoWay}"
+                        SelectedValuePath="Key"
+                        Style="{StaticResource comboBoxStyle}" />
+
+                    <TextBox
+                        Width="45"
+                        Margin="12,0,0,5"
+                        Style="{StaticResource textBoxStyle}"
+                        Text="{Binding Qty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBox
+                        Width="65"
+                        Margin="12,0,0,5"
+                        Style="{StaticResource textBoxStyle}"
+                        Text="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBox
+                        Width="100"
+                        Margin="12,0,0,5"
+                        Style="{StaticResource textBoxStyle}"
+                        Text="{Binding Invoice, Mode=TwoWay}" />
+
+                    <ComboBox
+                        Width="200"
+                        Margin="12,0,0,5"
+                        DisplayMemberPath="Name"
+                        ItemsSource="{Binding Source={StaticResource vm}, Path=Customers}"
+                        SelectedItem="{Binding Customer, Mode=TwoWay}"
+                        Style="{StaticResource comboBoxStyle}" />
+
+                    <Button
+                        Margin="17,0,0,5"
+                        Command="{Binding Source={StaticResource vm}, Path=AddItemCommand}"
+                        Content="Přidat"
+                        Style="{StaticResource buttonPrimaryStyle}" />
+                </StackPanel>
+            </DockPanel>
         </Grid>
     </DockPanel>
 </Window>

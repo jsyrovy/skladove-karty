@@ -33,11 +33,7 @@
             this.AddStoreCommand = new AddStoreCommand(this);
             this.AddSupplierCommand = new AddSupplierCommand(this);
 
-            this.UpdateAccountCommand = new UpdateAccountCommand(this);
-            this.UpdateCategoryCommand = new UpdateCategoryCommand(this);
-            this.UpdateCustomerCommand = new UpdateCustomerCommand(this);
-            this.UpdateStoreCommand = new UpdateStoreCommand(this);
-            this.UpdateSupplierCommand = new UpdateSupplierCommand(this);
+            this.SaveChangesSettingsCommand = new SaveChangesSettingsCommand(this);
 
             this.DeleteAccountCommand = new DeleteAccountCommand(this);
             this.DeleteCategoryCommand = new DeleteCategoryCommand(this);
@@ -236,15 +232,7 @@
 
         public AddSupplierCommand AddSupplierCommand { get; set; }
 
-        public UpdateAccountCommand UpdateAccountCommand { get; set; }
-
-        public UpdateCategoryCommand UpdateCategoryCommand { get; set; }
-
-        public UpdateCustomerCommand UpdateCustomerCommand { get; set; }
-
-        public UpdateStoreCommand UpdateStoreCommand { get; set; }
-
-        public UpdateSupplierCommand UpdateSupplierCommand { get; set; }
+        public SaveChangesSettingsCommand SaveChangesSettingsCommand { get; set; }
 
         public DeleteAccountCommand DeleteAccountCommand { get; set; }
 

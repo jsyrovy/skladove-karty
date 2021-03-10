@@ -69,19 +69,11 @@
                         <GridViewColumn>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button
-                                            Command="{Binding Source={StaticResource vm}, Path=UpdateCategoryCommand}"
-                                            CommandParameter="{Binding .}"
-                                            Content="Uložit"
-                                            Style="{StaticResource buttonInfoStyle}" />
-
-                                        <Button
-                                            Command="{Binding Source={StaticResource vm}, Path=DeleteCategoryCommand}"
-                                            CommandParameter="{Binding .}"
-                                            Content="Smazat"
-                                            Style="{StaticResource buttonDangerStyle}" />
-                                    </StackPanel>
+                                    <Button
+                                        Command="{Binding Source={StaticResource vm}, Path=DeleteCategoryCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Content="Smazat"
+                                        Style="{StaticResource buttonDangerStyle}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -133,19 +125,11 @@
                         <GridViewColumn>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button
-                                            Command="{Binding Source={StaticResource vm}, Path=UpdateStoreCommand}"
-                                            CommandParameter="{Binding .}"
-                                            Content="Uložit"
-                                            Style="{StaticResource buttonInfoStyle}" />
-
-                                        <Button
-                                            Command="{Binding Source={StaticResource vm}, Path=DeleteStoreCommand}"
-                                            CommandParameter="{Binding .}"
-                                            Content="Smazat"
-                                            Style="{StaticResource buttonDangerStyle}" />
-                                    </StackPanel>
+                                    <Button
+                                        Command="{Binding Source={StaticResource vm}, Path=DeleteStoreCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Content="Smazat"
+                                        Style="{StaticResource buttonDangerStyle}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -197,19 +181,11 @@
                         <GridViewColumn>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button
-                                            Command="{Binding Source={StaticResource vm}, Path=UpdateAccountCommand}"
-                                            CommandParameter="{Binding .}"
-                                            Content="Uložit"
-                                            Style="{StaticResource buttonInfoStyle}" />
-
-                                        <Button
-                                            Command="{Binding Source={StaticResource vm}, Path=DeleteAccountCommand}"
-                                            CommandParameter="{Binding .}"
-                                            Content="Smazat"
-                                            Style="{StaticResource buttonDangerStyle}" />
-                                    </StackPanel>
+                                    <Button
+                                        Command="{Binding Source={StaticResource vm}, Path=DeleteAccountCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Content="Smazat"
+                                        Style="{StaticResource buttonDangerStyle}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -261,19 +237,11 @@
                         <GridViewColumn>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button
-                                            Command="{Binding Source={StaticResource vm}, Path=UpdateSupplierCommand}"
-                                            CommandParameter="{Binding .}"
-                                            Content="Uložit"
-                                            Style="{StaticResource buttonInfoStyle}" />
-
-                                        <Button
-                                            Command="{Binding Source={StaticResource vm}, Path=DeleteSupplierCommand}"
-                                            CommandParameter="{Binding .}"
-                                            Content="Smazat"
-                                            Style="{StaticResource buttonDangerStyle}" />
-                                    </StackPanel>
+                                    <Button
+                                        Command="{Binding Source={StaticResource vm}, Path=DeleteSupplierCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Content="Smazat"
+                                        Style="{StaticResource buttonDangerStyle}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -327,19 +295,11 @@
                         <GridViewColumn>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button
-                                            Command="{Binding Source={StaticResource vm}, Path=UpdateCustomerCommand}"
-                                            CommandParameter="{Binding .}"
-                                            Content="Uložit"
-                                            Style="{StaticResource buttonInfoStyle}" />
-
-                                        <Button
-                                            Command="{Binding Source={StaticResource vm}, Path=DeleteCustomerCommand}"
-                                            CommandParameter="{Binding .}"
-                                            Content="Smazat"
-                                            Style="{StaticResource buttonDangerStyle}" />
-                                    </StackPanel>
+                                    <Button
+                                        Command="{Binding Source={StaticResource vm}, Path=DeleteCustomerCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Content="Smazat"
+                                        Style="{StaticResource buttonDangerStyle}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -347,23 +307,28 @@
                 </ListView.View>
             </ListView>
 
-            <StackPanel
+            <DockPanel
                 Grid.Row="8"
                 Grid.Column="0"
-                Grid.ColumnSpan="2"
-                DataContext="{Binding NewCustomer}"
-                Style="{StaticResource stackPanelStyle}">
-                <TextBox
-                    Width="200"
-                    Margin="10,0,0,5"
-                    Style="{StaticResource textBoxStyle}"
-                    Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                Grid.ColumnSpan="2">
                 <Button
-                    Margin="17,0,0,5"
-                    Command="{Binding Source={StaticResource vm}, Path=AddCustomerCommand}"
-                    Content="Přidat"
-                    Style="{StaticResource buttonPrimaryStyle}" />
-            </StackPanel>
+                    Command="{Binding SaveChangesSettingsCommand}"
+                    Content="Uložit změny"
+                    DockPanel.Dock="Right"
+                    Style="{StaticResource buttonInfoStyle}" />
+                <StackPanel DataContext="{Binding NewCustomer}" Style="{StaticResource stackPanelStyle}">
+                    <TextBox
+                        Width="200"
+                        Margin="10,0,0,5"
+                        Style="{StaticResource textBoxStyle}"
+                        Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Button
+                        Margin="17,0,0,5"
+                        Command="{Binding Source={StaticResource vm}, Path=AddCustomerCommand}"
+                        Content="Přidat"
+                        Style="{StaticResource buttonPrimaryStyle}" />
+                </StackPanel>
+            </DockPanel>
         </Grid>
     </DockPanel>
 </Window>

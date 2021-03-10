@@ -28,9 +28,8 @@
                 return;
 
             this.AddItemCommand = new AddItemCommand(this);
-            this.UpdateItemCommand = new UpdateItemCommand(this);
             this.DeleteItemCommand = new DeleteItemCommand(this);
-            this.UpdateStorageCardCommand = new UpdateStorageCardCommand(this);
+            this.SaveChangesMainCommand = new SaveChangesMainCommand(this);
             this.ShowSettingsCommand = new ShowSettingsCommand(this);
 
             this.NewItem = CreateDefaultItem();
@@ -56,13 +55,12 @@
 
         public ObservableCollection<Store> Stores { get; set; } = new();
 
-        public UpdateItemCommand UpdateItemCommand { get; set; }
 
         public AddItemCommand AddItemCommand { get; set; }
 
         public DeleteItemCommand DeleteItemCommand { get; set; }
 
-        public UpdateStorageCardCommand UpdateStorageCardCommand { get; set; }
+        public SaveChangesMainCommand SaveChangesMainCommand { get; set; }
 
         public ShowSettingsCommand ShowSettingsCommand { get; set; }
 
@@ -197,10 +195,10 @@
 
         public void CalculateStorageCardReports()
         {
-            this.SelectedStorageCardItemsQty = ReportHelper.GetStorageCardItemsQty(this.SelectedStorageCard.Items);
-            this.SelectedStorageCardItemsIncomingPrice = ReportHelper.GetStorageCardItemsPrice(this.SelectedStorageCard.Items, 1);
-            this.SelectedStorageCardItemsOutgoingPrice = ReportHelper.GetStorageCardItemsPrice(this.SelectedStorageCard.Items, -1);
-            this.SelectedStorageCardItemsPrice = ReportHelper.GetStorageCardItemsPrice(this.SelectedStorageCard.Items);
+            this.SelectedStorageCardItemsQty = ReportHelper.GetStorageCardItemsQty(this.SelectedStorageCard?.Items);
+            this.SelectedStorageCardItemsIncomingPrice = ReportHelper.GetStorageCardItemsPrice(this.SelectedStorageCard?.Items, 1);
+            this.SelectedStorageCardItemsOutgoingPrice = ReportHelper.GetStorageCardItemsPrice(this.SelectedStorageCard?.Items, -1);
+            this.SelectedStorageCardItemsPrice = ReportHelper.GetStorageCardItemsPrice(this.SelectedStorageCard?.Items);
         }
 
         private Task LoadItemsTask(Item itemToSelect)
