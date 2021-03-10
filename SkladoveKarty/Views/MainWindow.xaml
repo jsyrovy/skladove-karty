@@ -145,50 +145,58 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Row="0" Grid.Column="0">
-                <TextBlock Text="Název:" />
-
-                <ComboBox
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    DisplayMemberPath="Name"
-                    ItemsSource="{Binding StorageCards}"
-                    SelectedItem="{Binding SelectedStorageCard, Mode=TwoWay}" />
-
-                <TextBlock Text="Kategorie:" />
-
-                <ComboBox
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    DisplayMemberPath="Name"
-                    ItemsSource="{Binding Source={StaticResource vm}, Path=Categories}"
-                    SelectedItem="{Binding SelectedStorageCard.Category, Mode=TwoWay}" />
-
-                <TextBlock Text="Sklad:" />
-
-                <ComboBox
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    DisplayMemberPath="Name"
-                    ItemsSource="{Binding Source={StaticResource vm}, Path=Stores}"
-                    SelectedItem="{Binding SelectedStorageCard.Store, Mode=TwoWay}" />
-
-                <TextBlock Text="Účet:" />
-
-                <ComboBox
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    DisplayMemberPath="Name"
-                    ItemsSource="{Binding Source={StaticResource vm}, Path=Accounts}"
-                    SelectedItem="{Binding SelectedStorageCard.Account, Mode=TwoWay}" />
-
+            <DockPanel Grid.Row="0" Grid.Column="0">
                 <Button
-                    Background="{StaticResource colorInfo}"
-                    Command="{Binding UpdateStorageCardCommand}"
-                    Content="Uložit"
+                    Background="{StaticResource colorLink}"
+                    Command="{Binding ShowSettingsCommand}"
+                    Content="Nastavení"
+                    DockPanel.Dock="Right"
                     Style="{StaticResource buttonPrimary}" />
 
-            </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Název:" />
+
+                    <ComboBox
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        DisplayMemberPath="Name"
+                        ItemsSource="{Binding StorageCards}"
+                        SelectedItem="{Binding SelectedStorageCard, Mode=TwoWay}" />
+
+                    <TextBlock Text="Kategorie:" />
+
+                    <ComboBox
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        DisplayMemberPath="Name"
+                        ItemsSource="{Binding Source={StaticResource vm}, Path=Categories}"
+                        SelectedItem="{Binding SelectedStorageCard.Category, Mode=TwoWay}" />
+
+                    <TextBlock Text="Sklad:" />
+
+                    <ComboBox
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        DisplayMemberPath="Name"
+                        ItemsSource="{Binding Source={StaticResource vm}, Path=Stores}"
+                        SelectedItem="{Binding SelectedStorageCard.Store, Mode=TwoWay}" />
+
+                    <TextBlock Text="Účet:" />
+
+                    <ComboBox
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        DisplayMemberPath="Name"
+                        ItemsSource="{Binding Source={StaticResource vm}, Path=Accounts}"
+                        SelectedItem="{Binding SelectedStorageCard.Account, Mode=TwoWay}" />
+
+                    <Button
+                        Background="{StaticResource colorInfo}"
+                        Command="{Binding UpdateStorageCardCommand}"
+                        Content="Uložit"
+                        Style="{StaticResource buttonPrimary}" />
+                </StackPanel>
+            </DockPanel>
 
             <ListView
                 Grid.Row="1"

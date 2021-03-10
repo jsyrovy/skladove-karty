@@ -11,10 +11,10 @@
 
         public override void Execute(object parameter)
         {
-            this.ViewModel.Database.DeleteItem((Item)parameter);
-            this.ViewModel.LoadItemsAsync();
-            this.ViewModel.CalculateStorageCardReports();
-            this.ViewModel.LastActionStatus = "Položka byla smazána.";
+            this.MainViewModel.Database.DeleteItem((Item)parameter);
+            this.MainViewModel.LoadItemsAsync();
+            this.MainViewModel.CalculateStorageCardReports();
+            this.MainViewModel.LastActionStatus = "Položka byla smazána.";
         }
     }
 }

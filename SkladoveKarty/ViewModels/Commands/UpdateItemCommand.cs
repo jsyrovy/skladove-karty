@@ -20,9 +20,9 @@
 
         public override void Execute(object parameter)
         {
-            this.ViewModel.Database.UpdateItem((Item)parameter);
-            this.ViewModel.CalculateStorageCardReports();
-            this.ViewModel.LastActionStatus = "Položka byla aktualizována.";
+            this.MainViewModel.Database.UpdateItem((Item)parameter);
+            this.MainViewModel.CalculateStorageCardReports();
+            this.MainViewModel.LastActionStatus = "Položka byla aktualizována.";
         }
     }
 }

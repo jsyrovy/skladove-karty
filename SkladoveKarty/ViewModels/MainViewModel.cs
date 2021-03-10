@@ -63,28 +63,18 @@
             if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
                 return;
 
-            foreach (var account in this.Database.GetAccounts())
-                this.Accounts.Add(account);
-
-            foreach (var category in this.Database.GetCategories())
-                this.Categories.Add(category);
-
-            foreach (var customer in this.Database.GetCustomers())
-                this.Customers.Add(customer);
-
-            foreach (var storageCard in this.Database.GetStorageCards())
-                this.StorageCards.Add(storageCard);
-
-            foreach (var store in this.Database.GetStores())
-                this.Stores.Add(store);
-
             this.AddItemCommand = new AddItemCommand(this);
             this.UpdateItemCommand = new UpdateItemCommand(this);
             this.DeleteItemCommand = new DeleteItemCommand(this);
             this.UpdateStorageCardCommand = new UpdateStorageCardCommand(this);
+            this.ShowSettingsCommand = new ShowSettingsCommand(this);
+
+            this.LoadAllAsync();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public static Dictionary<int, string> Movements => new() { [1] = "Příjem", [-1] = "Výdej" };
 
         public DatabaseHelper Database { get; private set; } = new();
 
@@ -100,8 +90,6 @@
 
         public ObservableCollection<Store> Stores { get; set; } = new();
 
-        public Dictionary<int, string> Movements => new() { [1] = "Příjem", [-1] = "Výdej" };
-
         public UpdateItemCommand UpdateItemCommand { get; set; }
 
         public AddItemCommand AddItemCommand { get; set; }
@@ -109,6 +97,8 @@
         public DeleteItemCommand DeleteItemCommand { get; set; }
 
         public UpdateStorageCardCommand UpdateStorageCardCommand { get; set; }
+
+        public ShowSettingsCommand ShowSettingsCommand { get; set; }
 
         public string LastActionStatus
         {
@@ -181,6 +171,11 @@
             return new Item() { DateTime = DateTime.Today, Movement = 1, Qty = 1 };
         }
 
+        public async void LoadAllAsync()
+        {
+            await this.LoadAllTask();
+        }
+
         public async void LoadItemsAsync(Item itemToSelect = null)
         {
             await this.LoadItemsTask(itemToSelect);
@@ -205,9 +200,45 @@
             });
         }
 
+        private Task LoadAllTask()
+        {
+            return Task.Run(() =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    this.Accounts.Clear();
+
+                    foreach (var account in this.Database.GetAccounts())
+                        this.Accounts.Add(account);
+
+                    this.Categories.Clear();
+
+                    foreach (var category in this.Database.GetCategories())
+                        this.Categories.Add(category);
+
+                    this.Customers.Clear();
+
+                    foreach (var customer in this.Database.GetCustomers())
+                        this.Customers.Add(customer);
+
+                    this.StorageCards.Clear();
+
+                    foreach (var storageCard in this.Database.GetStorageCards())
+                        this.StorageCards.Add(storageCard);
+
+                    this.Stores.Clear();
+
+                    foreach (var store in this.Database.GetStores())
+                        this.Stores.Add(store);
+                });
+            });
+        }
+
         private void LoadItems(Item itemToSelect)
         {
             this.Items.Clear();
+
+            if (this.SelectedStorageCard == null) return;
 
             foreach (var item in this.SelectedStorageCard.Items.OrderBy(i => i.DateTime))
                 this.Items.Add(item);

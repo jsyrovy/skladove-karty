@@ -9,8 +9,8 @@
 
         public override void Execute(object parameter)
         {
-            this.ViewModel.Database.UpdateStorageCard(this.ViewModel.SelectedStorageCard);
-            this.ViewModel.LastActionStatus = "Skladová karta byla aktualizována.";
+            this.MainViewModel.Database.UpdateStorageCard(this.MainViewModel.SelectedStorageCard);
+            this.MainViewModel.LastActionStatus = "Skladová karta byla aktualizována.";
         }
     }
 }

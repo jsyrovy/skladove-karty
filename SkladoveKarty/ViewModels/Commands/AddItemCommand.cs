@@ -9,20 +9,20 @@
 
         public override bool CanExecute(object parameter)
         {
-            return this.ViewModel.SelectedStorageCard != null
-                && !string.IsNullOrWhiteSpace(this.ViewModel.NewItem.Name)
-                && this.ViewModel.NewItem.Price > 0
-                && this.ViewModel.NewItem.Qty > 0;
+            return this.MainViewModel.SelectedStorageCard != null
+                && !string.IsNullOrWhiteSpace(this.MainViewModel.NewItem.Name)
+                && this.MainViewModel.NewItem.Price > 0
+                && this.MainViewModel.NewItem.Qty > 0;
         }
 
         public override void Execute(object parameter)
         {
-            this.ViewModel.NewItem.StorageCard = this.ViewModel.SelectedStorageCard;
-            this.ViewModel.Database.AddItem(this.ViewModel.NewItem);
-            this.ViewModel.LoadItemsAsync(this.ViewModel.NewItem);
-            this.ViewModel.CalculateStorageCardReports();
-            this.ViewModel.NewItem = MainViewModel.CreateDefaultItem();
-            this.ViewModel.LastActionStatus = "Položka byla přidána.";
+            this.MainViewModel.NewItem.StorageCard = this.MainViewModel.SelectedStorageCard;
+            this.MainViewModel.Database.AddItem(this.MainViewModel.NewItem);
+            this.MainViewModel.LoadItemsAsync(this.MainViewModel.NewItem);
+            this.MainViewModel.CalculateStorageCardReports();
+            this.MainViewModel.NewItem = MainViewModel.CreateDefaultItem();
+            this.MainViewModel.LastActionStatus = "Položka byla přidána.";
         }
     }
 }

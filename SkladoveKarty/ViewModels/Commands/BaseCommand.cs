@@ -7,7 +7,12 @@
     {
         public BaseCommand(MainViewModel viewModel)
         {
-            this.ViewModel = viewModel;
+            this.MainViewModel = viewModel;
+        }
+
+        public BaseCommand(SettingsViewModel viewModel)
+        {
+            this.SettingsViewModel = viewModel;
         }
 
         public event EventHandler CanExecuteChanged
@@ -16,7 +21,9 @@
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        protected MainViewModel ViewModel { get; private set; }
+        protected MainViewModel MainViewModel { get; private set; }
+
+        protected SettingsViewModel SettingsViewModel { get; private set; }
 
         public virtual bool CanExecute(object parameter)
         {
