@@ -11,52 +11,16 @@
     using SkladoveKarty.ViewModels.Commands;
     using SkladoveKarty.ViewModels.Helpers;
 
-    public class MainViewModel : DependencyObject, INotifyPropertyChanged
+    public class MainViewModel : INotifyPropertyChanged
     {
-        public static readonly DependencyProperty NewItemProperty =
-           DependencyProperty.Register(
-               nameof(NewItem),
-               typeof(Item),
-               typeof(MainViewModel),
-               new PropertyMetadata(CreateDefaultItem()));
-
-        public static readonly DependencyProperty SelectedStorageCardItemsQtyProperty =
-           DependencyProperty.Register(
-               nameof(SelectedStorageCardItemsQty),
-               typeof(int),
-               typeof(MainViewModel),
-               new PropertyMetadata(0));
-
-        public static readonly DependencyProperty SelectedStorageCardItemsIncomingPriceProperty =
-           DependencyProperty.Register(
-               nameof(SelectedStorageCardItemsIncomingPrice),
-               typeof(decimal),
-               typeof(MainViewModel),
-               new PropertyMetadata(0M));
-
-        public static readonly DependencyProperty SelectedStorageCardItemsOutgoingPriceProperty =
-           DependencyProperty.Register(
-               nameof(SelectedStorageCardItemsOutgoingPrice),
-               typeof(decimal),
-               typeof(MainViewModel),
-               new PropertyMetadata(0M));
-
-        public static readonly DependencyProperty SelectedStorageCardPriceProperty =
-           DependencyProperty.Register(
-               nameof(SelectedStorageCardItemsPrice),
-               typeof(decimal),
-               typeof(MainViewModel),
-               new PropertyMetadata(0M));
-
-        public static readonly DependencyProperty SelectedStorageCardItemProperty =
-           DependencyProperty.Register(
-               nameof(SelectedStorageCardItem),
-               typeof(Item),
-               typeof(MainViewModel),
-               new PropertyMetadata(CreateDefaultItem()));
-
         private StorageCard selectedStorageCard;
+        private Item selectedStorageCardItem;
+        private Item newItem;
         private string lastActionStatus;
+        private int selectedStorageCardItemsQty;
+        private decimal selectedStorageCardItemsIncomingPrice;
+        private decimal selectedStorageCardItemsOutgoingPrice;
+        private decimal selectedStorageCardItemsPrice;
 
         public MainViewModel()
         {
@@ -68,6 +32,8 @@
             this.DeleteItemCommand = new DeleteItemCommand(this);
             this.UpdateStorageCardCommand = new UpdateStorageCardCommand(this);
             this.ShowSettingsCommand = new ShowSettingsCommand(this);
+
+            this.NewItem = CreateDefaultItem();
 
             this.LoadAllAsync();
         }
@@ -100,20 +66,6 @@
 
         public ShowSettingsCommand ShowSettingsCommand { get; set; }
 
-        public string LastActionStatus
-        {
-            get
-            {
-                return this.lastActionStatus;
-            }
-
-            set
-            {
-                this.lastActionStatus = value;
-                this.OnPropertyChanged(nameof(this.LastActionStatus));
-            }
-        }
-
         public StorageCard SelectedStorageCard
         {
             get
@@ -130,40 +82,102 @@
             }
         }
 
-        public Item NewItem
+        public Item SelectedStorageCardItem
         {
-            get { return (Item)this.GetValue(NewItemProperty); }
-            set { this.SetValue(NewItemProperty, value); }
+            get
+            {
+                return this.selectedStorageCardItem;
+            }
+
+            set
+            {
+                this.selectedStorageCardItem = value;
+                this.OnPropertyChanged(nameof(this.SelectedStorageCardItem));
+            }
         }
 
-        public decimal SelectedStorageCardItemsIncomingPrice
+        public Item NewItem
         {
-            get { return (decimal)this.GetValue(SelectedStorageCardItemsIncomingPriceProperty); }
-            set { this.SetValue(SelectedStorageCardItemsIncomingPriceProperty, value); }
+            get
+            {
+                return this.newItem;
+            }
+
+            set
+            {
+                this.newItem = value;
+                this.OnPropertyChanged(nameof(this.NewItem));
+            }
+        }
+
+        public string LastActionStatus
+        {
+            get
+            {
+                return this.lastActionStatus;
+            }
+
+            set
+            {
+                this.lastActionStatus = value;
+                this.OnPropertyChanged(nameof(this.LastActionStatus));
+            }
         }
 
         public int SelectedStorageCardItemsQty
         {
-            get { return (int)this.GetValue(SelectedStorageCardItemsQtyProperty); }
-            set { this.SetValue(SelectedStorageCardItemsQtyProperty, value); }
+            get
+            {
+                return this.selectedStorageCardItemsQty;
+            }
+
+            set
+            {
+                this.selectedStorageCardItemsQty = value;
+                this.OnPropertyChanged(nameof(this.SelectedStorageCardItemsQty));
+            }
+        }
+
+        public decimal SelectedStorageCardItemsIncomingPrice
+        {
+            get
+            {
+                return this.selectedStorageCardItemsIncomingPrice;
+            }
+
+            set
+            {
+                this.selectedStorageCardItemsIncomingPrice = value;
+                this.OnPropertyChanged(nameof(this.SelectedStorageCardItemsIncomingPrice));
+            }
         }
 
         public decimal SelectedStorageCardItemsOutgoingPrice
         {
-            get { return (decimal)this.GetValue(SelectedStorageCardItemsOutgoingPriceProperty); }
-            set { this.SetValue(SelectedStorageCardItemsOutgoingPriceProperty, value); }
+            get
+            {
+                return this.selectedStorageCardItemsOutgoingPrice;
+            }
+
+            set
+            {
+                this.selectedStorageCardItemsOutgoingPrice = value;
+                this.OnPropertyChanged(nameof(this.SelectedStorageCardItemsOutgoingPrice));
+            }
         }
 
         public decimal SelectedStorageCardItemsPrice
         {
-            get { return (decimal)this.GetValue(SelectedStorageCardPriceProperty); }
-            set { this.SetValue(SelectedStorageCardPriceProperty, value); }
-        }
+            get
+            {
+                return this.selectedStorageCardItemsPrice;
+            }
 
-        public Item SelectedStorageCardItem
-        {
-            get { return (Item)this.GetValue(SelectedStorageCardItemProperty); }
-            set { this.SetValue(SelectedStorageCardItemProperty, value); }
+            set
+            {
+                this.selectedStorageCardItemsPrice = value;
+                this.OnPropertyChanged(nameof(this.SelectedStorageCardItemsPrice));
+            }
         }
 
         public static Item CreateDefaultItem()
