@@ -1,5 +1,7 @@
 ﻿namespace SkladoveKarty.ViewModels.Commands
 {
+    using System;
+    using System.Windows;
     using SkladoveKarty.Models;
 
     public class DeleteStoreCommand : BaseCommand
@@ -11,7 +13,16 @@
 
         public override void Execute(object parameter)
         {
-            this.SettingsViewModel.Database.DeleteStore((Store)parameter);
+            try
+            {
+                this.SettingsViewModel.Database.DeleteStore((Store)parameter);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             this.SettingsViewModel.LoadStoresAsync();
             this.SettingsViewModel.LastActionStatus = "Sklad byl smazán.";
         }

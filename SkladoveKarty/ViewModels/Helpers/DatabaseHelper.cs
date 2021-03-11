@@ -1,5 +1,6 @@
 ﻿namespace SkladoveKarty.ViewModels.Helpers
 {
+    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
@@ -91,55 +92,74 @@
             this.db.SaveChanges();
         }
 
-        public void DeleteAccount(Account newAccount)
+        public void DeleteAccount(Account account)
         {
-            var account = this.db.Accounts.Where(i => i.Id == newAccount.Id).Single();
+            var assignedStorageCard = this.db.StorageCards.Where(s => s.Account == account).FirstOrDefault();
+
+            if (assignedStorageCard != null)
+                throw new InvalidOperationException($"Účet '{account.Name}' nelze smazat. Je přiřazen ke skladové kartě '{assignedStorageCard.Name}'.");
 
             this.db.Accounts.Remove(account);
 
             this.db.SaveChanges();
         }
 
-        public void DeleteCategory(Category newCategory)
+        public void DeleteCategory(Category category)
         {
-            var category = this.db.Categories.Where(i => i.Id == newCategory.Id).Single();
+            var assignedStorageCard = this.db.StorageCards.Where(s => s.Category == category).FirstOrDefault();
+
+            if (assignedStorageCard != null)
+                throw new InvalidOperationException($"Kategorii '{category.Name}' nelze smazat. Je přiřazena ke skladové kartě '{assignedStorageCard.Name}'.");
 
             this.db.Categories.Remove(category);
 
             this.db.SaveChanges();
         }
 
-        public void DeleteCustomer(Customer newCustomer)
+        public void DeleteCustomer(Customer customer)
         {
-            var customer = this.db.Customers.Where(i => i.Id == newCustomer.Id).Single();
+            var assignedItem = this.db.Items.Include(i => i.StorageCard).Where(i => i.Customer == customer).FirstOrDefault();
+
+            if (assignedItem != null)
+                throw new InvalidOperationException($"Dodavatele '{customer.Name}' nelze smazat. Je přiřazen k položce '{assignedItem.Name}' ve skladové kartě '{assignedItem.StorageCard.Name}'.");
 
             this.db.Customers.Remove(customer);
 
             this.db.SaveChanges();
         }
 
-        public void DeleteStore(Store newStore)
+        public void DeleteStore(Store store)
         {
-            var store = this.db.Stores.Where(i => i.Id == newStore.Id).Single();
+            var assignedStorageCard = this.db.StorageCards.Where(s => s.Store == store).FirstOrDefault();
+
+            if (assignedStorageCard != null)
+                throw new InvalidOperationException($"Sklad '{store.Name}' nelze smazat. Je přiřazen ke skladové kartě '{assignedStorageCard.Name}'.");
 
             this.db.Stores.Remove(store);
 
             this.db.SaveChanges();
         }
 
-        public void DeleteSupplier(Supplier newSupplier)
+        public void DeleteSupplier(Supplier supplier)
         {
-            var supplier = this.db.Suppliers.Where(i => i.Id == newSupplier.Id).Single();
+            var assignedStorageCardSupplier = this.db.StorageCardSuppliers
+                .Include(s => s.StorageCard)
+                .Where(s => s.Supplier == supplier)
+                .FirstOrDefault();
+
+            if (assignedStorageCardSupplier != null)
+            {
+                throw new InvalidOperationException(
+                    $"Dodavatele '{supplier.Name}' nelze smazat. Je přiřazen ke skladové kartě '{assignedStorageCardSupplier.StorageCard.Name}'.");
+            }
 
             this.db.Suppliers.Remove(supplier);
 
             this.db.SaveChanges();
         }
 
-        public void DeleteItem(Item newItem)
+        public void DeleteItem(Item item)
         {
-            var item = this.db.Items.Where(i => i.Id == newItem.Id).Single();
-
             this.db.Items.Remove(item);
 
             this.db.SaveChanges();
