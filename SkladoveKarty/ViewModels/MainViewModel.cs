@@ -32,6 +32,7 @@
             this.ShowSettingsCommand = new ShowSettingsCommand(this);
             this.ShowSuppliersCommand = new ShowSuppliersCommand(this);
             this.CreateStorageCardCommand = new CreateStorageCardCommand(this);
+            this.DeleteStorageCardCommand = new DeleteStorageCardCommand(this);
 
             this.NewItem = CreateDefaultItem();
 
@@ -64,6 +65,8 @@
         public ShowSuppliersCommand ShowSuppliersCommand { get; set; }
 
         public CreateStorageCardCommand CreateStorageCardCommand { get; set; }
+
+        public DeleteStorageCardCommand DeleteStorageCardCommand { get; set; }
 
         public StorageCard SelectedStorageCard
         {

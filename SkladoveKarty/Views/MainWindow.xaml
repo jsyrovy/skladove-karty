@@ -105,6 +105,12 @@
                         Command="{Binding CreateStorageCardCommand}"
                         Content="Nová"
                         Style="{StaticResource buttonPrimaryStyle}" />
+
+                    <Button
+                        Command="{Binding DeleteStorageCardCommand}"
+                        CommandParameter="{Binding SelectedStorageCard}"
+                        Content="Smazat"
+                        Style="{StaticResource buttonDangerStyle}" />
                 </StackPanel>
             </DockPanel>
 

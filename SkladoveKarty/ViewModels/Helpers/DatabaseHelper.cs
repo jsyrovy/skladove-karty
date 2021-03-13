@@ -164,6 +164,19 @@
             this.db.SaveChanges();
         }
 
+        public void DeleteStorageCard(StorageCard storageCard)
+        {
+            var storageCardSuppliers = this.db.StorageCardSuppliers.Where(s => s.StorageCard == storageCard);
+            this.db.StorageCardSuppliers.RemoveRange(storageCardSuppliers);
+
+            var items = this.db.Items.Where(i => i.StorageCard == storageCard);
+            this.db.Items.RemoveRange(items);
+
+            this.db.StorageCards.Remove(storageCard);
+
+            this.db.SaveChanges();
+        }
+
         public void DeleteStore(Store store)
         {
             var assignedStorageCard = this.db.StorageCards.Where(s => s.Store == store).FirstOrDefault();
