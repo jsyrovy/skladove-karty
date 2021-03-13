@@ -19,7 +19,7 @@
                 Supplier = (Supplier)parameter,
             };
 
-            this.SuppliersViewModel.Database.AddStorageCardSupplier(storageCardSupplier);
+            this.SuppliersViewModel.Database.Add(storageCardSupplier);
             this.SuppliersViewModel.LoadSuppliersAsync();
             this.SuppliersViewModel.LastActionStatus = "Dodavatel byl vybrán.";
         }

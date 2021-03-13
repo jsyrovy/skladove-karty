@@ -65,58 +65,9 @@
             return this.db.StorageCardSuppliers.Where(s => s.StorageCard == storageCard && s.Supplier == supplier).SingleOrDefault();
         }
 
-        public void AddAccount(Account newAccount)
+        public void Add(object entity)
         {
-            this.db.Accounts.Add(newAccount);
-
-            this.db.SaveChanges();
-        }
-
-        public void AddCategory(Category newCategory)
-        {
-            this.db.Categories.Add(newCategory);
-
-            this.db.SaveChanges();
-        }
-
-        public void AddCustomer(Customer newCustomer)
-        {
-            this.db.Customers.Add(newCustomer);
-
-            this.db.SaveChanges();
-        }
-
-        public void AddItem(Item newItem)
-        {
-            this.db.Items.Add(newItem);
-
-            this.db.SaveChanges();
-        }
-
-        public void AddStorageCardSupplier(StorageCardSupplier newStorageCardSupplier)
-        {
-            this.db.StorageCardSuppliers.Add(newStorageCardSupplier);
-
-            this.db.SaveChanges();
-        }
-
-        public void AddStore(Store newStore)
-        {
-            this.db.Stores.Add(newStore);
-
-            this.db.SaveChanges();
-        }
-
-        public void AddStorageCard(StorageCard newStorageCard)
-        {
-            this.db.StorageCards.Add(newStorageCard);
-
-            this.db.SaveChanges();
-        }
-
-        public void AddSupplier(Supplier newSupplier)
-        {
-            this.db.Suppliers.Add(newSupplier);
+            this.db.Add(entity);
 
             this.db.SaveChanges();
         }
