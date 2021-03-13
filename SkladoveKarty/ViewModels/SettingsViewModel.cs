@@ -31,11 +31,7 @@
 
             this.SaveChangesSettingsCommand = new SaveChangesSettingsCommand(this);
 
-            this.DeleteAccountCommand = new DeleteAccountCommand(this);
-            this.DeleteCategoryCommand = new DeleteCategoryCommand(this);
-            this.DeleteCustomerCommand = new DeleteCustomerCommand(this);
-            this.DeleteStoreCommand = new DeleteStoreCommand(this);
-            this.DeleteSupplierCommand = new DeleteSupplierCommand(this);
+            this.DeleteSettingCommand = new DeleteSettingCommand(this);
 
             this.NewAccount = new();
             this.NewCategory = new();
@@ -214,15 +210,7 @@
 
         public SaveChangesSettingsCommand SaveChangesSettingsCommand { get; set; }
 
-        public DeleteAccountCommand DeleteAccountCommand { get; set; }
-
-        public DeleteCategoryCommand DeleteCategoryCommand { get; set; }
-
-        public DeleteCustomerCommand DeleteCustomerCommand { get; set; }
-
-        public DeleteStoreCommand DeleteStoreCommand { get; set; }
-
-        public DeleteSupplierCommand DeleteSupplierCommand { get; set; }
+        public DeleteSettingCommand DeleteSettingCommand { get; set; }
 
         public async void LoadAccountsAsync(Account accountToSelect = null)
         {

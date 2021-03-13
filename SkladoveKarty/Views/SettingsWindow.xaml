@@ -70,7 +70,7 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button
-                                        Command="{Binding Source={StaticResource vm}, Path=DeleteCategoryCommand}"
+                                        Command="{Binding Source={StaticResource vm}, Path=DeleteSettingCommand}"
                                         CommandParameter="{Binding .}"
                                         Content="Smazat"
                                         Style="{StaticResource buttonDangerStyle}" />
@@ -126,7 +126,7 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button
-                                        Command="{Binding Source={StaticResource vm}, Path=DeleteStoreCommand}"
+                                        Command="{Binding Source={StaticResource vm}, Path=DeleteSettingCommand}"
                                         CommandParameter="{Binding .}"
                                         Content="Smazat"
                                         Style="{StaticResource buttonDangerStyle}" />
@@ -182,7 +182,7 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button
-                                        Command="{Binding Source={StaticResource vm}, Path=DeleteAccountCommand}"
+                                        Command="{Binding Source={StaticResource vm}, Path=DeleteSettingCommand}"
                                         CommandParameter="{Binding .}"
                                         Content="Smazat"
                                         Style="{StaticResource buttonDangerStyle}" />
@@ -238,7 +238,7 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button
-                                        Command="{Binding Source={StaticResource vm}, Path=DeleteSupplierCommand}"
+                                        Command="{Binding Source={StaticResource vm}, Path=DeleteSettingCommand}"
                                         CommandParameter="{Binding .}"
                                         Content="Smazat"
                                         Style="{StaticResource buttonDangerStyle}" />
@@ -296,7 +296,7 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button
-                                        Command="{Binding Source={StaticResource vm}, Path=DeleteCustomerCommand}"
+                                        Command="{Binding Source={StaticResource vm}, Path=DeleteSettingCommand}"
                                         CommandParameter="{Binding .}"
                                         Content="Smazat"
                                         Style="{StaticResource buttonDangerStyle}" />
