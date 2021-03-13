@@ -12,7 +12,8 @@
 
         public override bool CanExecute(object parameter)
         {
-            return this.MainViewModel.SelectedStorageCard != null;
+            return this.MainViewModel.SelectedStorageCard != null
+                && this.MainViewModel.SelectedStorageCard.Id != 0;
         }
 
         public override void Execute(object parameter)

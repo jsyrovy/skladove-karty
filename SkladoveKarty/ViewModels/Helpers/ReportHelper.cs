@@ -13,7 +13,7 @@
 
         public static decimal GetStorageCardItemsPrice(List<Item> items)
         {
-            if (items == null) return 0;
+            if (items == null || items.Count == 0) return 0;
 
             var averageIncomingPrice = GetStorageCardItemsWeightedAveragePrice(items.Where(i => i.Movement == 1));
             var outgoingPrice = items.Where(i => i.Movement == -1).Select(i => averageIncomingPrice * i.Qty).Sum();

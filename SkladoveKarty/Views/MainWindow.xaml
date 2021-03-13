@@ -67,6 +67,11 @@
                         SelectedItem="{Binding SelectedStorageCard, Mode=TwoWay}"
                         Style="{StaticResource comboBoxStyle}" />
 
+                    <TextBox
+                        Width="300"
+                        Style="{StaticResource textBoxStyle}"
+                        Text="{Binding SelectedStorageCard.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
                     <TextBlock Style="{StaticResource textBlockStyle}" Text="Kategorie:" />
 
                     <ComboBox
@@ -95,6 +100,11 @@
                         Command="{Binding ShowSuppliersCommand}"
                         Content="Spravovat dodavatele"
                         Style="{StaticResource buttonInfoStyle}" />
+
+                    <Button
+                        Command="{Binding CreateStorageCardCommand}"
+                        Content="Nová"
+                        Style="{StaticResource buttonPrimaryStyle}" />
                 </StackPanel>
             </DockPanel>
 

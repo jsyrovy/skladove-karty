@@ -107,6 +107,13 @@
             this.db.SaveChanges();
         }
 
+        public void AddStorageCard(StorageCard newStorageCard)
+        {
+            this.db.StorageCards.Add(newStorageCard);
+
+            this.db.SaveChanges();
+        }
+
         public void AddSupplier(Supplier newSupplier)
         {
             this.db.Suppliers.Add(newSupplier);
