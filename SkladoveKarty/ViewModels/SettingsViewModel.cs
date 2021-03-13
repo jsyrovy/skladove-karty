@@ -21,8 +21,10 @@
         private Supplier selectedSupplier;
 
         public SettingsViewModel()
-            : base()
         {
+            if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+                return;
+
             this.AddAccountCommand = new AddAccountCommand(this);
             this.AddCategoryCommand = new AddCategoryCommand(this);
             this.AddCustomerCommand = new AddCustomerCommand(this);

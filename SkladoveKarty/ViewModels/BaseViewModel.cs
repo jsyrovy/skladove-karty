@@ -1,18 +1,11 @@
 ﻿namespace SkladoveKarty.ViewModels
 {
     using System.ComponentModel;
-    using System.Windows;
     using SkladoveKarty.ViewModels.Helpers;
 
     public class BaseViewModel : INotifyPropertyChanged
     {
         private string lastActionStatus;
-
-        public BaseViewModel()
-        {
-            if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
-                return;
-        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

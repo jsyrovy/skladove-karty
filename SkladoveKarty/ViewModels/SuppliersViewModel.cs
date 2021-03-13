@@ -1,6 +1,7 @@
 ﻿namespace SkladoveKarty.ViewModels
 {
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows;
@@ -10,8 +11,10 @@
     public class SuppliersViewModel : BaseViewModel
     {
         public SuppliersViewModel(StorageCard selectedStorageCard)
-            : base()
         {
+            if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+                return;
+
             this.SelectedStorageCard = selectedStorageCard;
 
             this.AssignSupplierCommand = new(this);

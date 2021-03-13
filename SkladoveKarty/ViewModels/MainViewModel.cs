@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows;
@@ -21,8 +22,10 @@
         private decimal selectedStorageCardItemsPrice;
 
         public MainViewModel()
-            : base()
         {
+            if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+                return;
+
             this.AddItemCommand = new AddItemCommand(this);
             this.DeleteItemCommand = new DeleteItemCommand(this);
             this.SaveChangesMainCommand = new SaveChangesMainCommand(this);
