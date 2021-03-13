@@ -40,6 +40,11 @@
                 .ToList();
         }
 
+        public List<StorageCardSupplier> GetStorageCardSuppliers(StorageCard storageCard)
+        {
+            return this.db.StorageCardSuppliers.Include(s => s.Supplier).Where(s => s.StorageCard == storageCard).ToList();
+        }
+
         public List<Store> GetStores()
         {
             return this.db.Stores.OrderBy(s => s.Name).ToList();
@@ -48,6 +53,16 @@
         public List<Supplier> GetSuppliers()
         {
             return this.db.Suppliers.OrderBy(s => s.Name).ToList();
+        }
+
+        public StorageCard GetStorageCard(long id)
+        {
+            return this.db.StorageCards.Where(s => s.Id == id).SingleOrDefault();
+        }
+
+        public StorageCardSupplier GetStorageCardSupplier(StorageCard storageCard, Supplier supplier)
+        {
+            return this.db.StorageCardSuppliers.Where(s => s.StorageCard == storageCard && s.Supplier == supplier).SingleOrDefault();
         }
 
         public void AddAccount(Account newAccount)
@@ -74,6 +89,13 @@
         public void AddItem(Item newItem)
         {
             this.db.Items.Add(newItem);
+
+            this.db.SaveChanges();
+        }
+
+        public void AddStorageCardSupplier(StorageCardSupplier newStorageCardSupplier)
+        {
+            this.db.StorageCardSuppliers.Add(newStorageCardSupplier);
 
             this.db.SaveChanges();
         }
@@ -124,6 +146,13 @@
                 throw new InvalidOperationException($"Dodavatele '{customer.Name}' nelze smazat. Je přiřazen k položce '{assignedItem.Name}' ve skladové kartě '{assignedItem.StorageCard.Name}'.");
 
             this.db.Customers.Remove(customer);
+
+            this.db.SaveChanges();
+        }
+
+        public void DeleteStorageCardSupplier(StorageCardSupplier storageCardSupplier)
+        {
+            this.db.StorageCardSuppliers.Remove(storageCardSupplier);
 
             this.db.SaveChanges();
         }

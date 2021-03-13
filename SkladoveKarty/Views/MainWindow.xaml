@@ -55,12 +55,13 @@
                     DockPanel.Dock="Right"
                     Style="{StaticResource buttonLinkStyle}" />
 
-                <StackPanel Style="{StaticResource stackPanelStyle}">
+                <StackPanel
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Style="{StaticResource stackPanelStyle}">
                     <TextBlock Style="{StaticResource textBlockStyle}" Text="Název:" />
 
                     <ComboBox
-                        Grid.Row="0"
-                        Grid.Column="1"
                         DisplayMemberPath="Name"
                         ItemsSource="{Binding StorageCards}"
                         SelectedItem="{Binding SelectedStorageCard, Mode=TwoWay}"
@@ -69,8 +70,6 @@
                     <TextBlock Style="{StaticResource textBlockStyle}" Text="Kategorie:" />
 
                     <ComboBox
-                        Grid.Row="0"
-                        Grid.Column="1"
                         DisplayMemberPath="Name"
                         ItemsSource="{Binding Source={StaticResource vm}, Path=Categories}"
                         SelectedItem="{Binding SelectedStorageCard.Category, Mode=TwoWay}"
@@ -79,8 +78,6 @@
                     <TextBlock Style="{StaticResource textBlockStyle}" Text="Sklad:" />
 
                     <ComboBox
-                        Grid.Row="0"
-                        Grid.Column="1"
                         DisplayMemberPath="Name"
                         ItemsSource="{Binding Source={StaticResource vm}, Path=Stores}"
                         SelectedItem="{Binding SelectedStorageCard.Store, Mode=TwoWay}"
@@ -89,12 +86,15 @@
                     <TextBlock Style="{StaticResource textBlockStyle}" Text="Účet:" />
 
                     <ComboBox
-                        Grid.Row="0"
-                        Grid.Column="1"
                         DisplayMemberPath="Name"
                         ItemsSource="{Binding Source={StaticResource vm}, Path=Accounts}"
                         SelectedItem="{Binding SelectedStorageCard.Account, Mode=TwoWay}"
                         Style="{StaticResource comboBoxStyle}" />
+
+                    <Button
+                        Command="{Binding ShowSuppliersCommand}"
+                        Content="Spravovat dodavatele"
+                        Style="{StaticResource buttonInfoStyle}" />
                 </StackPanel>
             </DockPanel>
 

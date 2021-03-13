@@ -15,6 +15,11 @@
             this.SettingsViewModel = viewModel;
         }
 
+        public BaseCommand(SuppliersViewModel viewModel)
+        {
+            this.SuppliersViewModel = viewModel;
+        }
+
         public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
@@ -24,6 +29,8 @@
         protected MainViewModel MainViewModel { get; private set; }
 
         protected SettingsViewModel SettingsViewModel { get; private set; }
+
+        protected SuppliersViewModel SuppliersViewModel { get; private set; }
 
         public virtual bool CanExecute(object parameter)
         {
