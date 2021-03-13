@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.ComponentModel;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows;
@@ -11,22 +10,19 @@
     using SkladoveKarty.ViewModels.Commands;
     using SkladoveKarty.ViewModels.Helpers;
 
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : BaseViewModel
     {
         private StorageCard selectedStorageCard;
         private Item selectedStorageCardItem;
         private Item newItem;
-        private string lastActionStatus;
         private int selectedStorageCardItemsQty;
         private decimal selectedStorageCardItemsIncomingPrice;
         private decimal selectedStorageCardItemsOutgoingPrice;
         private decimal selectedStorageCardItemsPrice;
 
         public MainViewModel()
+            : base()
         {
-            if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
-                return;
-
             this.AddItemCommand = new AddItemCommand(this);
             this.DeleteItemCommand = new DeleteItemCommand(this);
             this.SaveChangesMainCommand = new SaveChangesMainCommand(this);
@@ -38,11 +34,7 @@
             this.LoadAllAsync();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public static Dictionary<int, string> Movements => new() { [1] = "Příjem", [-1] = "Výdej" };
-
-        public DatabaseHelper Database { get; private set; } = new();
 
         public ObservableCollection<Account> Accounts { get; set; } = new();
 
@@ -108,20 +100,6 @@
             {
                 this.newItem = value;
                 this.OnPropertyChanged(nameof(this.NewItem));
-            }
-        }
-
-        public string LastActionStatus
-        {
-            get
-            {
-                return this.lastActionStatus;
-            }
-
-            set
-            {
-                this.lastActionStatus = value;
-                this.OnPropertyChanged(nameof(this.LastActionStatus));
             }
         }
 
@@ -260,11 +238,6 @@
 
             if (itemToSelect != null)
                 this.SelectedStorageCardItem = itemToSelect;
-        }
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

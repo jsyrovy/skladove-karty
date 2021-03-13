@@ -6,11 +6,9 @@
     using System.Windows;
     using SkladoveKarty.Models;
     using SkladoveKarty.ViewModels.Commands;
-    using SkladoveKarty.ViewModels.Helpers;
 
-    public class SettingsViewModel : INotifyPropertyChanged
+    public class SettingsViewModel : BaseViewModel
     {
-        private string lastActionStatus;
         private Account newAccount;
         private Category newCategory;
         private Customer newCustomer;
@@ -23,10 +21,8 @@
         private Supplier selectedSupplier;
 
         public SettingsViewModel()
+            : base()
         {
-            if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
-                return;
-
             this.AddAccountCommand = new AddAccountCommand(this);
             this.AddCategoryCommand = new AddCategoryCommand(this);
             this.AddCustomerCommand = new AddCustomerCommand(this);
@@ -55,22 +51,6 @@
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public DatabaseHelper Database { get; private set; } = new();
-
-        public string LastActionStatus
-        {
-            get
-            {
-                return this.lastActionStatus;
-            }
-
-            set
-            {
-                this.lastActionStatus = value;
-                this.OnPropertyChanged(nameof(this.LastActionStatus));
-            }
-        }
 
         public Account NewAccount
         {
@@ -352,11 +332,6 @@
                         this.SelectedSupplier = supplierToSelect;
                 });
             });
-        }
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

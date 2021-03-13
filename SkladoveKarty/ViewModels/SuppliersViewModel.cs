@@ -1,23 +1,17 @@
 ﻿namespace SkladoveKarty.ViewModels
 {
     using System.Collections.ObjectModel;
-    using System.ComponentModel;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows;
     using SkladoveKarty.Models;
     using SkladoveKarty.ViewModels.Commands;
-    using SkladoveKarty.ViewModels.Helpers;
 
-    public class SuppliersViewModel : INotifyPropertyChanged
+    public class SuppliersViewModel : BaseViewModel
     {
-        private string lastActionStatus;
-
         public SuppliersViewModel(StorageCard selectedStorageCard)
+            : base()
         {
-            if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
-                return;
-
             this.SelectedStorageCard = selectedStorageCard;
 
             this.AssignSupplierCommand = new(this);
@@ -25,10 +19,6 @@
 
             this.LoadSuppliersAsync();
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public DatabaseHelper Database { get; private set; } = new();
 
         public ObservableCollection<Supplier> AvailableSuppliers { get; set; } = new();
 
@@ -38,31 +28,12 @@
 
         public UnassignSupplierCommand UnassignSupplierCommand { get; set; }
 
-        public string LastActionStatus
-        {
-            get
-            {
-                return this.lastActionStatus;
-            }
-
-            set
-            {
-                this.lastActionStatus = value;
-                this.OnPropertyChanged(nameof(this.LastActionStatus));
-            }
-        }
-
         public StorageCard SelectedStorageCard { get; }
 
         public async void LoadSuppliersAsync()
         {
             await this.LoadAssignedSuppliersTask();
             await this.LoadAvailableSuppliersTask();
-        }
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private Task LoadAssignedSuppliersTask()
