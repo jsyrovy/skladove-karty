@@ -9,26 +9,31 @@
 
     public class DatabaseHelper
     {
-        private readonly DatabaseContext db = new();
+        private readonly IDatabaseContext databaseContext;
+
+        public DatabaseHelper(IDatabaseContext databaseContext)
+        {
+            this.databaseContext = databaseContext;
+        }
 
         public List<Account> GetAccounts()
         {
-            return this.db.Accounts.OrderBy(a => a.Name).ToList();
+            return this.databaseContext.Accounts.OrderBy(a => a.Name).ToList();
         }
 
         public List<Category> GetCategories()
         {
-            return this.db.Categories.OrderBy(c => c.Name).ToList();
+            return this.databaseContext.Categories.OrderBy(c => c.Name).ToList();
         }
 
         public List<Customer> GetCustomers()
         {
-            return this.db.Customers.OrderBy(c => c.Name).ToList();
+            return this.databaseContext.Customers.OrderBy(c => c.Name).ToList();
         }
 
         public List<StorageCard> GetStorageCards()
         {
-            return this.db.StorageCards
+            return this.databaseContext.StorageCards
                 .Include(s => s.Account)
                 .Include(s => s.Category)
                 .Include(s => s.Store)
@@ -42,107 +47,107 @@
 
         public List<StorageCardSupplier> GetStorageCardSuppliers(StorageCard storageCard)
         {
-            return this.db.StorageCardSuppliers.Include(s => s.Supplier).Where(s => s.StorageCard == storageCard).ToList();
+            return this.databaseContext.StorageCardSuppliers.Include(s => s.Supplier).Where(s => s.StorageCard == storageCard).ToList();
         }
 
         public List<Store> GetStores()
         {
-            return this.db.Stores.OrderBy(s => s.Name).ToList();
+            return this.databaseContext.Stores.OrderBy(s => s.Name).ToList();
         }
 
         public List<Supplier> GetSuppliers()
         {
-            return this.db.Suppliers.OrderBy(s => s.Name).ToList();
+            return this.databaseContext.Suppliers.OrderBy(s => s.Name).ToList();
         }
 
         public StorageCard GetStorageCard(long id)
         {
-            return this.db.StorageCards.Where(s => s.Id == id).SingleOrDefault();
+            return this.databaseContext.StorageCards.Where(s => s.Id == id).SingleOrDefault();
         }
 
         public StorageCardSupplier GetStorageCardSupplier(StorageCard storageCard, Supplier supplier)
         {
-            return this.db.StorageCardSuppliers.Where(s => s.StorageCard == storageCard && s.Supplier == supplier).SingleOrDefault();
+            return this.databaseContext.StorageCardSuppliers.Where(s => s.StorageCard == storageCard && s.Supplier == supplier).SingleOrDefault();
         }
 
         public void Add(object entity)
         {
-            this.db.Add(entity);
+            this.databaseContext.Add(entity);
 
-            this.db.SaveChanges();
+            this.databaseContext.SaveChanges();
         }
 
         public void DeleteAccount(Account account)
         {
-            var assignedStorageCard = this.db.StorageCards.Where(s => s.Account == account).FirstOrDefault();
+            var assignedStorageCard = this.databaseContext.StorageCards.Where(s => s.Account == account).FirstOrDefault();
 
             if (assignedStorageCard != null)
                 throw new InvalidOperationException($"Účet '{account.Name}' nelze smazat. Je přiřazen ke skladové kartě '{assignedStorageCard.Name}'.");
 
-            this.db.Accounts.Remove(account);
+            this.databaseContext.Accounts.Remove(account);
 
-            this.db.SaveChanges();
+            this.databaseContext.SaveChanges();
         }
 
         public void DeleteCategory(Category category)
         {
-            var assignedStorageCard = this.db.StorageCards.Where(s => s.Category == category).FirstOrDefault();
+            var assignedStorageCard = this.databaseContext.StorageCards.Where(s => s.Category == category).FirstOrDefault();
 
             if (assignedStorageCard != null)
                 throw new InvalidOperationException($"Kategorii '{category.Name}' nelze smazat. Je přiřazena ke skladové kartě '{assignedStorageCard.Name}'.");
 
-            this.db.Categories.Remove(category);
+            this.databaseContext.Categories.Remove(category);
 
-            this.db.SaveChanges();
+            this.databaseContext.SaveChanges();
         }
 
         public void DeleteCustomer(Customer customer)
         {
-            var assignedItem = this.db.Items.Include(i => i.StorageCard).Where(i => i.Customer == customer).FirstOrDefault();
+            var assignedItem = this.databaseContext.Items.Include(i => i.StorageCard).Where(i => i.Customer == customer).FirstOrDefault();
 
             if (assignedItem != null)
                 throw new InvalidOperationException($"Dodavatele '{customer.Name}' nelze smazat. Je přiřazen k položce '{assignedItem.Name}' ve skladové kartě '{assignedItem.StorageCard.Name}'.");
 
-            this.db.Customers.Remove(customer);
+            this.databaseContext.Customers.Remove(customer);
 
-            this.db.SaveChanges();
+            this.databaseContext.SaveChanges();
         }
 
         public void DeleteStorageCardSupplier(StorageCardSupplier storageCardSupplier)
         {
-            this.db.StorageCardSuppliers.Remove(storageCardSupplier);
+            this.databaseContext.StorageCardSuppliers.Remove(storageCardSupplier);
 
-            this.db.SaveChanges();
+            this.databaseContext.SaveChanges();
         }
 
         public void DeleteStorageCard(StorageCard storageCard)
         {
-            var storageCardSuppliers = this.db.StorageCardSuppliers.Where(s => s.StorageCard == storageCard);
-            this.db.StorageCardSuppliers.RemoveRange(storageCardSuppliers);
+            var storageCardSuppliers = this.databaseContext.StorageCardSuppliers.Where(s => s.StorageCard == storageCard);
+            this.databaseContext.StorageCardSuppliers.RemoveRange(storageCardSuppliers);
 
-            var items = this.db.Items.Where(i => i.StorageCard == storageCard);
-            this.db.Items.RemoveRange(items);
+            var items = this.databaseContext.Items.Where(i => i.StorageCard == storageCard);
+            this.databaseContext.Items.RemoveRange(items);
 
-            this.db.StorageCards.Remove(storageCard);
+            this.databaseContext.StorageCards.Remove(storageCard);
 
-            this.db.SaveChanges();
+            this.databaseContext.SaveChanges();
         }
 
         public void DeleteStore(Store store)
         {
-            var assignedStorageCard = this.db.StorageCards.Where(s => s.Store == store).FirstOrDefault();
+            var assignedStorageCard = this.databaseContext.StorageCards.Where(s => s.Store == store).FirstOrDefault();
 
             if (assignedStorageCard != null)
                 throw new InvalidOperationException($"Sklad '{store.Name}' nelze smazat. Je přiřazen ke skladové kartě '{assignedStorageCard.Name}'.");
 
-            this.db.Stores.Remove(store);
+            this.databaseContext.Stores.Remove(store);
 
-            this.db.SaveChanges();
+            this.databaseContext.SaveChanges();
         }
 
         public void DeleteSupplier(Supplier supplier)
         {
-            var assignedStorageCardSupplier = this.db.StorageCardSuppliers
+            var assignedStorageCardSupplier = this.databaseContext.StorageCardSuppliers
                 .Include(s => s.StorageCard)
                 .Where(s => s.Supplier == supplier)
                 .FirstOrDefault();
@@ -153,21 +158,21 @@
                     $"Dodavatele '{supplier.Name}' nelze smazat. Je přiřazen ke skladové kartě '{assignedStorageCardSupplier.StorageCard.Name}'.");
             }
 
-            this.db.Suppliers.Remove(supplier);
+            this.databaseContext.Suppliers.Remove(supplier);
 
-            this.db.SaveChanges();
+            this.databaseContext.SaveChanges();
         }
 
         public void DeleteItem(Item item)
         {
-            this.db.Items.Remove(item);
+            this.databaseContext.Items.Remove(item);
 
-            this.db.SaveChanges();
+            this.databaseContext.SaveChanges();
         }
 
         public void SaveChanges()
         {
-            this.db.SaveChanges();
+            this.databaseContext.SaveChanges();
         }
     }
 }
