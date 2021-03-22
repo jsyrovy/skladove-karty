@@ -45,6 +45,11 @@
                 .ToList();
         }
 
+        public List<StorageCardSupplier> GetStorageCardSuppliers()
+        {
+            return this.databaseContext.StorageCardSuppliers.Include(s => s.StorageCard).Include(s => s.Supplier).ToList();
+        }
+
         public List<StorageCardSupplier> GetStorageCardSuppliers(StorageCard storageCard)
         {
             return this.databaseContext.StorageCardSuppliers.Include(s => s.Supplier).Where(s => s.StorageCard == storageCard).ToList();

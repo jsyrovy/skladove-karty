@@ -267,6 +267,19 @@
         [Test]
         public void GetStorageCardSuppliers_WhenCalled_ReturnStorageCardSuppliers()
         {
+            var storageCardsSuppliers = this.databaseHelper.GetStorageCardSuppliers();
+
+            Assert.That(storageCardsSuppliers.Count, Is.EqualTo(1));
+
+            Assert.That(storageCardsSuppliers[0].StorageCard, Is.Not.Null);
+            Assert.That(storageCardsSuppliers[0].StorageCard.Name, Is.EqualTo("storageCard1"));
+            Assert.That(storageCardsSuppliers[0].Supplier, Is.Not.Null);
+            Assert.That(storageCardsSuppliers[0].Supplier.Name, Is.EqualTo("supplier1"));
+        }
+
+        [Test]
+        public void GetStorageCardSuppliers_WhenCalledWithArgument_ReturnStorageCardSuppliers()
+        {
             var storageCard = this.databaseHelper.GetStorageCards().First();
             var storageCardsSuppliers = this.databaseHelper.GetStorageCardSuppliers(storageCard);
 
@@ -297,6 +310,16 @@
 
             Assert.That(storageCardSupplier, Is.Not.Null);
             Assert.That(storageCardSupplier.DateTime, Is.EqualTo(this.dateTime));
+        }
+
+        [Test]
+        public void Add_WhenCalled_AddAccount()
+        {
+            var account = new Account { DateTime = this.dateTime, Name = "account4" };
+
+            this.databaseHelper.Add(account);
+
+            var accounts = this.databaseHelper.GetAccounts();
         }
 
         private static Mock<DbSet<T>> GetMockSet<T>(IQueryable<T> data)

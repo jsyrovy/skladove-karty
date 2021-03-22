@@ -35,6 +35,8 @@
 
             this.DeleteSettingCommand = new DeleteSettingCommand(this);
 
+            this.ExportCommand = new ExportCommand(this);
+
             this.NewAccount = new();
             this.NewCategory = new();
             this.NewCustomer = new();
@@ -47,8 +49,6 @@
             this.LoadStoresAsync();
             this.LoadSuppliersAsync();
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public Account NewAccount
         {
@@ -213,6 +213,8 @@
         public SaveChangesSettingsCommand SaveChangesSettingsCommand { get; set; }
 
         public DeleteSettingCommand DeleteSettingCommand { get; set; }
+
+        public ExportCommand ExportCommand { get; set; }
 
         public async void LoadAccountsAsync(Account accountToSelect = null)
         {
