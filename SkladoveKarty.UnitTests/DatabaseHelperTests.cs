@@ -36,16 +36,13 @@
             var accounts = databaseHelper.GetAccounts();
 
             Assert.That(accounts.Count, Is.EqualTo(3));
-
-            Assert.That(accounts[0].Id, Is.Not.EqualTo(0));
+            Assert.That(accounts[0].Id, Is.Not.Zero);
             Assert.That(accounts[0].DateTime, Is.EqualTo(this.dateTime));
             Assert.That(accounts[0].Name, Is.EqualTo("account1"));
-
-            Assert.That(accounts[1].Id, Is.Not.EqualTo(0));
+            Assert.That(accounts[1].Id, Is.Not.Zero);
             Assert.That(accounts[1].DateTime, Is.EqualTo(this.dateTime));
             Assert.That(accounts[1].Name, Is.EqualTo("account2"));
-
-            Assert.That(accounts[2].Id, Is.Not.EqualTo(0));
+            Assert.That(accounts[2].Id, Is.Not.Zero);
             Assert.That(accounts[2].DateTime, Is.EqualTo(this.dateTime));
             Assert.That(accounts[2].Name, Is.EqualTo("account3"));
         }
@@ -59,16 +56,13 @@
             var categories = databaseHelper.GetCategories();
 
             Assert.That(categories.Count, Is.EqualTo(3));
-
-            Assert.That(categories[0].Id, Is.Not.EqualTo(0));
+            Assert.That(categories[0].Id, Is.Not.Zero);
             Assert.That(categories[0].DateTime, Is.EqualTo(this.dateTime));
             Assert.That(categories[0].Name, Is.EqualTo("category1"));
-
-            Assert.That(categories[1].Id, Is.Not.EqualTo(0));
+            Assert.That(categories[1].Id, Is.Not.Zero);
             Assert.That(categories[1].DateTime, Is.EqualTo(this.dateTime));
             Assert.That(categories[1].Name, Is.EqualTo("category2"));
-
-            Assert.That(categories[2].Id, Is.Not.EqualTo(0));
+            Assert.That(categories[2].Id, Is.Not.Zero);
             Assert.That(categories[2].DateTime, Is.EqualTo(this.dateTime));
             Assert.That(categories[2].Name, Is.EqualTo("category3"));
         }
@@ -82,16 +76,13 @@
             var customers = databaseHelper.GetCustomers();
 
             Assert.That(customers.Count, Is.EqualTo(3));
-
-            Assert.That(customers[0].Id, Is.Not.EqualTo(0));
+            Assert.That(customers[0].Id, Is.Not.Zero);
             Assert.That(customers[0].DateTime, Is.EqualTo(this.dateTime));
             Assert.That(customers[0].Name, Is.EqualTo("customer1"));
-
-            Assert.That(customers[1].Id, Is.Not.EqualTo(0));
+            Assert.That(customers[1].Id, Is.Not.Zero);
             Assert.That(customers[1].DateTime, Is.EqualTo(this.dateTime));
             Assert.That(customers[1].Name, Is.EqualTo("customer2"));
-
-            Assert.That(customers[2].Id, Is.Not.EqualTo(0));
+            Assert.That(customers[2].Id, Is.Not.Zero);
             Assert.That(customers[2].DateTime, Is.EqualTo(this.dateTime));
             Assert.That(customers[2].Name, Is.EqualTo("customer3"));
         }
@@ -105,16 +96,13 @@
             var stores = databaseHelper.GetStores();
 
             Assert.That(stores.Count, Is.EqualTo(3));
-
-            Assert.That(stores[0].Id, Is.Not.EqualTo(0));
+            Assert.That(stores[0].Id, Is.Not.Zero);
             Assert.That(stores[0].DateTime, Is.EqualTo(this.dateTime));
             Assert.That(stores[0].Name, Is.EqualTo("store1"));
-
-            Assert.That(stores[1].Id, Is.Not.EqualTo(0));
+            Assert.That(stores[1].Id, Is.Not.Zero);
             Assert.That(stores[1].DateTime, Is.EqualTo(this.dateTime));
             Assert.That(stores[1].Name, Is.EqualTo("store2"));
-
-            Assert.That(stores[2].Id, Is.Not.EqualTo(0));
+            Assert.That(stores[2].Id, Is.Not.Zero);
             Assert.That(stores[2].DateTime, Is.EqualTo(this.dateTime));
             Assert.That(stores[2].Name, Is.EqualTo("store3"));
         }
@@ -128,16 +116,13 @@
             var suppliers = databaseHelper.GetSuppliers();
 
             Assert.That(suppliers.Count, Is.EqualTo(3));
-
-            Assert.That(suppliers[0].Id, Is.Not.EqualTo(0));
+            Assert.That(suppliers[0].Id, Is.Not.Zero);
             Assert.That(suppliers[0].DateTime, Is.EqualTo(this.dateTime));
             Assert.That(suppliers[0].Name, Is.EqualTo("supplier1"));
-
-            Assert.That(suppliers[1].Id, Is.Not.EqualTo(0));
+            Assert.That(suppliers[1].Id, Is.Not.Zero);
             Assert.That(suppliers[1].DateTime, Is.EqualTo(this.dateTime));
             Assert.That(suppliers[1].Name, Is.EqualTo("supplier2"));
-
-            Assert.That(suppliers[2].Id, Is.Not.EqualTo(0));
+            Assert.That(suppliers[2].Id, Is.Not.Zero);
             Assert.That(suppliers[2].DateTime, Is.EqualTo(this.dateTime));
             Assert.That(suppliers[2].Name, Is.EqualTo("supplier3"));
         }
@@ -151,52 +136,49 @@
             var storageCards = databaseHelper.GetStorageCards();
 
             Assert.That(storageCards.Count, Is.EqualTo(3));
-
-            Assert.That(storageCards[0].Id, Is.Not.EqualTo(0));
+            Assert.That(storageCards[0].Id, Is.Not.Zero);
             Assert.That(storageCards[0].DateTime, Is.EqualTo(this.dateTime));
             Assert.That(storageCards[0].Name, Is.EqualTo("storageCard1"));
             Assert.That(storageCards[0].Account, Is.Not.Null);
-            Assert.That(storageCards[0].Account.Id, Is.Not.EqualTo(0));
+            Assert.That(storageCards[0].Account.Id, Is.Not.Zero);
             Assert.That(storageCards[0].Account.DateTime, Is.EqualTo(this.dateTime));
             Assert.That(storageCards[0].Account.Name, Is.EqualTo("account1"));
             Assert.That(storageCards[0].Category, Is.Not.Null);
-            Assert.That(storageCards[0].Category.Id, Is.Not.EqualTo(0));
+            Assert.That(storageCards[0].Category.Id, Is.Not.Zero);
             Assert.That(storageCards[0].Category.DateTime, Is.EqualTo(this.dateTime));
             Assert.That(storageCards[0].Category.Name, Is.EqualTo("category1"));
             Assert.That(storageCards[0].Store, Is.Not.Null);
-            Assert.That(storageCards[0].Store.Id, Is.Not.EqualTo(0));
+            Assert.That(storageCards[0].Store.Id, Is.Not.Zero);
             Assert.That(storageCards[0].Store.DateTime, Is.EqualTo(this.dateTime));
             Assert.That(storageCards[0].Store.Name, Is.EqualTo("store1"));
-
-            Assert.That(storageCards[1].Id, Is.Not.EqualTo(0));
+            Assert.That(storageCards[1].Id, Is.Not.Zero);
             Assert.That(storageCards[1].DateTime, Is.EqualTo(this.dateTime));
             Assert.That(storageCards[1].Name, Is.EqualTo("storageCard2"));
             Assert.That(storageCards[1].Account, Is.Not.Null);
-            Assert.That(storageCards[1].Account.Id, Is.Not.EqualTo(0));
+            Assert.That(storageCards[1].Account.Id, Is.Not.Zero);
             Assert.That(storageCards[1].Account.DateTime, Is.EqualTo(this.dateTime));
             Assert.That(storageCards[1].Account.Name, Is.EqualTo("account2"));
             Assert.That(storageCards[1].Category, Is.Not.Null);
-            Assert.That(storageCards[1].Category.Id, Is.Not.EqualTo(0));
+            Assert.That(storageCards[1].Category.Id, Is.Not.Zero);
             Assert.That(storageCards[1].Category.DateTime, Is.EqualTo(this.dateTime));
             Assert.That(storageCards[1].Category.Name, Is.EqualTo("category2"));
             Assert.That(storageCards[1].Store, Is.Not.Null);
-            Assert.That(storageCards[1].Store.Id, Is.Not.EqualTo(0));
+            Assert.That(storageCards[1].Store.Id, Is.Not.Zero);
             Assert.That(storageCards[1].Store.DateTime, Is.EqualTo(this.dateTime));
             Assert.That(storageCards[1].Store.Name, Is.EqualTo("store2"));
-
-            Assert.That(storageCards[2].Id, Is.Not.EqualTo(0));
+            Assert.That(storageCards[2].Id, Is.Not.Zero);
             Assert.That(storageCards[2].DateTime, Is.EqualTo(this.dateTime));
             Assert.That(storageCards[2].Name, Is.EqualTo("storageCard3"));
             Assert.That(storageCards[2].Account, Is.Not.Null);
-            Assert.That(storageCards[2].Account.Id, Is.Not.EqualTo(0));
+            Assert.That(storageCards[2].Account.Id, Is.Not.Zero);
             Assert.That(storageCards[2].Account.DateTime, Is.EqualTo(this.dateTime));
             Assert.That(storageCards[2].Account.Name, Is.EqualTo("account3"));
             Assert.That(storageCards[2].Category, Is.Not.Null);
-            Assert.That(storageCards[2].Category.Id, Is.Not.EqualTo(0));
+            Assert.That(storageCards[2].Category.Id, Is.Not.Zero);
             Assert.That(storageCards[2].Category.DateTime, Is.EqualTo(this.dateTime));
             Assert.That(storageCards[2].Category.Name, Is.EqualTo("category3"));
             Assert.That(storageCards[2].Store, Is.Not.Null);
-            Assert.That(storageCards[2].Store.Id, Is.Not.EqualTo(0));
+            Assert.That(storageCards[2].Store.Id, Is.Not.Zero);
             Assert.That(storageCards[2].Store.DateTime, Is.EqualTo(this.dateTime));
             Assert.That(storageCards[2].Store.Name, Is.EqualTo("store3"));
         }
@@ -210,7 +192,6 @@
             var storageCardsSuppliers = databaseHelper.GetStorageCardSuppliers();
 
             Assert.That(storageCardsSuppliers.Count, Is.EqualTo(6));
-
             Assert.That(storageCardsSuppliers.Where(s => s.Id == 0).Any(), Is.False);
             Assert.That(storageCardsSuppliers.Where(s => s.DateTime != this.dateTime).Any(), Is.False);
             Assert.That(storageCardsSuppliers.Where(s => s.StorageCard == null).Any(), Is.False);
@@ -259,7 +240,7 @@
             var storageCardSupplier = databaseHelper.GetStorageCardSupplier(storageCard, supplier);
 
             Assert.That(storageCardSupplier, Is.Not.Null);
-            Assert.That(storageCardSupplier.Id, Is.Not.EqualTo(0));
+            Assert.That(storageCardSupplier.Id, Is.Not.Zero);
             Assert.That(storageCardSupplier.DateTime, Is.EqualTo(this.dateTime));
             Assert.That(storageCardSupplier.StorageCard, Is.EqualTo(storageCard));
             Assert.That(storageCardSupplier.Supplier, Is.EqualTo(supplier));
@@ -272,10 +253,10 @@
 
             var databaseHelper = new DatabaseHelper(this.context);
             databaseHelper.Add(account);
-
             var accounts = this.context.Accounts;
-            Assert.That(accounts.Count(), Is.EqualTo(1));
-            Assert.That(accounts.First().Id, Is.Not.EqualTo(0));
+
+            Assert.That(accounts.Count, Is.EqualTo(1));
+            Assert.That(accounts.First().Id, Is.Not.Zero);
             Assert.That(accounts.First().DateTime, Is.EqualTo(account.DateTime));
             Assert.That(accounts.First().Name, Is.EqualTo(account.Name));
         }
@@ -288,10 +269,10 @@
 
             var databaseHelper = new DatabaseHelper(this.context);
             databaseHelper.SaveChanges();
-
             var accounts = this.context.Accounts;
-            Assert.That(accounts.Count(), Is.EqualTo(1));
-            Assert.That(accounts.First().Id, Is.Not.EqualTo(0));
+
+            Assert.That(accounts.Count, Is.EqualTo(1));
+            Assert.That(accounts.First().Id, Is.Not.Zero);
             Assert.That(accounts.First().DateTime, Is.EqualTo(account.DateTime));
             Assert.That(accounts.First().Name, Is.EqualTo(account.Name));
         }
