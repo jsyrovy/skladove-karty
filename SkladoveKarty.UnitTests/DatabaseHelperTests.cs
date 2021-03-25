@@ -277,6 +277,173 @@
             Assert.That(accounts.First().Name, Is.EqualTo(account.Name));
         }
 
+        [Test]
+        public void DeleteAccount_IsNotUsed_DeleteAccount()
+        {
+            this.context.Add(new Account());
+            this.context.SaveChanges();
+            var account = this.context.Accounts.First();
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            databaseHelper.DeleteAccount(account);
+            var accounts = this.context.Accounts;
+
+            Assert.That(accounts.Count, Is.Zero);
+        }
+
+        [Test]
+        public void DeleteAccount_IsUsed_ThrowException()
+        {
+            this.AddTestData();
+            var account = this.context.Accounts.First();
+
+            var databaseHelper = new DatabaseHelper(this.context);
+
+            Assert.Throws<InvalidOperationException>(() => databaseHelper.DeleteAccount(account));
+        }
+
+        [Test]
+        public void DeleteCategory_IsNotUsed_DeleteCategory()
+        {
+            this.context.Add(new Category());
+            this.context.SaveChanges();
+            var category = this.context.Categories.First();
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            databaseHelper.DeleteCategory(category);
+            var categories = this.context.Categories;
+
+            Assert.That(categories.Count, Is.Zero);
+        }
+
+        [Test]
+        public void DeleteCategory_IsUsed_ThrowException()
+        {
+            this.AddTestData();
+            var category = this.context.Categories.First();
+
+            var databaseHelper = new DatabaseHelper(this.context);
+
+            Assert.Throws<InvalidOperationException>(() => databaseHelper.DeleteCategory(category));
+        }
+
+        [Test]
+        public void DeleteCustomer_IsNotUsed_DeleteCustomer()
+        {
+            this.context.Add(new Customer());
+            this.context.SaveChanges();
+            var customer = this.context.Customers.First();
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            databaseHelper.DeleteCustomer(customer);
+            var customers = this.context.Customers;
+
+            Assert.That(customers.Count, Is.Zero);
+        }
+
+        [Test]
+        public void DeleteCustomer_IsUsed_ThrowException()
+        {
+            this.AddTestData();
+            var customer = this.context.Customers.First();
+
+            var databaseHelper = new DatabaseHelper(this.context);
+
+            Assert.Throws<InvalidOperationException>(() => databaseHelper.DeleteCustomer(customer));
+        }
+
+        [Test]
+        public void DeleteStorageCardSupplier_WhenCalled_DeleteStorageCardSupplier()
+        {
+            this.AddTestData();
+            var storageCardSupplier = this.context.StorageCardSuppliers.First();
+            var count = this.context.StorageCardSuppliers.Count();
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            databaseHelper.DeleteStorageCardSupplier(storageCardSupplier);
+            var storageCardSuppliers = this.context.StorageCardSuppliers;
+
+            Assert.That(storageCardSuppliers.Count, Is.EqualTo(count - 1));
+        }
+
+        [Test]
+        public void DeleteStorageCard_WhenCalled_DeleteStorageCard()
+        {
+            this.AddTestData();
+            var storageCard = this.context.StorageCards.First();
+            var count = this.context.StorageCards.Count();
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            databaseHelper.DeleteStorageCard(storageCard);
+            var storageCards = this.context.StorageCards;
+
+            Assert.That(storageCards.Count, Is.EqualTo(count - 1));
+        }
+
+        [Test]
+        public void DeleteStore_IsNotUsed_DeleteStore()
+        {
+            this.context.Add(new Store());
+            this.context.SaveChanges();
+            var store = this.context.Stores.First();
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            databaseHelper.DeleteStore(store);
+            var stores = this.context.Stores;
+
+            Assert.That(stores.Count, Is.Zero);
+        }
+
+        [Test]
+        public void DeleteStore_IsUsed_ThrowException()
+        {
+            this.AddTestData();
+            var store = this.context.Stores.First();
+
+            var databaseHelper = new DatabaseHelper(this.context);
+
+            Assert.Throws<InvalidOperationException>(() => databaseHelper.DeleteStore(store));
+        }
+
+        [Test]
+        public void DeleteSupplier_IsNotUsed_DeleteSupplier()
+        {
+            this.context.Add(new Supplier());
+            this.context.SaveChanges();
+            var supplier = this.context.Suppliers.First();
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            databaseHelper.DeleteSupplier(supplier);
+            var suppliers = this.context.Suppliers;
+
+            Assert.That(suppliers.Count, Is.Zero);
+        }
+
+        [Test]
+        public void DeleteSupplier_IsUsed_ThrowException()
+        {
+            this.AddTestData();
+            var supplier = this.context.Suppliers.First();
+
+            var databaseHelper = new DatabaseHelper(this.context);
+
+            Assert.Throws<InvalidOperationException>(() => databaseHelper.DeleteSupplier(supplier));
+        }
+
+        [Test]
+        public void DeleteItem_WhenCalled_DeleteItem()
+        {
+            this.AddTestData();
+            var item = this.context.Items.First();
+            var count = this.context.Items.Count();
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            databaseHelper.DeleteItem(item);
+            var items = this.context.Items;
+
+            Assert.That(items.Count, Is.EqualTo(count - 1));
+        }
+
         private void AddTestData()
         {
             var account1 = new Account { DateTime = this.dateTime, Name = "account1" };
@@ -368,6 +535,18 @@
                 Supplier = supplier3,
             };
 
+            var item1 = new Item
+            {
+                DateTime = this.dateTime,
+                Name = "item1",
+                Movement = 1,
+                Qty = 1,
+                Price = 1,
+                Invoice = "invoice1",
+                StorageCard = storageCard1,
+                Customer = customer1,
+            };
+
             this.context.AddRange(
                 account1,
                 account2,
@@ -392,7 +571,8 @@
                 storageCardSupplier3,
                 storageCardSupplier4,
                 storageCardSupplier5,
-                storageCardSupplier6);
+                storageCardSupplier6,
+                item1);
 
             this.context.SaveChanges();
         }
