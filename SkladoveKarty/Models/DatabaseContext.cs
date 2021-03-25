@@ -9,24 +9,36 @@
 
         private ModelBuilder modelBuilder;
 
-        public virtual DbSet<StorageCard> StorageCards { get; set; }
+        public DatabaseContext()
+        {
+        }
 
-        public virtual DbSet<Category> Categories { get; set; }
+        public DatabaseContext(DbContextOptions<DatabaseContext> options)
+            : base(options)
+        {
+        }
 
-        public virtual DbSet<Store> Stores { get; set; }
+        public DbSet<StorageCard> StorageCards { get; set; }
 
-        public virtual DbSet<Account> Accounts { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
-        public virtual DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Store> Stores { get; set; }
 
-        public virtual DbSet<StorageCardSupplier> StorageCardSuppliers { get; set; }
+        public DbSet<Account> Accounts { get; set; }
 
-        public virtual DbSet<Item> Items { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
 
-        public virtual DbSet<Customer> Customers { get; set; }
+        public DbSet<StorageCardSupplier> StorageCardSuppliers { get; set; }
+
+        public DbSet<Item> Items { get; set; }
+
+        public DbSet<Customer> Customers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite($"Data Source={DatabaseName}");
+        {
+            if (!options.IsConfigured)
+                options.UseSqlite($"Data Source={DatabaseName}");
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
