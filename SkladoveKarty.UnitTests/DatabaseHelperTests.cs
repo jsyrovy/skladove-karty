@@ -393,10 +393,28 @@
         [Test]
         public void Add_WhenCalled_AddAccount()
         {
-            var account = new Account { DateTime = DateTime.Now, Name = "account" };
+            var account = new Account { DateTime = this.dateTime, Name = "account" };
 
             var databaseHelper = new DatabaseHelper(this.context);
             databaseHelper.Add(account);
+
+            var accounts = this.context.Accounts;
+
+            Assert.That(accounts.Count(), Is.EqualTo(1));
+            Assert.That(accounts.First().Id, Is.Not.Null);
+            Assert.That(accounts.First().DateTime, Is.EqualTo(account.DateTime));
+            Assert.That(accounts.First().Name, Is.EqualTo(account.Name));
+        }
+
+        [Test]
+        public void SaveChanges_WhenCalled_SaveChanges()
+        {
+            var account = new Account { DateTime = this.dateTime, Name = "account" };
+
+            this.context.Add(account);
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            databaseHelper.SaveChanges();
 
             var accounts = this.context.Accounts;
 
