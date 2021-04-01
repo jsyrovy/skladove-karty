@@ -2,18 +2,29 @@
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
+    using System.Linq;
     using CsvHelper;
     using CsvHelper.TypeConversion;
 
     public static class FileHelper
     {
+        private const string ItemsFileName = "items.csv";
+        private const string SuppliersFileName = "suppliers.csv";
+
+        public static string ImportDirectoryPath => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "import");
+
+        public static string ImportItemsFilePath => Path.Combine(ImportDirectoryPath, ItemsFileName);
+
+        public static string ImportSuppliersFilePath => Path.Combine(ImportDirectoryPath, SuppliersFileName);
+
         public static string ExportDirectoryPath => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "export");
 
-        public static string ExportItemsPath => Path.Combine(ExportDirectoryPath, "items.csv");
+        public static string ExportItemsFilePath => Path.Combine(ExportDirectoryPath, ItemsFileName);
 
-        public static string ExportSuppliersPath => Path.Combine(ExportDirectoryPath, "suppliers.csv");
+        public static string ExportSuppliersFilePath => Path.Combine(ExportDirectoryPath, SuppliersFileName);
 
         public static void CreateExportDirectory()
         {
