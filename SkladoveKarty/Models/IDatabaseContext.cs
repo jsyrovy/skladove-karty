@@ -5,6 +5,8 @@
 
     public interface IDatabaseContext
     {
+        ChangeTracker ChangeTracker { get; }
+
         DbSet<Account> Accounts { get; set; }
 
         DbSet<Category> Categories { get; set; }
