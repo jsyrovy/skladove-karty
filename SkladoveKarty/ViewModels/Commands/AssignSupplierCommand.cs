@@ -19,7 +19,8 @@
                 Supplier = (Supplier)parameter,
             };
 
-            this.SuppliersViewModel.Database.AddAndSave(storageCardSupplier);
+            this.SuppliersViewModel.Database.Add(storageCardSupplier);
+            this.SuppliersViewModel.Database.SaveChanges();
             this.SuppliersViewModel.LoadSuppliersAsync();
             this.SuppliersViewModel.LastActionStatus = "Dodavatel byl vybrán.";
         }

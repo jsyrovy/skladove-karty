@@ -124,13 +124,6 @@
             return entity;
         }
 
-        public void AddAndSave(object entity)
-        {
-            this.databaseContext.Add(entity);
-
-            this.databaseContext.SaveChanges();
-        }
-
         public void DeleteAccount(Account account)
         {
             var assignedStorageCard = this.databaseContext.StorageCards.Where(s => s.Account == account).FirstOrDefault();

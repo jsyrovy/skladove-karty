@@ -17,7 +17,8 @@
         public override void Execute(object parameter)
         {
             this.SettingsViewModel.NewCategory.DateTime = DateTime.Now;
-            this.SettingsViewModel.Database.AddAndSave(this.SettingsViewModel.NewCategory);
+            this.SettingsViewModel.Database.Add(this.SettingsViewModel.NewCategory);
+            this.SettingsViewModel.Database.SaveChanges();
             this.SettingsViewModel.LoadCategoriesAsync(this.SettingsViewModel.NewCategory);
             this.SettingsViewModel.NewCategory = new();
             this.SettingsViewModel.LastActionStatus = "Kategorie byla přidána.";
