@@ -25,6 +25,7 @@
                         ItemQty = item.Qty,
                         ItemPrice = item.Price,
                         ItemInvoice = item.Invoice,
+                        ItemCustomerName = item.Customer?.Name,
                     });
                 }
             }
