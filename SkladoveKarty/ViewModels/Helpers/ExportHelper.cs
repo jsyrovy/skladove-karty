@@ -1,6 +1,7 @@
 ﻿namespace SkladoveKarty.ViewModels.Helpers
 {
     using System.Collections.Generic;
+    using System.Linq;
     using SkladoveKarty.Models;
 
     public static class ExportHelper
@@ -30,7 +31,7 @@
                 }
             }
 
-            return exportItems;
+            return exportItems.OrderBy(e => e.StorageCardName).ThenBy(e => e.ItemDateTime).ThenBy(e => e.ItemName).ToList();
         }
 
         public static List<ImportExportSupplier> GetExportSuppliers(List<StorageCardSupplier> storageCardSuppliers)
@@ -46,7 +47,7 @@
                 });
             }
 
-            return exportSuppliers;
+            return exportSuppliers.OrderBy(e => e.StorageCardName).ThenBy(e => e.SupplierName).ToList();
         }
     }
 }
