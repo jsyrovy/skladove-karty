@@ -3,6 +3,7 @@
     using System;
     using System.Windows;
     using SkladoveKarty.Models;
+    using SkladoveKarty.ViewModels.Helpers;
 
     public class DeleteStorageCardCommand : BaseCommand
     {
@@ -34,7 +35,7 @@
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ExceptionHelper.GetCompleteExceptionMessage(e), "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
