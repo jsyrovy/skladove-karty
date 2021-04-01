@@ -43,11 +43,7 @@
             this.NewStore = new();
             this.NewSupplier = new();
 
-            this.LoadAccountsAsync();
-            this.LoadCategoriesAsync();
-            this.LoadCustomersAsync();
-            this.LoadStoresAsync();
-            this.LoadSuppliersAsync();
+            this.LoadAllAsync();
         }
 
         public Account NewAccount
@@ -216,6 +212,15 @@
 
         public ExportCommand ExportCommand { get; set; }
 
+        public async void LoadAllAsync()
+        {
+            await this.LoadAccountsTask();
+            await this.LoadCategoriesTask();
+            await this.LoadCustomersTask();
+            await this.LoadStoresTask();
+            await this.LoadSuppliersTask();
+        }
+
         public async void LoadAccountsAsync(Account accountToSelect = null)
         {
             await this.LoadAccountsTask(accountToSelect);
@@ -241,7 +246,7 @@
             await this.LoadSuppliersTask(supplierToSelect);
         }
 
-        private Task LoadAccountsTask(Account accountToSelect)
+        private Task LoadAccountsTask(Account accountToSelect = null)
         {
             return Task.Run(() =>
             {
@@ -258,7 +263,7 @@
             });
         }
 
-        private Task LoadCategoriesTask(Category categoryToSelect)
+        private Task LoadCategoriesTask(Category categoryToSelect = null)
         {
             return Task.Run(() =>
             {
@@ -275,7 +280,7 @@
             });
         }
 
-        private Task LoadCustomersTask(Customer customerToSelect)
+        private Task LoadCustomersTask(Customer customerToSelect = null)
         {
             return Task.Run(() =>
             {
@@ -292,7 +297,7 @@
             });
         }
 
-        private Task LoadStoresTask(Store storeToSelect)
+        private Task LoadStoresTask(Store storeToSelect = null)
         {
             return Task.Run(() =>
             {
@@ -309,7 +314,7 @@
             });
         }
 
-        private Task LoadSuppliersTask(Supplier supplierToSelect)
+        private Task LoadSuppliersTask(Supplier supplierToSelect = null)
         {
             return Task.Run(() =>
             {
