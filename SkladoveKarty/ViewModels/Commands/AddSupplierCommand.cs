@@ -17,7 +17,7 @@
         public override void Execute(object parameter)
         {
             this.SettingsViewModel.NewSupplier.DateTime = DateTime.Now;
-            this.SettingsViewModel.Database.Add(this.SettingsViewModel.NewSupplier);
+            this.SettingsViewModel.Database.AddAndSave(this.SettingsViewModel.NewSupplier);
             this.SettingsViewModel.LoadSuppliersAsync(this.SettingsViewModel.NewSupplier);
             this.SettingsViewModel.NewSupplier = new();
             this.SettingsViewModel.LastActionStatus = "Sodavatel byl přidán.";

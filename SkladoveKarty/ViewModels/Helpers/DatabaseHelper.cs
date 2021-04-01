@@ -75,7 +75,7 @@
             return this.databaseContext.StorageCardSuppliers.Where(s => s.StorageCard == storageCard && s.Supplier == supplier).SingleOrDefault();
         }
 
-        public void Add(object entity)
+        public void AddAndSave(object entity)
         {
             this.databaseContext.Add(entity);
 

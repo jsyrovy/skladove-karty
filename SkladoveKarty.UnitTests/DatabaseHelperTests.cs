@@ -252,7 +252,7 @@
             var account = new Account { DateTime = this.dateTime, Name = "account" };
 
             var databaseHelper = new DatabaseHelper(this.context);
-            databaseHelper.Add(account);
+            databaseHelper.AddAndSave(account);
             var accounts = this.context.Accounts;
 
             Assert.That(accounts.Count, Is.EqualTo(1));

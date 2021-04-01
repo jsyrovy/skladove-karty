@@ -18,7 +18,7 @@
         public override void Execute(object parameter)
         {
             this.MainViewModel.NewItem.StorageCard = this.MainViewModel.SelectedStorageCard;
-            this.MainViewModel.Database.Add(this.MainViewModel.NewItem);
+            this.MainViewModel.Database.AddAndSave(this.MainViewModel.NewItem);
             this.MainViewModel.LoadItemsAsync(this.MainViewModel.NewItem);
             this.MainViewModel.CalculateStorageCardReports();
             this.MainViewModel.NewItem = MainViewModel.CreateDefaultItem();

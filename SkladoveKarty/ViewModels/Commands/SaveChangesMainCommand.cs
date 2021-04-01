@@ -19,7 +19,7 @@
         {
             if (this.MainViewModel.SelectedStorageCard?.Id == 0)
             {
-                this.MainViewModel.Database.Add(this.MainViewModel.SelectedStorageCard);
+                this.MainViewModel.Database.AddAndSave(this.MainViewModel.SelectedStorageCard);
                 this.MainViewModel.SelectedStorageCard = null;
                 this.MainViewModel.LastActionStatus = "Skladová karta byla přidána.";
                 this.MainViewModel.LoadAllAsync();

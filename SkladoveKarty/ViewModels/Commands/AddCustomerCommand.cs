@@ -17,7 +17,7 @@
         public override void Execute(object parameter)
         {
             this.SettingsViewModel.NewCustomer.DateTime = DateTime.Now;
-            this.SettingsViewModel.Database.Add(this.SettingsViewModel.NewCustomer);
+            this.SettingsViewModel.Database.AddAndSave(this.SettingsViewModel.NewCustomer);
             this.SettingsViewModel.LoadCustomersAsync(this.SettingsViewModel.NewCustomer);
             this.SettingsViewModel.NewCustomer = new();
             this.SettingsViewModel.LastActionStatus = "Zákazník byl přidán.";
