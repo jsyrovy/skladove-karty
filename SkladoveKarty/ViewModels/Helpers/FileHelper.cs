@@ -31,6 +31,25 @@
             Directory.CreateDirectory(ExportDirectoryPath);
         }
 
+        public static bool DirectoryExists(string path)
+        {
+            return Directory.Exists(path);
+        }
+
+        public static bool FileExists(string path)
+        {
+            return File.Exists(path);
+        }
+
+        public static List<T> ReadCsv<T>(string path)
+        {
+            using (var reader = new StreamReader(path))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                return csv.GetRecords<T>().ToList();
+            }
+        }
+
         public static void WriteCsv(string path, IEnumerable records)
         {
             using (var writer = new StreamWriter(path))
