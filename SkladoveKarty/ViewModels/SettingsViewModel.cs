@@ -35,6 +35,7 @@
 
             this.DeleteSettingCommand = new DeleteSettingCommand(this);
 
+            this.ImportCommand = new ImportCommand(this);
             this.ExportCommand = new ExportCommand(this);
 
             this.NewAccount = new();
@@ -209,6 +210,8 @@
         public SaveChangesSettingsCommand SaveChangesSettingsCommand { get; set; }
 
         public DeleteSettingCommand DeleteSettingCommand { get; set; }
+
+        public ImportCommand ImportCommand { get; set; }
 
         public ExportCommand ExportCommand { get; set; }
 
