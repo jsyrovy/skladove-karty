@@ -16,14 +16,32 @@
             this.databaseContext = databaseContext;
         }
 
+        public Account GetAccount(string name, List<Account> addedAccounts = null)
+        {
+            return addedAccounts?.Where(a => a.Name == name).SingleOrDefault()
+                ?? this.databaseContext.Accounts.Where(a => a.Name == name).SingleOrDefault();
+        }
+
         public List<Account> GetAccounts()
         {
             return this.databaseContext.Accounts.OrderBy(a => a.Name).ToList();
         }
 
+        public Category GetCategory(string name, List<Category> addedCategories = null)
+        {
+            return addedCategories?.Where(a => a.Name == name).SingleOrDefault()
+                ?? this.databaseContext.Categories.Where(a => a.Name == name).SingleOrDefault();
+        }
+
         public List<Category> GetCategories()
         {
             return this.databaseContext.Categories.OrderBy(c => c.Name).ToList();
+        }
+
+        public Customer GetCustomer(string name, List<Customer> addedCustomers = null)
+        {
+            return addedCustomers.Where(c => c.Name == name).SingleOrDefault()
+                ?? this.databaseContext.Customers.Where(c => c.Name == name).SingleOrDefault();
         }
 
         public List<Customer> GetCustomers()
@@ -55,9 +73,21 @@
             return this.databaseContext.StorageCardSuppliers.Include(s => s.Supplier).Where(s => s.StorageCard == storageCard).ToList();
         }
 
+        public Store GetStore(string name, List<Store> addedStores = null)
+        {
+            return addedStores?.Where(a => a.Name == name).SingleOrDefault()
+                ?? this.databaseContext.Stores.Where(a => a.Name == name).SingleOrDefault();
+        }
+
         public List<Store> GetStores()
         {
             return this.databaseContext.Stores.OrderBy(s => s.Name).ToList();
+        }
+
+        public Supplier GetSupplier(string name, List<Supplier> addedSuppliers = null)
+        {
+            return addedSuppliers?.Where(s => s.Name == name).SingleOrDefault()
+                ?? this.databaseContext.Suppliers.Where(s => s.Name == name).SingleOrDefault();
         }
 
         public List<Supplier> GetSuppliers()
@@ -70,9 +100,21 @@
             return this.databaseContext.StorageCards.Where(s => s.Id == id).SingleOrDefault();
         }
 
+        public StorageCard GetStorageCard(string name, List<StorageCard> addedStorageCards = null)
+        {
+            return addedStorageCards?.Where(s => s.Name == name).SingleOrDefault()
+                ?? this.databaseContext.StorageCards.Where(s => s.Name == name).SingleOrDefault();
+        }
+
         public StorageCardSupplier GetStorageCardSupplier(StorageCard storageCard, Supplier supplier)
         {
             return this.databaseContext.StorageCardSuppliers.Where(s => s.StorageCard == storageCard && s.Supplier == supplier).SingleOrDefault();
+        }
+
+        public StorageCardSupplier GetStorageCardSupplier(StorageCard storageCard, Supplier supplier, List<StorageCardSupplier> addedStorageCardSuppliers = null)
+        {
+            return addedStorageCardSuppliers?.Where(s => s.StorageCard == storageCard && s.Supplier == supplier).SingleOrDefault()
+                ?? this.databaseContext.StorageCardSuppliers.Where(s => s.StorageCard == storageCard && s.Supplier == supplier).SingleOrDefault();
         }
 
         public T Add<T>(T entity)
