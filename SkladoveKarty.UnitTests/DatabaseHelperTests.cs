@@ -252,6 +252,25 @@
             var account = new Account { DateTime = this.dateTime, Name = "account" };
 
             var databaseHelper = new DatabaseHelper(this.context);
+            databaseHelper.Add(account);
+            var accountsBeforeSave = this.context.Accounts.ToList();
+            this.context.SaveChanges();
+            var accountsAfterSave = this.context.Accounts;
+
+            Assert.That(accountsBeforeSave.Count, Is.Zero);
+
+            Assert.That(accountsAfterSave.Count, Is.EqualTo(1));
+            Assert.That(accountsAfterSave.First().Id, Is.Not.Zero);
+            Assert.That(accountsAfterSave.First().DateTime, Is.EqualTo(account.DateTime));
+            Assert.That(accountsAfterSave.First().Name, Is.EqualTo(account.Name));
+        }
+
+        [Test]
+        public void Add_WhenCalled_AddAndSaveAccount()
+        {
+            var account = new Account { DateTime = this.dateTime, Name = "account" };
+
+            var databaseHelper = new DatabaseHelper(this.context);
             databaseHelper.AddAndSave(account);
             var accounts = this.context.Accounts;
 
