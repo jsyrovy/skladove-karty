@@ -1,6 +1,6 @@
 ﻿namespace SkladoveKarty.Models
 {
-    public class ExportSupplier
+    public class ImportExportSupplier
     {
         public string StorageCardName { get; set; }
 

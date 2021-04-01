@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class ExportItem
+    public class ImportExportItem
     {
         public string StorageCardName { get; set; }
 
@@ -23,5 +23,7 @@
         public decimal ItemPrice { get; set; }
 
         public string ItemInvoice { get; set; }
+
+        public string ItemCustomerName { get; set; }
     }
 }
