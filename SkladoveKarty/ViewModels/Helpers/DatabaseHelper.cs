@@ -149,7 +149,7 @@
             var assignedItem = this.databaseContext.Items.Include(i => i.StorageCard).Where(i => i.Customer == customer).FirstOrDefault();
 
             if (assignedItem != null)
-                throw new InvalidOperationException($"Dodavatele '{customer.Name}' nelze smazat. Je přiřazen k položce '{assignedItem.Name}' ve skladové kartě '{assignedItem.StorageCard.Name}'.");
+                throw new InvalidOperationException($"Zákazníka '{customer.Name}' nelze smazat. Je přiřazen k položce '{assignedItem.Name}' ve skladové kartě '{assignedItem.StorageCard.Name}'.");
 
             this.databaseContext.Customers.Remove(customer);
         }

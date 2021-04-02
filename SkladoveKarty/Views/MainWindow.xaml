@@ -172,7 +172,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Dodavatel">
+                        <GridViewColumn Header="Zákazník">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <ComboBox
