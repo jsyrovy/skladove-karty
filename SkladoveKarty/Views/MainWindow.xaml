@@ -102,6 +102,11 @@
                         Style="{StaticResource buttonInfoStyle}" />
 
                     <Button
+                        Command="{Binding GenerateHtmlCommand}"
+                        Content="Exportovat"
+                        Style="{StaticResource buttonInfoStyle}" />
+
+                    <Button
                         Command="{Binding CreateStorageCardCommand}"
                         Content="Nová"
                         Style="{StaticResource buttonPrimaryStyle}" />

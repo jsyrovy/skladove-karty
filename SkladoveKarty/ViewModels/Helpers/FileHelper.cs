@@ -3,6 +3,7 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Globalization;
     using System.IO;
     using System.Linq;
@@ -13,6 +14,7 @@
     {
         private const string ItemsFileName = "items.csv";
         private const string SuppliersFileName = "suppliers.csv";
+        private const string StorageCardTemplateFileName = "StorageCard.Mustache";
 
         public static string ImportDirectoryPath => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "import");
 
@@ -25,6 +27,15 @@
         public static string ExportItemsFilePath => Path.Combine(ExportDirectoryPath, ItemsFileName);
 
         public static string ExportSuppliersFilePath => Path.Combine(ExportDirectoryPath, SuppliersFileName);
+
+        public static string TemplatesDirectoryPath => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Templates");
+
+        public static string StorageCardTemplateFilePath => Path.Combine(TemplatesDirectoryPath, StorageCardTemplateFileName);
+
+        public static string GetExportStarageCardFilePath(string storageCardName)
+        {
+            return Path.Combine(Path.GetTempPath(), $"{GetValidFileName(storageCardName)}_{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.html");
+        }
 
         public static void CreateExportDirectory()
         {
@@ -59,6 +70,39 @@
                 csv.Context.TypeConverterOptionsCache.AddOptions<DateTime>(options);
                 csv.WriteRecords(records);
             }
+        }
+
+        public static string ReadText(string path)
+        {
+            return File.ReadAllText(path);
+        }
+
+        public static void WriteText(string path, string content)
+        {
+            File.WriteAllText(path, content);
+        }
+
+        public static void Open(string path)
+        {
+            var process = new Process
+            {
+                StartInfo = new ProcessStartInfo(path)
+                {
+                    UseShellExecute = true,
+                },
+            };
+
+            process.Start();
+        }
+
+        private static string GetValidFileName(string name)
+        {
+            var invalidChars = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
+
+            foreach (var invalidChar in invalidChars)
+                name = name.Replace(invalidChar.ToString(), string.Empty);
+
+            return name;
         }
     }
 }

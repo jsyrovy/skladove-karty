@@ -1,0 +1,95 @@
+﻿<!-- Generated from https://github.com/jsyrovy/skladove-karty -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ Name }}</title>
+
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+
+      .value {
+        color: #209cee;
+      }
+
+      .list:not(:last-of-type)::after {
+        content: ", ";
+      }
+
+      .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.9em;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .styled-table thead tr {
+        background-color: #209cee;
+        color: #ffffff;
+        text-align: left;
+      }
+
+      .styled-table th,
+      .styled-table td {
+        padding: 12px 15px;
+      }
+
+      .styled-table tbody tr {
+        border-bottom: 1px solid #dddddd;
+      }
+
+      .styled-table tbody tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+      }
+
+      .styled-table tbody tr:last-of-type {
+        border-bottom: 2px solid #209cee;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>
+      Skladová karta: <span class="value">{{ Name }}</span>
+    </h1>
+    <h3>Kategorie: {{ Category.Name }}</h3>
+    <h3>Sklad: {{ Store.Name }}</h3>
+    <h3>Účet: {{ Account.Name }}</h3>
+    <h3>
+      Dodavatelé:
+      {{ #StorageCardSuppliers }}
+      <span class="list">{{ Supplier.Name }}</span>
+      {{ /StorageCardSuppliers }}
+    </h3>
+
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Datum</th>
+          <th>Název</th>
+          <th>Pohyb</th>
+          <th>Počet</th>
+          <th>Cena</th>
+          <th>Faktura</th>
+          <th>Zákazník</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ #Items }}
+        <tr>
+          <td>{{ DateTime }}</td>
+          <td>{{ Name }}</td>
+          <td>{{ Movement }}</td>
+          <td>{{ Qty }}</td>
+          <td>{{ Price }}</td>
+          <td>{{ Invoice }}</td>
+          <td>{{ Customer.Name }}</td>
+        </tr>
+        {{ /Items }}
+      </tbody>
+    </table>
+  </body>
+</html>
