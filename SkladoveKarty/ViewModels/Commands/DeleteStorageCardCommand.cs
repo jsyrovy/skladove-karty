@@ -32,6 +32,7 @@
             try
             {
                 this.MainViewModel.Database.DeleteStorageCard(storageCard);
+                this.MainViewModel.Database.SaveChanges();
             }
             catch (Exception e)
             {

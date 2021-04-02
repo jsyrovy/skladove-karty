@@ -287,6 +287,7 @@
 
             var databaseHelper = new DatabaseHelper(this.context);
             databaseHelper.DeleteAccount(account);
+            this.context.SaveChanges();
             var accounts = this.context.Accounts;
 
             Assert.That(accounts.Count, Is.Zero);
@@ -312,6 +313,7 @@
 
             var databaseHelper = new DatabaseHelper(this.context);
             databaseHelper.DeleteCategory(category);
+            this.context.SaveChanges();
             var categories = this.context.Categories;
 
             Assert.That(categories.Count, Is.Zero);
@@ -337,6 +339,7 @@
 
             var databaseHelper = new DatabaseHelper(this.context);
             databaseHelper.DeleteCustomer(customer);
+            this.context.SaveChanges();
             var customers = this.context.Customers;
 
             Assert.That(customers.Count, Is.Zero);
@@ -362,6 +365,7 @@
 
             var databaseHelper = new DatabaseHelper(this.context);
             databaseHelper.DeleteStorageCardSupplier(storageCardSupplier);
+            this.context.SaveChanges();
             var storageCardSuppliers = this.context.StorageCardSuppliers;
 
             Assert.That(storageCardSuppliers.Count, Is.EqualTo(count - 1));
@@ -376,6 +380,7 @@
 
             var databaseHelper = new DatabaseHelper(this.context);
             databaseHelper.DeleteStorageCard(storageCard);
+            this.context.SaveChanges();
             var storageCards = this.context.StorageCards;
 
             Assert.That(storageCards.Count, Is.EqualTo(count - 1));
@@ -390,6 +395,7 @@
 
             var databaseHelper = new DatabaseHelper(this.context);
             databaseHelper.DeleteStore(store);
+            this.context.SaveChanges();
             var stores = this.context.Stores;
 
             Assert.That(stores.Count, Is.Zero);
@@ -415,6 +421,7 @@
 
             var databaseHelper = new DatabaseHelper(this.context);
             databaseHelper.DeleteSupplier(supplier);
+            this.context.SaveChanges();
             var suppliers = this.context.Suppliers;
 
             Assert.That(suppliers.Count, Is.Zero);
@@ -440,6 +447,7 @@
 
             var databaseHelper = new DatabaseHelper(this.context);
             databaseHelper.DeleteItem(item);
+            this.context.SaveChanges();
             var items = this.context.Items;
 
             Assert.That(items.Count, Is.EqualTo(count - 1));

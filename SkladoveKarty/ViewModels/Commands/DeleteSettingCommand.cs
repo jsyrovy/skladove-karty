@@ -50,6 +50,8 @@
                     this.SettingsViewModel.LoadSuppliersAsync();
                     this.SettingsViewModel.LastActionStatus = "Dodavatel byl smazán.";
                 }
+
+                this.SettingsViewModel.Database.SaveChanges();
             }
             catch (Exception e)
             {

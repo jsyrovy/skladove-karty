@@ -15,6 +15,7 @@
             var storageCardSupplier = this.SuppliersViewModel.Database.GetStorageCardSupplier(
                 this.SuppliersViewModel.SelectedStorageCard, (Supplier)parameter);
             this.SuppliersViewModel.Database.DeleteStorageCardSupplier(storageCardSupplier);
+            this.SuppliersViewModel.Database.SaveChanges();
             this.SuppliersViewModel.LoadSuppliersAsync();
             this.SuppliersViewModel.LastActionStatus = "Dodavatel byl odebrán.";
         }

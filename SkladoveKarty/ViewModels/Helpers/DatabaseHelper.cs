@@ -132,8 +132,6 @@
                 throw new InvalidOperationException($"Účet '{account.Name}' nelze smazat. Je přiřazen ke skladové kartě '{assignedStorageCard.Name}'.");
 
             this.databaseContext.Accounts.Remove(account);
-
-            this.databaseContext.SaveChanges();
         }
 
         public void DeleteCategory(Category category)
@@ -144,8 +142,6 @@
                 throw new InvalidOperationException($"Kategorii '{category.Name}' nelze smazat. Je přiřazena ke skladové kartě '{assignedStorageCard.Name}'.");
 
             this.databaseContext.Categories.Remove(category);
-
-            this.databaseContext.SaveChanges();
         }
 
         public void DeleteCustomer(Customer customer)
@@ -156,15 +152,11 @@
                 throw new InvalidOperationException($"Dodavatele '{customer.Name}' nelze smazat. Je přiřazen k položce '{assignedItem.Name}' ve skladové kartě '{assignedItem.StorageCard.Name}'.");
 
             this.databaseContext.Customers.Remove(customer);
-
-            this.databaseContext.SaveChanges();
         }
 
         public void DeleteStorageCardSupplier(StorageCardSupplier storageCardSupplier)
         {
             this.databaseContext.StorageCardSuppliers.Remove(storageCardSupplier);
-
-            this.databaseContext.SaveChanges();
         }
 
         public void DeleteStorageCard(StorageCard storageCard)
@@ -176,8 +168,6 @@
             this.databaseContext.Items.RemoveRange(items);
 
             this.databaseContext.StorageCards.Remove(storageCard);
-
-            this.databaseContext.SaveChanges();
         }
 
         public void DeleteStore(Store store)
@@ -188,8 +178,6 @@
                 throw new InvalidOperationException($"Sklad '{store.Name}' nelze smazat. Je přiřazen ke skladové kartě '{assignedStorageCard.Name}'.");
 
             this.databaseContext.Stores.Remove(store);
-
-            this.databaseContext.SaveChanges();
         }
 
         public void DeleteSupplier(Supplier supplier)
@@ -206,15 +194,11 @@
             }
 
             this.databaseContext.Suppliers.Remove(supplier);
-
-            this.databaseContext.SaveChanges();
         }
 
         public void DeleteItem(Item item)
         {
             this.databaseContext.Items.Remove(item);
-
-            this.databaseContext.SaveChanges();
         }
 
         public void SaveChanges()

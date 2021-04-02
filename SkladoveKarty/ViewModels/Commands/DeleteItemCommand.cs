@@ -17,6 +17,7 @@
             try
             {
                 this.MainViewModel.Database.DeleteItem((Item)parameter);
+                this.MainViewModel.Database.SaveChanges();
             }
             catch (Exception e)
             {
