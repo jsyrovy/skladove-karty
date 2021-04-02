@@ -98,7 +98,7 @@
 
                     <Button
                         Command="{Binding ShowSuppliersCommand}"
-                        Content="Spravovat dodavatele"
+                        Content="Dodavatelé"
                         Style="{StaticResource buttonInfoStyle}" />
 
                     <Button
