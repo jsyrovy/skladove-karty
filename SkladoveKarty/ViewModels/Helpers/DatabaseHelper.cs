@@ -40,7 +40,7 @@
 
         public Customer GetCustomer(string name, List<Customer> addedCustomers = null)
         {
-            return addedCustomers.Where(c => c.Name == name).SingleOrDefault()
+            return addedCustomers?.Where(c => c.Name == name).SingleOrDefault()
                 ?? this.databaseContext.Customers.Where(c => c.Name == name).SingleOrDefault();
         }
 
