@@ -1,6 +1,7 @@
 ﻿namespace SkladoveKarty.UnitTests
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using Microsoft.EntityFrameworkCore;
     using Moq;
@@ -451,6 +452,358 @@
             var items = this.context.Items;
 
             Assert.That(items.Count, Is.EqualTo(count - 1));
+        }
+
+        [Test]
+        public void GetAccount_DoesntExist_ReturnNull()
+        {
+            this.AddTestData();
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            var result = databaseHelper.GetAccount("non-existent");
+
+            Assert.That(result, Is.Null);
+        }
+
+        [Test]
+        public void GetAccount_Exists_ReturnAccount()
+        {
+            this.AddTestData();
+            var name = "account1";
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            var result = databaseHelper.GetAccount(name);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Name, Is.EqualTo(name));
+        }
+
+        [Test]
+        public void GetAccount_IsInArgument_ReturnAccount()
+        {
+            var name = "account";
+            var accounts = new List<Account>
+            {
+                new Account
+                {
+                    Name = name,
+                },
+            };
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            var result = databaseHelper.GetAccount(name, accounts);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Name, Is.EqualTo(name));
+        }
+
+        [Test]
+        public void GetCategory_DoesntExist_ReturnNull()
+        {
+            this.AddTestData();
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            var result = databaseHelper.GetCategory("non-existent");
+
+            Assert.That(result, Is.Null);
+        }
+
+        [Test]
+        public void GetCategory_Exists_ReturnCategory()
+        {
+            this.AddTestData();
+            var name = "category1";
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            var result = databaseHelper.GetCategory(name);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Name, Is.EqualTo(name));
+        }
+
+        [Test]
+        public void GetCategory_IsInArgument_ReturnCategory()
+        {
+            var name = "category";
+            var categories = new List<Category>
+            {
+                new Category
+                {
+                    Name = name,
+                },
+            };
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            var result = databaseHelper.GetCategory(name, categories);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Name, Is.EqualTo(name));
+        }
+
+        [Test]
+        public void GetCustomer_DoesntExist_ReturnNull()
+        {
+            this.AddTestData();
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            var result = databaseHelper.GetCustomer("non-existent");
+
+            Assert.That(result, Is.Null);
+        }
+
+        [Test]
+        public void GetCustomer_Exists_ReturnCustomer()
+        {
+            this.AddTestData();
+            var name = "customer1";
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            var result = databaseHelper.GetCustomer(name);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Name, Is.EqualTo(name));
+        }
+
+        [Test]
+        public void GetCustomer_IsInArgument_ReturnCustomer()
+        {
+            var name = "customer";
+            var customers = new List<Customer>
+            {
+                new Customer
+                {
+                    Name = name,
+                },
+            };
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            var result = databaseHelper.GetCustomer(name, customers);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Name, Is.EqualTo(name));
+        }
+
+        [Test]
+        public void GetStore_DoesntExist_ReturnNull()
+        {
+            this.AddTestData();
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            var result = databaseHelper.GetStore("non-existent");
+
+            Assert.That(result, Is.Null);
+        }
+
+        [Test]
+        public void GetStore_Exists_ReturnStore()
+        {
+            this.AddTestData();
+            var name = "store1";
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            var result = databaseHelper.GetStore(name);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Name, Is.EqualTo(name));
+        }
+
+        [Test]
+        public void GetStore_IsInArgument_ReturnStore()
+        {
+            var name = "store";
+            var stores = new List<Store>
+            {
+                new Store
+                {
+                    Name = name,
+                },
+            };
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            var result = databaseHelper.GetStore(name, stores);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Name, Is.EqualTo(name));
+        }
+
+        [Test]
+        public void GetSupplier_DoesntExist_ReturnNull()
+        {
+            this.AddTestData();
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            var result = databaseHelper.GetSupplier("non-existent");
+
+            Assert.That(result, Is.Null);
+        }
+
+        [Test]
+        public void GetSupplier_Exists_ReturnSupplier()
+        {
+            this.AddTestData();
+            var name = "supplier1";
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            var result = databaseHelper.GetSupplier(name);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Name, Is.EqualTo(name));
+        }
+
+        [Test]
+        public void GetSupplier_IsInArgument_ReturnSupplier()
+        {
+            var name = "supplier";
+            var suppliers = new List<Supplier>
+            {
+                new Supplier
+                {
+                    Name = name,
+                },
+            };
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            var result = databaseHelper.GetSupplier(name, suppliers);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Name, Is.EqualTo(name));
+        }
+
+        [Test]
+        public void GetStorageCard_DoesntExist_ReturnNull()
+        {
+            this.AddTestData();
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            var result = databaseHelper.GetStorageCard("non-existent");
+
+            Assert.That(result, Is.Null);
+        }
+
+        [Test]
+        public void GetStorageCard_Exists_ReturnStorageCard()
+        {
+            this.AddTestData();
+            var name = "storageCard1";
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            var result = databaseHelper.GetStorageCard(name);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Name, Is.EqualTo(name));
+        }
+
+        [Test]
+        public void GetStorageCard_IsInArgument_ReturnStorageCard()
+        {
+            var name = "storageCard";
+            var storageCards = new List<StorageCard>
+            {
+                new StorageCard
+                {
+                    Name = name,
+                },
+            };
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            var result = databaseHelper.GetStorageCard(name, storageCards);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Name, Is.EqualTo(name));
+        }
+
+        [Test]
+        public void GetStorageCardSupplier_DoesntExist_ReturnNull()
+        {
+            this.AddTestData();
+            var storageCard = this.context.StorageCards.First();
+            var supplier = this.context.Suppliers.Where(s => !storageCard.StorageCardSuppliers.Select(s2 => s2.Supplier).Contains(s)).First();
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            var result = databaseHelper.GetStorageCardSupplier(storageCard, supplier);
+
+            Assert.That(result, Is.Null);
+        }
+
+        [Test]
+        public void GetStorageCardSupplier_Exists_ReturnStorageCardSupplier()
+        {
+            this.AddTestData();
+            var storageCard = this.context.StorageCards.First();
+            var supplier = storageCard.StorageCardSuppliers.First().Supplier;
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            var result = databaseHelper.GetStorageCardSupplier(storageCard, supplier);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.StorageCard, Is.EqualTo(storageCard));
+            Assert.That(result.Supplier, Is.EqualTo(supplier));
+        }
+
+        [Test]
+        public void GetStorageCardSupplier_IsInArgument_ReturnStorageCardSupplier()
+        {
+            var storageCard = new StorageCard { Name = "storageCard" };
+            var supplier = new Supplier { Name = "supplier" };
+            var storageCardSuppliers = new List<StorageCardSupplier>
+            {
+                new StorageCardSupplier
+                {
+                    StorageCard = storageCard,
+                    Supplier = supplier,
+                },
+            };
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            var result = databaseHelper.GetStorageCardSupplier(storageCard, supplier, storageCardSuppliers);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.StorageCard, Is.EqualTo(storageCard));
+            Assert.That(result.Supplier, Is.EqualTo(supplier));
+        }
+
+        [Test]
+        public void RollBack_Modified_RollBackChanges()
+        {
+            this.AddTestData();
+            var account = this.context.Accounts.First();
+            var originalName = account.Name;
+            account.Name = "newName";
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            databaseHelper.RollBack();
+            this.context.SaveChanges();
+
+            Assert.That(account.Name, Is.EqualTo(originalName));
+        }
+
+        [Test]
+        public void RollBack_Added_RollBackChanges()
+        {
+            var name = "account";
+            this.context.Accounts.Add(new Account { Name = name });
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            databaseHelper.RollBack();
+            this.context.SaveChanges();
+            var account = this.context.Accounts.Where(a => a.Name == name).SingleOrDefault();
+
+            Assert.That(account, Is.Null);
+        }
+
+        [Test]
+        public void RollBack_Deleted_RollBackChanges()
+        {
+            this.AddTestData();
+            var newAccount = this.context.Accounts.First();
+            this.context.Remove(newAccount);
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            databaseHelper.RollBack();
+            this.context.SaveChanges();
+            var account = this.context.Accounts.Where(a => a == newAccount).SingleOrDefault();
+
+            Assert.That(account, Is.Not.Null);
         }
 
         private void AddTestData()
