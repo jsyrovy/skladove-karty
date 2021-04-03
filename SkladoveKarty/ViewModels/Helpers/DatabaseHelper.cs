@@ -106,11 +106,6 @@
                 ?? this.databaseContext.StorageCards.Where(s => s.Name == name).SingleOrDefault();
         }
 
-        public StorageCardSupplier GetStorageCardSupplier(StorageCard storageCard, Supplier supplier)
-        {
-            return this.databaseContext.StorageCardSuppliers.Where(s => s.StorageCard == storageCard && s.Supplier == supplier).SingleOrDefault();
-        }
-
         public StorageCardSupplier GetStorageCardSupplier(StorageCard storageCard, Supplier supplier, List<StorageCardSupplier> addedStorageCardSuppliers = null)
         {
             return addedStorageCardSuppliers?.Where(s => s.StorageCard == storageCard && s.Supplier == supplier).SingleOrDefault()
