@@ -8,46 +8,33 @@
     [TestFixture]
     public class ExportHelperTests
     {
-        private List<StorageCardSupplier> storageCardSuppliers;
-
-        [SetUp]
-        public void SetUp()
-        {
-            this.storageCardSuppliers = new()
-            {
-                new()
-                {
-                    StorageCard = new() { Name = "storageCard1" },
-                    Supplier = new() { Name = "supplier1" },
-                },
-                new()
-                {
-                    StorageCard = new() { Name = "storageCard2" },
-                    Supplier = new() { Name = "supplier2" },
-                },
-                new()
-                {
-                    StorageCard = new() { Name = "storageCard2" },
-                    Supplier = new() { Name = "supplier3" },
-                },
-            };
-        }
-
         [Test]
         public void GetExportSuppliers_WhenCalled_ReturnExportSuppliers()
         {
-            var exportSuppliers = ExportHelper.GetExportSuppliers(this.storageCardSuppliers);
+            var storageCard = new StorageCard { Name = "storageCard" };
+            var supplier1 = new Supplier { Name = "supplier1" };
+            var supplier2 = new Supplier { Name = "supplier2" };
+            var storageCardSuppliers = new List<StorageCardSupplier>
+            {
+                new StorageCardSupplier
+                {
+                    StorageCard = storageCard,
+                    Supplier = supplier2,
+                },
+                new StorageCardSupplier
+                {
+                    StorageCard = storageCard,
+                    Supplier = supplier1,
+                },
+            };
 
-            Assert.That(exportSuppliers.Count, Is.EqualTo(3));
+            var result = ExportHelper.GetExportSuppliers(storageCardSuppliers);
 
-            Assert.That(exportSuppliers[0].StorageCardName, Is.EqualTo("storageCard1"));
-            Assert.That(exportSuppliers[0].SupplierName, Is.EqualTo("supplier1"));
-
-            Assert.That(exportSuppliers[1].StorageCardName, Is.EqualTo("storageCard2"));
-            Assert.That(exportSuppliers[1].SupplierName, Is.EqualTo("supplier2"));
-
-            Assert.That(exportSuppliers[2].StorageCardName, Is.EqualTo("storageCard2"));
-            Assert.That(exportSuppliers[2].SupplierName, Is.EqualTo("supplier3"));
+            Assert.That(result.Count, Is.EqualTo(2));
+            Assert.That(result[0].StorageCardName, Is.EqualTo(storageCard.Name));
+            Assert.That(result[0].SupplierName, Is.EqualTo(supplier1.Name));
+            Assert.That(result[1].StorageCardName, Is.EqualTo(storageCard.Name));
+            Assert.That(result[1].SupplierName, Is.EqualTo(supplier2.Name));
         }
     }
 }
