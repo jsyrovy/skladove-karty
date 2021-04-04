@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.EntityFrameworkCore;
-    using Moq;
     using NUnit.Framework;
     using SkladoveKarty.Models;
     using SkladoveKarty.ViewModels.Helpers;
