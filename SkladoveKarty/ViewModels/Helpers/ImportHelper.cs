@@ -18,11 +18,15 @@
 
         public ImportHelper(DatabaseHelper databaseHelper)
         {
+            if (databaseHelper == null) throw new ArgumentNullException(nameof(databaseHelper));
+
             this.databaseHelper = databaseHelper;
         }
 
         public void ImportItems(List<ImportExportItem> importItems)
         {
+            if (importItems == null) throw new ArgumentNullException(nameof(importItems));
+
             try
             {
                 foreach (var importItem in importItems)
@@ -39,6 +43,8 @@
 
         public void ImportSuppliers(List<ImportExportSupplier> importSuppliers)
         {
+            if (importSuppliers == null) throw new ArgumentNullException(nameof(importSuppliers));
+
             try
             {
                 foreach (var importSupplier in importSuppliers)

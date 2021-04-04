@@ -203,8 +203,10 @@
 
         public void RollBack()
         {
-            var changedEntries = this.databaseContext.ChangeTracker.Entries()
-                .Where(e => e.State != EntityState.Unchanged).ToList();
+            var changedEntries = this.databaseContext.ChangeTracker?
+                .Entries().Where(e => e.State != EntityState.Unchanged).ToList();
+
+            if (changedEntries == null) return;
 
             foreach (var entry in changedEntries)
             {
