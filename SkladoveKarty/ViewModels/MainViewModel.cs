@@ -54,7 +54,6 @@
 
         public ObservableCollection<Store> Stores { get; set; } = new();
 
-
         public AddItemCommand AddItemCommand { get; set; }
 
         public DeleteItemCommand DeleteItemCommand { get; set; }
