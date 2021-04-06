@@ -95,7 +95,7 @@
             process.Start();
         }
 
-        private static string GetValidFileName(string name)
+        public static string GetValidFileName(string name)
         {
             var invalidChars = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
 
