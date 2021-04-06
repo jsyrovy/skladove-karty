@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace SkladoveKarty.Migrations
+﻿namespace SkladoveKarty.Migrations
 {
+    using System;
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,7 +14,7 @@ namespace SkladoveKarty.Migrations
                     Id = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     DateTime = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "DATETIME()"),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -28,7 +28,7 @@ namespace SkladoveKarty.Migrations
                     Id = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     DateTime = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "DATETIME()"),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -42,7 +42,7 @@ namespace SkladoveKarty.Migrations
                     Id = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     DateTime = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "DATETIME()"),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -56,7 +56,7 @@ namespace SkladoveKarty.Migrations
                     Id = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     DateTime = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "DATETIME()"),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -70,7 +70,7 @@ namespace SkladoveKarty.Migrations
                     Id = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     DateTime = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "DATETIME()"),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -87,7 +87,7 @@ namespace SkladoveKarty.Migrations
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     AccountId = table.Column<long>(type: "INTEGER", nullable: false),
                     CategoryId = table.Column<long>(type: "INTEGER", nullable: false),
-                    StoreId = table.Column<long>(type: "INTEGER", nullable: false)
+                    StoreId = table.Column<long>(type: "INTEGER", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -125,7 +125,7 @@ namespace SkladoveKarty.Migrations
                     Price = table.Column<decimal>(type: "TEXT", nullable: false),
                     Invoice = table.Column<string>(type: "TEXT", nullable: true),
                     StorageCardId = table.Column<long>(type: "INTEGER", nullable: false),
-                    CustomerId = table.Column<long>(type: "INTEGER", nullable: true)
+                    CustomerId = table.Column<long>(type: "INTEGER", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -152,7 +152,7 @@ namespace SkladoveKarty.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     DateTime = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "DATETIME()"),
                     StorageCardId = table.Column<long>(type: "INTEGER", nullable: false),
-                    SupplierId = table.Column<long>(type: "INTEGER", nullable: false)
+                    SupplierId = table.Column<long>(type: "INTEGER", nullable: false),
                 },
                 constraints: table =>
                 {
