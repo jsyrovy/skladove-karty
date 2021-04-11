@@ -34,6 +34,8 @@
 
         public DbSet<Customer> Customers { get; set; }
 
+        public DbSet<Setting> Settings { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             if (!options.IsConfigured)
@@ -56,6 +58,7 @@
             this.modelBuilder.Entity<Account>().HasIndex(b => b.Name).IsUnique();
             this.modelBuilder.Entity<Supplier>().HasIndex(b => b.Name).IsUnique();
             this.modelBuilder.Entity<Customer>().HasIndex(b => b.Name).IsUnique();
+            this.modelBuilder.Entity<Setting>().HasIndex(b => b.Name).IsUnique();
         }
 
         private void CreateDefaults()
