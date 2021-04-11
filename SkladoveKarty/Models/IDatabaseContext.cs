@@ -23,6 +23,8 @@
 
         DbSet<Supplier> Suppliers { get; set; }
 
+        DbSet<Setting> Settings { get; set; }
+
         EntityEntry Add(object entity);
 
         int SaveChanges();
