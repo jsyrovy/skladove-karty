@@ -1,4 +1,4 @@
-﻿namespace SkladoveKarty
+﻿namespace SkladoveKarty.ViewModels.Interfaces
 {
     public interface IClosing
     {

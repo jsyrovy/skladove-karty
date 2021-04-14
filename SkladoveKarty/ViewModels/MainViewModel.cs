@@ -10,6 +10,7 @@
     using SkladoveKarty.Models;
     using SkladoveKarty.ViewModels.Commands;
     using SkladoveKarty.ViewModels.Helpers;
+    using SkladoveKarty.ViewModels.Interfaces;
 
     public class MainViewModel : BaseViewModel, IClosing
     {

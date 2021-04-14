@@ -1,6 +1,7 @@
 ﻿namespace SkladoveKarty.Views
 {
     using System.Windows;
+    using SkladoveKarty.ViewModels.Interfaces;
 
     public partial class MainWindow : Window
     {
