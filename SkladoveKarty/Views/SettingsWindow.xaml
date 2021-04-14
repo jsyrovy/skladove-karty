@@ -51,12 +51,12 @@
                 <Button
                     Command="{Binding ImportCommand}"
                     Content="Importovat data"
-                    Style="{StaticResource buttonLinkStyle}" />
+                    Style="{StaticResource buttonInfoStyle}" />
 
                 <Button
                     Command="{Binding ExportCommand}"
                     Content="Exportovat data"
-                    Style="{StaticResource buttonLinkStyle}" />
+                    Style="{StaticResource buttonInfoStyle}" />
             </StackPanel>
 
             <TextBlock
@@ -83,18 +83,18 @@
                 <Button
                     Command="{Binding BackupCommand}"
                     Content="Zálohovat"
-                    Style="{StaticResource buttonLinkStyle}" />
+                    Style="{StaticResource buttonInfoStyle}" />
 
                 <Button
                     Command="{Binding SetBackupDirectoryCommand}"
                     Content="Vybrat složku"
-                    Style="{StaticResource buttonLinkStyle}" />
+                    Style="{StaticResource buttonInfoStyle}" />
 
                 <Button
                     Command="{Binding OpenPathCommand}"
                     CommandParameter="{Binding BackupDirectory}"
                     Content="Otevřít složku"
-                    Style="{StaticResource buttonLinkStyle}" />
+                    Style="{StaticResource buttonInfoStyle}" />
             </StackPanel>
 
             <CheckBox
