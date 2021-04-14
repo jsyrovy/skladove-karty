@@ -11,7 +11,7 @@
     using SkladoveKarty.ViewModels.Commands;
     using SkladoveKarty.ViewModels.Helpers;
 
-    public class MainViewModel : BaseViewModel
+    public class MainViewModel : BaseViewModel, IClosing
     {
         private StorageCard selectedStorageCard;
         private Item selectedStorageCardItem;
@@ -176,6 +176,33 @@
         public static Item CreateDefaultItem()
         {
             return new Item() { DateTime = DateTime.Today, Movement = 1, Qty = 1 };
+        }
+
+        public bool OnClosing()
+        {
+            var settings = new SettingHelper(new DatabaseContext());
+
+            if (!settings.BackupOnExit) return true;
+
+            try
+            {
+                // TODO: remove duplicity (BackupCommand)
+                FileHelper.CreateDirectory(settings.BackupDirectory);
+
+                FileHelper.WriteCsv(
+                    FileHelper.GetFilePathWithTimestamp("items", ".csv", settings.BackupDirectory),
+                    ExportHelper.GetExportItems(this.Database.GetStorageCards()));
+
+                FileHelper.WriteCsv(
+                    FileHelper.GetFilePathWithTimestamp("suppliers", ".csv", settings.BackupDirectory),
+                    ExportHelper.GetExportSuppliers(this.Database.GetStorageCardSuppliers()));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(ExceptionHelper.GetCompleteExceptionMessage(e), "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return true;
         }
 
         public async void LoadAllAsync()

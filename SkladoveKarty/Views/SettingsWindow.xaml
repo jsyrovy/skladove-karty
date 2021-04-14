@@ -29,6 +29,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
@@ -95,6 +96,15 @@
                     Content="Otevřít složku"
                     Style="{StaticResource buttonLinkStyle}" />
             </StackPanel>
+
+            <CheckBox
+                Grid.Row="5"
+                Grid.Column="0"
+                Margin="10,5"
+                Content="Automaticky zálohovat před ukončením aplikace"
+                IsChecked="{Binding BackupOnExit}"
+                Style="{StaticResource checkBoxStyle}" />
+
         </Grid>
     </DockPanel>
 </Window>

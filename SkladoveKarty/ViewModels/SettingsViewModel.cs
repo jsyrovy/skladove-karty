@@ -9,6 +9,7 @@
     public class SettingsViewModel : BaseViewModel
     {
         private string backupDirectory;
+        private bool backupOnExit;
 
         public SettingsViewModel()
         {
@@ -23,9 +24,10 @@
             this.OpenPathCommand = new OpenPathCommand(this);
 
             this.backupDirectory = this.Settings.BackupDirectory;
+            this.backupOnExit = this.Settings.BackupOnExit;
         }
 
-        public SettingHelper Settings { get; } = new SettingHelper(new DatabaseContext());
+        public SettingHelper Settings { get; } = new(new DatabaseContext());
 
         public string BackupDirectory
         {
@@ -39,6 +41,21 @@
                 this.backupDirectory = value;
                 this.Settings.BackupDirectory = value;
                 this.OnPropertyChanged(nameof(this.BackupDirectory));
+            }
+        }
+
+        public bool BackupOnExit
+        {
+            get
+            {
+                return this.backupOnExit;
+            }
+
+            set
+            {
+                this.backupOnExit = value;
+                this.Settings.BackupOnExit = value;
+                this.OnPropertyChanged(nameof(this.BackupOnExit));
             }
         }
 

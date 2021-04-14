@@ -11,13 +11,18 @@
     Title="Skladové Karty"
     Width="1250"
     Height="800"
+    Closing="Window_Closing"
     mc:Ignorable="d">
 
     <Window.Resources>
         <vm:MainViewModel x:Key="vm" />
     </Window.Resources>
 
-    <DockPanel DataContext="{StaticResource vm}">
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+
+    <DockPanel>
         <StatusBar DockPanel.Dock="Bottom" Style="{StaticResource statusBarStyle}">
             <StatusBarItem>
                 <TextBlock Text="{Binding LastActionStatus}" />

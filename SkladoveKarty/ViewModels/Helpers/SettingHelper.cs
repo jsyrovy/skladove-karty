@@ -7,13 +7,17 @@
     public class SettingHelper
     {
         private const string BackupDirectoryKey = "BACKUP-DIRECTORY";
+        private const string BackupOnExitKey = "BACKUP-ON-EXIT";
+
         private readonly IDatabaseContext databaseContext;
         private string backupDirectory;
+        private bool backupOnExit;
 
         public SettingHelper(IDatabaseContext databaseContext)
         {
             this.databaseContext = databaseContext;
             this.backupDirectory = GetSetting(this.databaseContext, BackupDirectoryKey)?.Value;
+            this.backupOnExit = GetBoolValue(this.databaseContext, BackupOnExitKey);
         }
 
         public string BackupDirectory
@@ -27,6 +31,20 @@
             {
                 this.backupDirectory = value;
                 SaveValue(this.databaseContext, BackupDirectoryKey, value);
+            }
+        }
+
+        public bool BackupOnExit
+        {
+            get
+            {
+                return this.backupOnExit;
+            }
+
+            set
+            {
+                this.backupOnExit = value;
+                SaveValue(this.databaseContext, BackupOnExitKey, value);
             }
         }
 
@@ -48,7 +66,6 @@
             if (setting != null)
             {
                 setting.Value = value.ToString();
-                return;
             }
             else
             {
