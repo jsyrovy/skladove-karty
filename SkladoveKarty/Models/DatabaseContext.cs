@@ -4,7 +4,7 @@
 
     public class DatabaseContext : DbContext, IDatabaseContext
     {
-        private const string DefaultValueSql = "DATETIME()";
+        private const string DefaultDateTimeValueSql = "DATETIME()";
         private const string DatabaseName = "data.sqlite";
 
         private ModelBuilder modelBuilder;
@@ -63,14 +63,14 @@
 
         private void CreateDefaults()
         {
-            this.modelBuilder.Entity<StorageCard>().Property(b => b.DateTime).HasDefaultValueSql(DefaultValueSql);
-            this.modelBuilder.Entity<Category>().Property(b => b.DateTime).HasDefaultValueSql(DefaultValueSql);
-            this.modelBuilder.Entity<Store>().Property(b => b.DateTime).HasDefaultValueSql(DefaultValueSql);
-            this.modelBuilder.Entity<Account>().Property(b => b.DateTime).HasDefaultValueSql(DefaultValueSql);
-            this.modelBuilder.Entity<Supplier>().Property(b => b.DateTime).HasDefaultValueSql(DefaultValueSql);
-            this.modelBuilder.Entity<StorageCardSupplier>().Property(b => b.DateTime).HasDefaultValueSql(DefaultValueSql);
-            this.modelBuilder.Entity<Item>().Property(b => b.DateTime).HasDefaultValueSql(DefaultValueSql);
-            this.modelBuilder.Entity<Customer>().Property(b => b.DateTime).HasDefaultValueSql(DefaultValueSql);
+            this.modelBuilder.Entity<StorageCard>().Property(b => b.DateTime).HasDefaultValueSql(DefaultDateTimeValueSql);
+            this.modelBuilder.Entity<Category>().Property(b => b.DateTime).HasDefaultValueSql(DefaultDateTimeValueSql);
+            this.modelBuilder.Entity<Store>().Property(b => b.DateTime).HasDefaultValueSql(DefaultDateTimeValueSql);
+            this.modelBuilder.Entity<Account>().Property(b => b.DateTime).HasDefaultValueSql(DefaultDateTimeValueSql);
+            this.modelBuilder.Entity<Supplier>().Property(b => b.DateTime).HasDefaultValueSql(DefaultDateTimeValueSql);
+            this.modelBuilder.Entity<StorageCardSupplier>().Property(b => b.DateTime).HasDefaultValueSql(DefaultDateTimeValueSql);
+            this.modelBuilder.Entity<Item>().Property(b => b.DateTime).HasDefaultValueSql(DefaultDateTimeValueSql);
+            this.modelBuilder.Entity<Customer>().Property(b => b.DateTime).HasDefaultValueSql(DefaultDateTimeValueSql);
         }
     }
 }
