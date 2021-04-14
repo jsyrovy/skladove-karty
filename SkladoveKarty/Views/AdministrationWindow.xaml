@@ -311,25 +311,13 @@
                 Grid.Row="8"
                 Grid.Column="0"
                 Grid.ColumnSpan="2">
-                <StackPanel DockPanel.Dock="Right" Style="{StaticResource stackPanelStyle}">
-                    <Button
-                        Margin="5,0,5,5"
-                        Command="{Binding ImportCommand}"
-                        Content="Importovat data"
-                        Style="{StaticResource buttonLinkStyle}" />
 
-                    <Button
-                        Margin="5,0,5,5"
-                        Command="{Binding ExportCommand}"
-                        Content="Exportovat data"
-                        Style="{StaticResource buttonLinkStyle}" />
-
-                    <Button
-                        Margin="5,0,5,5"
-                        Command="{Binding SaveChangesAdministrationCommand}"
-                        Content="Uložit změny"
-                        Style="{StaticResource buttonInfoStyle}" />
-                </StackPanel>
+                <Button
+                    Margin="5,0,5,5"
+                    Command="{Binding SaveChangesAdministrationCommand}"
+                    Content="Uložit změny"
+                    DockPanel.Dock="Right"
+                    Style="{StaticResource buttonInfoStyle}" />
 
                 <StackPanel DataContext="{Binding NewCustomer}" Style="{StaticResource stackPanelStyle}">
                     <TextBox
