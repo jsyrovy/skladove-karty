@@ -26,47 +26,35 @@
         }
 
         [Test]
-        public void GetBoolValue_ValueDoesntExist_ReturnFalse()
+        [TestCase(typeof(string))]
+        [TestCase(typeof(bool))]
+        public void GetValue_ValueDoesntExist_ReturnDefault<T>(T type)
         {
-            var result = SettingHelper.GetBoolValue(this.context, "not-exists");
+            var result = SettingHelper.GetValue<T>(this.context, "not-exists");
 
-            Assert.That(result, Is.False);
+            Assert.That(result, Is.EqualTo(default(T)));
         }
 
         [Test]
-        public void GetBoolValue_ValueIsFalse_ReturnFalse()
-        {
-            var setting = new Setting()
-            {
-                Name = "name",
-                Value = "false",
-            };
-            this.context.Settings.Add(setting);
-            this.context.SaveChanges();
-
-            var result = SettingHelper.GetBoolValue(this.context, setting.Name);
-
-            Assert.That(result, Is.False);
-        }
-
-        [Test]
-        public void GetBoolValue_ValueIsTrue_ReturnTrue()
+        [TestCase(typeof(string))]
+        [TestCase(typeof(bool))]
+        public void GetValue_ValueIsDefault_ReturnDefault<T>(T type)
         {
             var setting = new Setting()
             {
                 Name = "name",
-                Value = "TRUE",
+                Value = default(T)?.ToString(),
             };
             this.context.Settings.Add(setting);
             this.context.SaveChanges();
 
-            var result = SettingHelper.GetBoolValue(this.context, setting.Name);
+            var result = SettingHelper.GetValue<T>(this.context, setting.Name);
 
-            Assert.That(result, Is.True);
+            Assert.That(result, Is.EqualTo(default(T)));
         }
 
         [Test]
-        public void GetBoolValue_ValueIsntBoolean_ThrowException()
+        public void GetValue_ValueIsntBoolean_ThrowException()
         {
             var setting = new Setting()
             {
@@ -76,7 +64,7 @@
             this.context.Settings.Add(setting);
             this.context.SaveChanges();
 
-            Assert.Throws<InvalidOperationException>(() => SettingHelper.GetBoolValue(this.context, setting.Name));
+            Assert.Throws<FormatException>(() => SettingHelper.GetValue<bool>(this.context, setting.Name));
         }
 
         [Test]

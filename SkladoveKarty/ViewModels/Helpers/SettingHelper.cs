@@ -16,8 +16,8 @@
         public SettingHelper(IDatabaseContext databaseContext)
         {
             this.databaseContext = databaseContext;
-            this.backupDirectory = GetSetting(this.databaseContext, BackupDirectoryKey)?.Value;
-            this.backupOnExit = GetBoolValue(this.databaseContext, BackupOnExitKey);
+            this.backupDirectory = GetValue<string>(this.databaseContext, BackupDirectoryKey);
+            this.backupOnExit = GetValue<bool>(this.databaseContext, BackupOnExitKey);
         }
 
         public string BackupDirectory
@@ -48,15 +48,13 @@
             }
         }
 
-        public static bool GetBoolValue(IDatabaseContext databaseContext, string name)
+        public static T GetValue<T>(IDatabaseContext databaseContext, string name)
         {
             var setting = GetSetting(databaseContext, name);
 
-            if (setting == null) return false;
+            if (setting == null) return default;
 
-            if (bool.TryParse(setting.Value, out bool result)) return result;
-
-            throw new InvalidOperationException($"'{name}' value isn't boolean.");
+            return (T)Convert.ChangeType(setting.Value, typeof(T));
         }
 
         public static void SaveValue<T>(IDatabaseContext databaseContext, string name, T value)
