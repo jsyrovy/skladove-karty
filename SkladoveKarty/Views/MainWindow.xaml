@@ -49,16 +49,18 @@
             </Grid.ColumnDefinitions>
 
             <DockPanel Grid.Row="0" Grid.Column="0">
-                <Button
-                    Command="{Binding ShowAdministrationCommand}"
-                    Content="Administrace"
-                    DockPanel.Dock="Right"
-                    Style="{StaticResource buttonLinkStyle}" />
+                <StackPanel DockPanel.Dock="Right" Style="{StaticResource stackPanelStyle}">
+                    <Button
+                        Command="{Binding ShowAdministrationCommand}"
+                        Content="Administrace"
+                        Style="{StaticResource buttonLinkStyle}" />
+                    <Button
+                        Command="{Binding ShowSettingsCommand}"
+                        Content="Nastavení"
+                        Style="{StaticResource buttonLinkStyle}" />
+                </StackPanel>
 
-                <StackPanel
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Style="{StaticResource stackPanelStyle}">
+                <StackPanel Style="{StaticResource stackPanelStyle}">
                     <TextBlock Style="{StaticResource textBlockStyle}" Text="Název:" />
 
                     <ComboBox

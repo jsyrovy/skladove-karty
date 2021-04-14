@@ -15,6 +15,11 @@
             this.AdministrationViewModel = viewModel;
         }
 
+        public BaseCommand(SettingsViewModel viewModel)
+        {
+            this.SettingsViewModel = viewModel;
+        }
+
         public BaseCommand(SuppliersViewModel viewModel)
         {
             this.SuppliersViewModel = viewModel;
@@ -29,6 +34,8 @@
         protected MainViewModel MainViewModel { get; private set; }
 
         protected AdministrationViewModel AdministrationViewModel { get; private set; }
+
+        protected SettingsViewModel SettingsViewModel { get; private set; }
 
         protected SuppliersViewModel SuppliersViewModel { get; private set; }
 
