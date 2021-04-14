@@ -6,8 +6,8 @@
 
     public class SettingHelper
     {
-        private const string BackupDirectoryKey = "BACKUP-DIRECTORY";
-        private const string BackupOnExitKey = "BACKUP-ON-EXIT";
+        public const string BackupDirectoryName = "BACKUP-DIRECTORY";
+        public const string BackupOnExitName = "BACKUP-ON-EXIT";
 
         private readonly IDatabaseContext databaseContext;
         private string backupDirectory;
@@ -16,8 +16,9 @@
         public SettingHelper(IDatabaseContext databaseContext)
         {
             this.databaseContext = databaseContext;
-            this.backupDirectory = GetValue<string>(this.databaseContext, BackupDirectoryKey);
-            this.backupOnExit = GetValue<bool>(this.databaseContext, BackupOnExitKey);
+
+            this.backupDirectory = this.GetValue<string>(BackupDirectoryName);
+            this.backupOnExit = this.GetValue<bool>(BackupOnExitName);
         }
 
         public string BackupDirectory
@@ -30,7 +31,7 @@
             set
             {
                 this.backupDirectory = value;
-                SaveValue(this.databaseContext, BackupDirectoryKey, value);
+                this.SaveValue(BackupDirectoryName, value);
             }
         }
 
@@ -44,22 +45,27 @@
             set
             {
                 this.backupOnExit = value;
-                SaveValue(this.databaseContext, BackupOnExitKey, value);
+                this.SaveValue(BackupOnExitName, value);
             }
         }
 
-        public static T GetValue<T>(IDatabaseContext databaseContext, string name)
+        private T GetValue<T>(string name)
         {
-            var setting = GetSetting(databaseContext, name);
+            var setting = this.GetSetting(name);
 
             if (setting == null) return default;
 
             return (T)Convert.ChangeType(setting.Value, typeof(T));
         }
 
-        public static void SaveValue<T>(IDatabaseContext databaseContext, string name, T value)
+        private Setting GetSetting(string name)
         {
-            var setting = GetSetting(databaseContext, name);
+            return this.databaseContext.Settings.Where(s => s.Name == name).SingleOrDefault();
+        }
+
+        private void SaveValue<T>(string name, T value)
+        {
+            var setting = this.GetSetting(name);
 
             if (setting != null)
             {
@@ -73,15 +79,10 @@
                     Value = value.ToString(),
                 };
 
-                databaseContext.Settings.Add(setting);
+                this.databaseContext.Settings.Add(setting);
             }
 
-            databaseContext.SaveChanges();
-        }
-
-        private static Setting GetSetting(IDatabaseContext databaseContext, string name)
-        {
-            return databaseContext.Settings.Where(s => s.Name == name).SingleOrDefault();
+            this.databaseContext.SaveChanges();
         }
     }
 }

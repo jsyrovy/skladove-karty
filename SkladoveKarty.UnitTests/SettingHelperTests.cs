@@ -26,75 +26,101 @@
         }
 
         [Test]
-        [TestCase(typeof(string))]
-        [TestCase(typeof(bool))]
-        public void GetValue_ValueDoesntExist_ReturnDefault<T>(T type)
+        public void BackupDirectory_SettingDoesntExist_GetDefaultPath()
         {
-            var result = SettingHelper.GetValue<T>(this.context, "not-exists");
+            var helper = new SettingHelper(this.context);
 
-            Assert.That(result, Is.EqualTo(default(T)));
+            Assert.That(helper.BackupDirectory, Is.EqualTo(FileHelper.DefaultBackupDirectoryPath));
         }
 
         [Test]
-        [TestCase(typeof(string))]
-        [TestCase(typeof(bool))]
-        public void GetValue_ValueIsDefault_ReturnDefault<T>(T type)
+        public void BackupDirectory_SettingExists_GetPath()
         {
-            var setting = new Setting()
-            {
-                Name = "name",
-                Value = default(T)?.ToString(),
-            };
+            var setting = new Setting() { Name = SettingHelper.BackupDirectoryName, Value = "path" };
             this.context.Settings.Add(setting);
             this.context.SaveChanges();
 
-            var result = SettingHelper.GetValue<T>(this.context, setting.Name);
+            var helper = new SettingHelper(this.context);
 
-            Assert.That(result, Is.EqualTo(default(T)));
+            Assert.That(helper.BackupDirectory, Is.EqualTo(setting.Value));
         }
 
         [Test]
-        public void GetValue_ValueIsntBoolean_ThrowException()
+        public void BackupOnExit_SettingDoesntExist_GetDefaultValue()
         {
-            var setting = new Setting()
-            {
-                Name = "name",
-                Value = "not-bool",
-            };
+            var helper = new SettingHelper(this.context);
+
+            Assert.That(helper.BackupOnExit, Is.False);
+        }
+
+        [Test]
+        public void BackupOnExit_SettingValueIsTrue_GetTrue()
+        {
+            var setting = new Setting() { Name = SettingHelper.BackupOnExitName, Value = "true" };
             this.context.Settings.Add(setting);
             this.context.SaveChanges();
 
-            Assert.Throws<FormatException>(() => SettingHelper.GetValue<bool>(this.context, setting.Name));
+            var helper = new SettingHelper(this.context);
+
+            Assert.That(helper.BackupOnExit, Is.True);
         }
 
         [Test]
-        public void SaveValue_SettingDoesntExist_CreateSetting()
+        public void BackupDirectory_SettingDoesntExist_SetPath()
         {
-            var value = true;
-            SettingHelper.SaveValue(this.context, "name", value);
-            this.context.SaveChanges();
-            var result = this.context.Settings.Single();
-
-            Assert.That(result.Value, Is.EqualTo(value.ToString()));
-        }
-
-        [Test]
-        public void SaveValue_SettingExists_UpdateSetting()
-        {
-            var setting = new Setting()
+            _ = new SettingHelper(this.context)
             {
-                Name = "name",
-                Value = "false",
+                BackupDirectory = "path",
             };
-            this.context.Settings.Add(setting);
-            this.context.SaveChanges();
-            var newValue = true;
 
-            SettingHelper.SaveValue(this.context, setting.Name, newValue);
-            this.context.SaveChanges();
-            var result = this.context.Settings.Single();
+            var result = this.context.Settings.Single().Value;
 
-            Assert.That(result.Value, Is.EqualTo(newValue.ToString()));
+            Assert.That(result, Is.EqualTo("path"));
+        }
+
+        [Test]
+        public void BackupDirectory_SettingExists_SetPath()
+        {
+            this.context.Settings.Add(new() { Name = SettingHelper.BackupDirectoryName, Value = "init" });
+            this.context.SaveChanges();
+
+            _ = new SettingHelper(this.context)
+            {
+                BackupDirectory = "path",
+            };
+
+            var result = this.context.Settings.Single().Value;
+
+            Assert.That(result, Is.EqualTo("path"));
+        }
+
+        [Test]
+        public void BackupOnExit_SettingDoesntExist_SetValue()
+        {
+            _ = new SettingHelper(this.context)
+            {
+                BackupOnExit = true,
+            };
+
+            var result = this.context.Settings.Single().Value;
+
+            Assert.That(result, Is.EqualTo("True"));
+        }
+
+        [Test]
+        public void BackupOnExit_SettingExists_SetValue()
+        {
+            this.context.Settings.Add(new() { Name = SettingHelper.BackupOnExitName, Value = "false" });
+            this.context.SaveChanges();
+
+            _ = new SettingHelper(this.context)
+            {
+                BackupOnExit = true,
+            };
+
+            var result = this.context.Settings.Single().Value;
+
+            Assert.That(result, Is.EqualTo("True"));
         }
     }
 }
