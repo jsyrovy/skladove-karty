@@ -4,9 +4,9 @@
     using System.Windows;
     using SkladoveKarty.ViewModels.Helpers;
 
-    public class ExportCommand : BaseCommand
+    public class BackupCommand : BaseCommand
     {
-        public ExportCommand(SettingsViewModel viewModel)
+        public BackupCommand(SettingsViewModel viewModel)
             : base(viewModel)
         {
         }
@@ -15,17 +15,17 @@
         {
             try
             {
-                FileHelper.CreateDirectory(FileHelper.ExportDirectoryPath);
+                FileHelper.CreateDirectory(this.SettingsViewModel.BackupDirectory);
 
                 FileHelper.WriteCsv(
-                    FileHelper.ExportItemsFilePath,
+                    FileHelper.GetFilePathWithTimestamp("items", ".csv", this.SettingsViewModel.BackupDirectory),
                     ExportHelper.GetExportItems(this.SettingsViewModel.Database.GetStorageCards()));
 
                 FileHelper.WriteCsv(
-                    FileHelper.ExportSuppliersFilePath,
+                    FileHelper.GetFilePathWithTimestamp("suppliers", ".csv", this.SettingsViewModel.BackupDirectory),
                     ExportHelper.GetExportSuppliers(this.SettingsViewModel.Database.GetStorageCardSuppliers()));
 
-                this.SettingsViewModel.LastActionStatus = $"Data byly exportovány do '{FileHelper.ExportDirectoryPath}'.";
+                this.SettingsViewModel.LastActionStatus = $"Data byly zálohovány do '{this.SettingsViewModel.BackupDirectory}'.";
             }
             catch (Exception e)
             {

@@ -32,14 +32,18 @@
 
         public static string StorageCardTemplateFilePath => Path.Combine(TemplatesDirectoryPath, StorageCardTemplateFileName);
 
-        public static string GetExportStarageCardFilePath(string storageCardName)
+        public static string DefaultBackupDirectoryPath => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "backup");
+
+        public static string GetFilePathWithTimestamp(string fileName, string fileExtension, string directoryPath = null)
         {
-            return Path.Combine(Path.GetTempPath(), $"{GetValidFileName(storageCardName)}_{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.html");
+            return Path.Combine(
+                directoryPath ?? Path.GetTempPath(),
+                $"{GetValidFileName(fileName)}_{DateTime.Now:yyyy-MM-dd-HH-mm-ss}{fileExtension}");
         }
 
-        public static void CreateExportDirectory()
+        public static void CreateDirectory(string path)
         {
-            Directory.CreateDirectory(ExportDirectoryPath);
+            Directory.CreateDirectory(path);
         }
 
         public static bool DirectoryExists(string path)

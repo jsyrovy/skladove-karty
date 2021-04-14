@@ -4,8 +4,32 @@
     using System.Linq;
     using SkladoveKarty.Models;
 
-    public static class SettingHelper
+    public class SettingHelper
     {
+        private const string BackupDirectoryKey = "BACKUP-DIRECTORY";
+        private readonly IDatabaseContext databaseContext;
+        private string backupDirectory;
+
+        public SettingHelper(IDatabaseContext databaseContext)
+        {
+            this.databaseContext = databaseContext;
+            this.backupDirectory = GetSetting(this.databaseContext, BackupDirectoryKey)?.Value;
+        }
+
+        public string BackupDirectory
+        {
+            get
+            {
+                return this.backupDirectory ?? FileHelper.DefaultBackupDirectoryPath;
+            }
+
+            set
+            {
+                this.backupDirectory = value;
+                SaveValue(this.databaseContext, BackupDirectoryKey, value);
+            }
+        }
+
         public static bool GetBoolValue(IDatabaseContext databaseContext, string name)
         {
             var setting = GetSetting(databaseContext, name);
@@ -26,14 +50,18 @@
                 setting.Value = value.ToString();
                 return;
             }
-
-            setting = new()
+            else
             {
-                Name = name,
-                Value = value.ToString(),
-            };
+                setting = new()
+                {
+                    Name = name,
+                    Value = value.ToString(),
+                };
 
-            databaseContext.Settings.Add(setting);
+                databaseContext.Settings.Add(setting);
+            }
+
+            databaseContext.SaveChanges();
         }
 
         private static Setting GetSetting(IDatabaseContext databaseContext, string name)

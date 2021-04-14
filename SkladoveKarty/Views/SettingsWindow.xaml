@@ -26,6 +26,9 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
@@ -52,6 +55,44 @@
                 <Button
                     Command="{Binding ExportCommand}"
                     Content="Exportovat data"
+                    Style="{StaticResource buttonLinkStyle}" />
+            </StackPanel>
+
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                Style="{StaticResource textBlockHeaderStyle}"
+                Text="Zálohy" />
+
+            <StackPanel
+                Grid.Row="3"
+                Grid.Column="0"
+                Style="{StaticResource stackPanelStyle}">
+
+                <TextBlock Style="{StaticResource textBlockStyle}" Text="Umístění záloh:" />
+
+                <TextBlock Style="{StaticResource textBlockStyle}" Text="{Binding BackupDirectory}" />
+            </StackPanel>
+
+            <StackPanel
+                Grid.Row="4"
+                Grid.Column="0"
+                Style="{StaticResource stackPanelStyle}">
+
+                <Button
+                    Command="{Binding BackupCommand}"
+                    Content="Zálohovat"
+                    Style="{StaticResource buttonLinkStyle}" />
+
+                <Button
+                    Command="{Binding SetBackupDirectoryCommand}"
+                    Content="Vybrat složku"
+                    Style="{StaticResource buttonLinkStyle}" />
+
+                <Button
+                    Command="{Binding OpenPathCommand}"
+                    CommandParameter="{Binding BackupDirectory}"
+                    Content="Otevřít složku"
                     Style="{StaticResource buttonLinkStyle}" />
             </StackPanel>
         </Grid>
