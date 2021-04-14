@@ -50,8 +50,8 @@
 
             <DockPanel Grid.Row="0" Grid.Column="0">
                 <Button
-                    Command="{Binding ShowSettingsCommand}"
-                    Content="Nastavení"
+                    Command="{Binding ShowAdministrationCommand}"
+                    Content="Administrace"
                     DockPanel.Dock="Right"
                     Style="{StaticResource buttonLinkStyle}" />
 

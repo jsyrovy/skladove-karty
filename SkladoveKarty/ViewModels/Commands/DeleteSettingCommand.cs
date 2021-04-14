@@ -7,7 +7,7 @@
 
     public class DeleteSettingCommand : BaseCommand
     {
-        public DeleteSettingCommand(SettingsViewModel viewModel)
+        public DeleteSettingCommand(AdministrationViewModel viewModel)
             : base(viewModel)
         {
         }
@@ -18,40 +18,40 @@
             {
                 if (parameter is Account account)
                 {
-                    this.SettingsViewModel.Database.DeleteAccount(account);
-                    this.SettingsViewModel.LoadAccountsAsync();
-                    this.SettingsViewModel.LastActionStatus = "Účet byl smazán.";
+                    this.AdministrationViewModel.Database.DeleteAccount(account);
+                    this.AdministrationViewModel.LoadAccountsAsync();
+                    this.AdministrationViewModel.LastActionStatus = "Účet byl smazán.";
                 }
 
                 if (parameter is Category category)
                 {
-                    this.SettingsViewModel.Database.DeleteCategory(category);
-                    this.SettingsViewModel.LoadCategoriesAsync();
-                    this.SettingsViewModel.LastActionStatus = "Kategorie byla smazána.";
+                    this.AdministrationViewModel.Database.DeleteCategory(category);
+                    this.AdministrationViewModel.LoadCategoriesAsync();
+                    this.AdministrationViewModel.LastActionStatus = "Kategorie byla smazána.";
                 }
 
                 if (parameter is Customer customer)
                 {
-                    this.SettingsViewModel.Database.DeleteCustomer(customer);
-                    this.SettingsViewModel.LoadCustomersAsync();
-                    this.SettingsViewModel.LastActionStatus = "Zákazník byl smazán.";
+                    this.AdministrationViewModel.Database.DeleteCustomer(customer);
+                    this.AdministrationViewModel.LoadCustomersAsync();
+                    this.AdministrationViewModel.LastActionStatus = "Zákazník byl smazán.";
                 }
 
                 if (parameter is Store store)
                 {
-                    this.SettingsViewModel.Database.DeleteStore(store);
-                    this.SettingsViewModel.LoadStoresAsync();
-                    this.SettingsViewModel.LastActionStatus = "Sklad byl smazán.";
+                    this.AdministrationViewModel.Database.DeleteStore(store);
+                    this.AdministrationViewModel.LoadStoresAsync();
+                    this.AdministrationViewModel.LastActionStatus = "Sklad byl smazán.";
                 }
 
                 if (parameter is Supplier supplier)
                 {
-                    this.SettingsViewModel.Database.DeleteSupplier(supplier);
-                    this.SettingsViewModel.LoadSuppliersAsync();
-                    this.SettingsViewModel.LastActionStatus = "Dodavatel byl smazán.";
+                    this.AdministrationViewModel.Database.DeleteSupplier(supplier);
+                    this.AdministrationViewModel.LoadSuppliersAsync();
+                    this.AdministrationViewModel.LastActionStatus = "Dodavatel byl smazán.";
                 }
 
-                this.SettingsViewModel.Database.SaveChanges();
+                this.AdministrationViewModel.Database.SaveChanges();
             }
             catch (Exception e)
             {

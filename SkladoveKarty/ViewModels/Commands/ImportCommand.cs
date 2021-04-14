@@ -8,7 +8,7 @@
 
     public class ImportCommand : BaseCommand
     {
-        public ImportCommand(SettingsViewModel viewModel)
+        public ImportCommand(AdministrationViewModel viewModel)
             : base(viewModel)
         {
         }
@@ -23,7 +23,7 @@
                 if (!FileHelper.FileExists(FileHelper.ImportItemsFilePath) && !FileHelper.FileExists(FileHelper.ImportSuppliersFilePath))
                     throw new FileNotFoundException("Nenalezen žádný soubor k importu.");
 
-                var importHelper = new ImportHelper(this.SettingsViewModel.Database);
+                var importHelper = new ImportHelper(this.AdministrationViewModel.Database);
 
                 importHelper.ImportItems(
                     FileHelper.ReadCsv<ImportExportItem>(FileHelper.ImportItemsFilePath));
@@ -31,11 +31,11 @@
                 importHelper.ImportSuppliers(
                     FileHelper.ReadCsv<ImportExportSupplier>(FileHelper.ImportSuppliersFilePath));
 
-                this.SettingsViewModel.Database.SaveChanges();
+                this.AdministrationViewModel.Database.SaveChanges();
 
-                this.SettingsViewModel.LoadAllAsync();
+                this.AdministrationViewModel.LoadAllAsync();
 
-                this.SettingsViewModel.LastActionStatus = "Data byly importovány.";
+                this.AdministrationViewModel.LastActionStatus = "Data byly importovány.";
             }
             catch (Exception e)
             {

@@ -3,16 +3,16 @@
     using System.Windows;
     using SkladoveKarty.Views;
 
-    public class ShowSettingsCommand : BaseCommand
+    public class ShowAdministrationCommand : BaseCommand
     {
-        public ShowSettingsCommand(MainViewModel viewModel)
+        public ShowAdministrationCommand(MainViewModel viewModel)
             : base(viewModel)
         {
         }
 
         public override void Execute(object parameter)
         {
-            var window = new SettingsWindow
+            var window = new AdministrationWindow
             {
                 Owner = Application.Current.MainWindow,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,

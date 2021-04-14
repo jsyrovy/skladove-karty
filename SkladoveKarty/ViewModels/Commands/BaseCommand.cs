@@ -10,9 +10,9 @@
             this.MainViewModel = viewModel;
         }
 
-        public BaseCommand(SettingsViewModel viewModel)
+        public BaseCommand(AdministrationViewModel viewModel)
         {
-            this.SettingsViewModel = viewModel;
+            this.AdministrationViewModel = viewModel;
         }
 
         public BaseCommand(SuppliersViewModel viewModel)
@@ -28,7 +28,7 @@
 
         protected MainViewModel MainViewModel { get; private set; }
 
-        protected SettingsViewModel SettingsViewModel { get; private set; }
+        protected AdministrationViewModel AdministrationViewModel { get; private set; }
 
         protected SuppliersViewModel SuppliersViewModel { get; private set; }
 

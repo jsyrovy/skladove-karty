@@ -7,7 +7,7 @@
     using SkladoveKarty.Models;
     using SkladoveKarty.ViewModels.Commands;
 
-    public class SettingsViewModel : BaseViewModel
+    public class AdministrationViewModel : BaseViewModel
     {
         private Account newAccount;
         private Category newCategory;
@@ -20,7 +20,7 @@
         private Store selectedStore;
         private Supplier selectedSupplier;
 
-        public SettingsViewModel()
+        public AdministrationViewModel()
         {
             if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
                 return;
@@ -31,7 +31,7 @@
             this.AddStoreCommand = new AddStoreCommand(this);
             this.AddSupplierCommand = new AddSupplierCommand(this);
 
-            this.SaveChangesSettingsCommand = new SaveChangesSettingsCommand(this);
+            this.SaveChangesAdministrationCommand = new SaveChangesAdministrationCommand(this);
 
             this.DeleteSettingCommand = new DeleteSettingCommand(this);
 
@@ -207,7 +207,7 @@
 
         public AddSupplierCommand AddSupplierCommand { get; set; }
 
-        public SaveChangesSettingsCommand SaveChangesSettingsCommand { get; set; }
+        public SaveChangesAdministrationCommand SaveChangesAdministrationCommand { get; set; }
 
         public DeleteSettingCommand DeleteSettingCommand { get; set; }
 

@@ -6,7 +6,7 @@
 
     public class ExportCommand : BaseCommand
     {
-        public ExportCommand(SettingsViewModel viewModel)
+        public ExportCommand(AdministrationViewModel viewModel)
             : base(viewModel)
         {
         }
@@ -19,13 +19,13 @@
 
                 FileHelper.WriteCsv(
                     FileHelper.ExportItemsFilePath,
-                    ExportHelper.GetExportItems(this.SettingsViewModel.Database.GetStorageCards()));
+                    ExportHelper.GetExportItems(this.AdministrationViewModel.Database.GetStorageCards()));
 
                 FileHelper.WriteCsv(
                     FileHelper.ExportSuppliersFilePath,
-                    ExportHelper.GetExportSuppliers(this.SettingsViewModel.Database.GetStorageCardSuppliers()));
+                    ExportHelper.GetExportSuppliers(this.AdministrationViewModel.Database.GetStorageCardSuppliers()));
 
-                this.SettingsViewModel.LastActionStatus = $"Data byly exportovány do '{FileHelper.ExportDirectoryPath}'.";
+                this.AdministrationViewModel.LastActionStatus = $"Data byly exportovány do '{FileHelper.ExportDirectoryPath}'.";
             }
             catch (Exception e)
             {

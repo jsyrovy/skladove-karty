@@ -2,9 +2,9 @@
 {
     using System.Windows;
 
-    public partial class SettingsWindow : Window
+    public partial class AdministrationWindow : Window
     {
-        public SettingsWindow()
+        public AdministrationWindow()
         {
             this.InitializeComponent();
         }

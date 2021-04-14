@@ -4,7 +4,7 @@
 
     public class AddCategoryCommand : BaseCommand
     {
-        public AddCategoryCommand(SettingsViewModel viewModel)
+        public AddCategoryCommand(AdministrationViewModel viewModel)
             : base(viewModel)
         {
         }
@@ -16,12 +16,12 @@
 
         public override void Execute(object parameter)
         {
-            this.SettingsViewModel.NewCategory.DateTime = DateTime.Now;
-            this.SettingsViewModel.Database.Add(this.SettingsViewModel.NewCategory);
-            this.SettingsViewModel.Database.SaveChanges();
-            this.SettingsViewModel.LoadCategoriesAsync(this.SettingsViewModel.NewCategory);
-            this.SettingsViewModel.NewCategory = new();
-            this.SettingsViewModel.LastActionStatus = "Kategorie byla přidána.";
+            this.AdministrationViewModel.NewCategory.DateTime = DateTime.Now;
+            this.AdministrationViewModel.Database.Add(this.AdministrationViewModel.NewCategory);
+            this.AdministrationViewModel.Database.SaveChanges();
+            this.AdministrationViewModel.LoadCategoriesAsync(this.AdministrationViewModel.NewCategory);
+            this.AdministrationViewModel.NewCategory = new();
+            this.AdministrationViewModel.LastActionStatus = "Kategorie byla přidána.";
         }
     }
 }

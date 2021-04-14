@@ -4,7 +4,7 @@
 
     public class AddStoreCommand : BaseCommand
     {
-        public AddStoreCommand(SettingsViewModel viewModel)
+        public AddStoreCommand(AdministrationViewModel viewModel)
             : base(viewModel)
         {
         }
@@ -16,12 +16,12 @@
 
         public override void Execute(object parameter)
         {
-            this.SettingsViewModel.NewStore.DateTime = DateTime.Now;
-            this.SettingsViewModel.Database.Add(this.SettingsViewModel.NewStore);
-            this.SettingsViewModel.Database.SaveChanges();
-            this.SettingsViewModel.LoadStoresAsync(this.SettingsViewModel.NewStore);
-            this.SettingsViewModel.NewStore = new();
-            this.SettingsViewModel.LastActionStatus = "Sklad byl přidán.";
+            this.AdministrationViewModel.NewStore.DateTime = DateTime.Now;
+            this.AdministrationViewModel.Database.Add(this.AdministrationViewModel.NewStore);
+            this.AdministrationViewModel.Database.SaveChanges();
+            this.AdministrationViewModel.LoadStoresAsync(this.AdministrationViewModel.NewStore);
+            this.AdministrationViewModel.NewStore = new();
+            this.AdministrationViewModel.LastActionStatus = "Sklad byl přidán.";
         }
     }
 }

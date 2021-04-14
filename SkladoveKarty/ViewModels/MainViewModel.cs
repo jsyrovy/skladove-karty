@@ -29,7 +29,7 @@
             this.AddItemCommand = new AddItemCommand(this);
             this.DeleteItemCommand = new DeleteItemCommand(this);
             this.SaveChangesMainCommand = new SaveChangesMainCommand(this);
-            this.ShowSettingsCommand = new ShowSettingsCommand(this);
+            this.ShowAdministrationCommand = new ShowAdministrationCommand(this);
             this.ShowSuppliersCommand = new ShowSuppliersCommand(this);
             this.CreateStorageCardCommand = new CreateStorageCardCommand(this);
             this.DeleteStorageCardCommand = new DeleteStorageCardCommand(this);
@@ -60,7 +60,7 @@
 
         public SaveChangesMainCommand SaveChangesMainCommand { get; set; }
 
-        public ShowSettingsCommand ShowSettingsCommand { get; set; }
+        public ShowAdministrationCommand ShowAdministrationCommand { get; set; }
 
         public ShowSuppliersCommand ShowSuppliersCommand { get; set; }
 

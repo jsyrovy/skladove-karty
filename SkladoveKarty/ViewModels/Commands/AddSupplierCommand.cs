@@ -4,7 +4,7 @@
 
     public class AddSupplierCommand : BaseCommand
     {
-        public AddSupplierCommand(SettingsViewModel viewModel)
+        public AddSupplierCommand(AdministrationViewModel viewModel)
             : base(viewModel)
         {
         }
@@ -16,12 +16,12 @@
 
         public override void Execute(object parameter)
         {
-            this.SettingsViewModel.NewSupplier.DateTime = DateTime.Now;
-            this.SettingsViewModel.Database.Add(this.SettingsViewModel.NewSupplier);
-            this.SettingsViewModel.Database.SaveChanges();
-            this.SettingsViewModel.LoadSuppliersAsync(this.SettingsViewModel.NewSupplier);
-            this.SettingsViewModel.NewSupplier = new();
-            this.SettingsViewModel.LastActionStatus = "Sodavatel byl přidán.";
+            this.AdministrationViewModel.NewSupplier.DateTime = DateTime.Now;
+            this.AdministrationViewModel.Database.Add(this.AdministrationViewModel.NewSupplier);
+            this.AdministrationViewModel.Database.SaveChanges();
+            this.AdministrationViewModel.LoadSuppliersAsync(this.AdministrationViewModel.NewSupplier);
+            this.AdministrationViewModel.NewSupplier = new();
+            this.AdministrationViewModel.LastActionStatus = "Sodavatel byl přidán.";
         }
     }
 }

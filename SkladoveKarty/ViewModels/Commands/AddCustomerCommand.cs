@@ -4,7 +4,7 @@
 
     public class AddCustomerCommand : BaseCommand
     {
-        public AddCustomerCommand(SettingsViewModel viewModel)
+        public AddCustomerCommand(AdministrationViewModel viewModel)
             : base(viewModel)
         {
         }
@@ -16,12 +16,12 @@
 
         public override void Execute(object parameter)
         {
-            this.SettingsViewModel.NewCustomer.DateTime = DateTime.Now;
-            this.SettingsViewModel.Database.Add(this.SettingsViewModel.NewCustomer);
-            this.SettingsViewModel.Database.SaveChanges();
-            this.SettingsViewModel.LoadCustomersAsync(this.SettingsViewModel.NewCustomer);
-            this.SettingsViewModel.NewCustomer = new();
-            this.SettingsViewModel.LastActionStatus = "Zákazník byl přidán.";
+            this.AdministrationViewModel.NewCustomer.DateTime = DateTime.Now;
+            this.AdministrationViewModel.Database.Add(this.AdministrationViewModel.NewCustomer);
+            this.AdministrationViewModel.Database.SaveChanges();
+            this.AdministrationViewModel.LoadCustomersAsync(this.AdministrationViewModel.NewCustomer);
+            this.AdministrationViewModel.NewCustomer = new();
+            this.AdministrationViewModel.LastActionStatus = "Zákazník byl přidán.";
         }
     }
 }

@@ -4,7 +4,7 @@
 
     public class AddAccountCommand : BaseCommand
     {
-        public AddAccountCommand(SettingsViewModel viewModel)
+        public AddAccountCommand(AdministrationViewModel viewModel)
             : base(viewModel)
         {
         }
@@ -16,12 +16,12 @@
 
         public override void Execute(object parameter)
         {
-            this.SettingsViewModel.NewAccount.DateTime = DateTime.Now;
-            this.SettingsViewModel.Database.Add(this.SettingsViewModel.NewAccount);
-            this.SettingsViewModel.Database.SaveChanges();
-            this.SettingsViewModel.LoadAccountsAsync(this.SettingsViewModel.NewAccount);
-            this.SettingsViewModel.NewAccount = new();
-            this.SettingsViewModel.LastActionStatus = "Účet byl přidán.";
+            this.AdministrationViewModel.NewAccount.DateTime = DateTime.Now;
+            this.AdministrationViewModel.Database.Add(this.AdministrationViewModel.NewAccount);
+            this.AdministrationViewModel.Database.SaveChanges();
+            this.AdministrationViewModel.LoadAccountsAsync(this.AdministrationViewModel.NewAccount);
+            this.AdministrationViewModel.NewAccount = new();
+            this.AdministrationViewModel.LastActionStatus = "Účet byl přidán.";
         }
     }
 }
