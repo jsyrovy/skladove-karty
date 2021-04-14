@@ -1,4 +1,4 @@
-﻿namespace SkladoveKarty.UnitTests
+﻿namespace SkladoveKarty.Tests
 {
     using NUnit.Framework;
     using SkladoveKarty.ViewModels.Helpers;

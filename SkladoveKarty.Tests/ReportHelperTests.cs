@@ -1,4 +1,4 @@
-﻿namespace SkladoveKarty.UnitTests
+﻿namespace SkladoveKarty.Tests
 {
     using System.Collections.Generic;
     using NUnit.Framework;
