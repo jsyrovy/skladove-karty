@@ -105,6 +105,35 @@
                 IsChecked="{Binding BackupOnExit}"
                 Style="{StaticResource checkBoxStyle}" />
 
+            <ListView
+                Grid.Row="6"
+                Grid.Column="0"
+                ItemsSource="{Binding BackupDirectories}"
+                Style="{StaticResource listViewStyle}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Název">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Style="{StaticResource textBlockStyle}" Text="{Binding .}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button
+                                        Command="{Binding Source={StaticResource vm}, Path=RestoreCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Content="Obnovit"
+                                        Style="{StaticResource buttonInfoStyle}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
         </Grid>
     </DockPanel>
 </Window>

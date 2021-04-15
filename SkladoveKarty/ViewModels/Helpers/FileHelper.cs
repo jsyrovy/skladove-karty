@@ -108,19 +108,40 @@
             return name;
         }
 
-        public static string GetCurrentBackupDirectoryPath(string backupDirectoryPath = null)
+        public static string GetCurrentBackupDirectoryPath(string backupDirectoryPath)
         {
             return Path.Combine(backupDirectoryPath ?? DefaultBackupDirectoryPath, DateTime.Now.ToString(DateTimeFormat));
         }
 
-        public static string GetItemsBackupPath(string backupDirectoryPath = null)
+        public static string GetItemsBackupPath(string backupDirectoryPath)
         {
             return Path.Combine(backupDirectoryPath ?? DefaultBackupDirectoryPath, ItemsFileName);
         }
 
-        public static string GetSuppliersBackupPath(string backupDirectoryPath = null)
+        public static string GetItemsBackupPath(string backupDirectoryPath, string backupDirectory)
+        {
+            return Path.Combine(backupDirectoryPath ?? DefaultBackupDirectoryPath, backupDirectory, ItemsFileName);
+        }
+
+        public static string GetSuppliersBackupPath(string backupDirectoryPath)
         {
             return Path.Combine(backupDirectoryPath ?? DefaultBackupDirectoryPath, SuppliersFileName);
+        }
+
+        public static string GetSuppliersBackupPath(string backupDirectoryPath, string backupDirectory)
+        {
+            return Path.Combine(backupDirectoryPath ?? DefaultBackupDirectoryPath, backupDirectory, SuppliersFileName);
+        }
+
+        public static IEnumerable<string> GetBackupDirectoriesPaths(string backupDirectoryPath)
+        {
+            foreach (var directory in Directory.GetDirectories(backupDirectoryPath ?? DefaultBackupDirectoryPath).Select(d => new FileInfo(d)))
+            {
+                var files = Directory.GetFiles(directory.FullName).Select(d => new FileInfo(d).Name.ToLower());
+
+                if (files.Contains(ItemsFileName) && files.Contains(SuppliersFileName))
+                    yield return directory.Name;
+            }
         }
     }
 }

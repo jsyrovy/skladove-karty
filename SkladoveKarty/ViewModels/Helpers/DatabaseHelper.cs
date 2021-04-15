@@ -196,6 +196,18 @@
             this.databaseContext.Items.Remove(item);
         }
 
+        public void DeleteAll()
+        {
+            this.databaseContext.Items.RemoveRange(this.databaseContext.Items);
+            this.databaseContext.StorageCardSuppliers.RemoveRange(this.databaseContext.StorageCardSuppliers);
+            this.databaseContext.StorageCards.RemoveRange(this.databaseContext.StorageCards);
+            this.databaseContext.Accounts.RemoveRange(this.databaseContext.Accounts);
+            this.databaseContext.Categories.RemoveRange(this.databaseContext.Categories);
+            this.databaseContext.Customers.RemoveRange(this.databaseContext.Customers);
+            this.databaseContext.Stores.RemoveRange(this.databaseContext.Stores);
+            this.databaseContext.Suppliers.RemoveRange(this.databaseContext.Suppliers);
+        }
+
         public void SaveChanges()
         {
             this.databaseContext.SaveChanges();

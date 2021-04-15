@@ -27,6 +27,8 @@
                     FileHelper.GetSuppliersBackupPath(directory),
                     ExportHelper.GetExportSuppliers(this.SettingsViewModel.Database.GetStorageCardSuppliers()));
 
+                this.SettingsViewModel.LoadBackupDirectoriesAsync();
+
                 this.SettingsViewModel.LastActionStatus = $"Data byly zálohovány do '{directory}'.";
             }
             catch (Exception e)
