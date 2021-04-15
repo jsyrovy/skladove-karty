@@ -18,40 +18,40 @@
             {
                 if (parameter is Account account)
                 {
-                    this.AdministrationViewModel.Database.DeleteAccount(account);
+                    this.AdministrationViewModel.DatabaseHelper.DeleteAccount(account);
                     this.AdministrationViewModel.LoadAccountsAsync();
                     this.AdministrationViewModel.LastActionStatus = "Účet byl smazán.";
                 }
 
                 if (parameter is Category category)
                 {
-                    this.AdministrationViewModel.Database.DeleteCategory(category);
+                    this.AdministrationViewModel.DatabaseHelper.DeleteCategory(category);
                     this.AdministrationViewModel.LoadCategoriesAsync();
                     this.AdministrationViewModel.LastActionStatus = "Kategorie byla smazána.";
                 }
 
                 if (parameter is Customer customer)
                 {
-                    this.AdministrationViewModel.Database.DeleteCustomer(customer);
+                    this.AdministrationViewModel.DatabaseHelper.DeleteCustomer(customer);
                     this.AdministrationViewModel.LoadCustomersAsync();
                     this.AdministrationViewModel.LastActionStatus = "Zákazník byl smazán.";
                 }
 
                 if (parameter is Store store)
                 {
-                    this.AdministrationViewModel.Database.DeleteStore(store);
+                    this.AdministrationViewModel.DatabaseHelper.DeleteStore(store);
                     this.AdministrationViewModel.LoadStoresAsync();
                     this.AdministrationViewModel.LastActionStatus = "Sklad byl smazán.";
                 }
 
                 if (parameter is Supplier supplier)
                 {
-                    this.AdministrationViewModel.Database.DeleteSupplier(supplier);
+                    this.AdministrationViewModel.DatabaseHelper.DeleteSupplier(supplier);
                     this.AdministrationViewModel.LoadSuppliersAsync();
                     this.AdministrationViewModel.LastActionStatus = "Dodavatel byl smazán.";
                 }
 
-                this.AdministrationViewModel.Database.SaveChanges();
+                this.AdministrationViewModel.DatabaseHelper.SaveChanges();
             }
             catch (Exception e)
             {

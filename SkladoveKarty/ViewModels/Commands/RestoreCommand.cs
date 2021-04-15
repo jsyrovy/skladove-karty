@@ -24,9 +24,9 @@
 
             try
             {
-                this.SettingsViewModel.Database.DeleteAll();
+                this.SettingsViewModel.DatabaseHelper.DeleteAll();
 
-                var importHelper = new ImportHelper(this.SettingsViewModel.Database);
+                var importHelper = new ImportHelper(this.SettingsViewModel.DatabaseHelper);
 
                 importHelper.ImportItems(
                     FileHelper.ReadCsv<ImportExportItem>(
@@ -36,7 +36,7 @@
                     FileHelper.ReadCsv<ImportExportSupplier>(
                         FileHelper.GetSuppliersBackupPath(this.SettingsViewModel.BackupDirectory, parameter.ToString())));
 
-                this.SettingsViewModel.Database.SaveChanges();
+                this.SettingsViewModel.DatabaseHelper.SaveChanges();
             }
             catch (Exception e)
             {

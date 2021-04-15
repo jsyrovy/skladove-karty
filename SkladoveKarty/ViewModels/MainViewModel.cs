@@ -181,23 +181,23 @@
 
         public bool OnClosing()
         {
-            var settings = new SettingHelper(new DatabaseContext());
+            var settingHelper = new SettingHelper(new DatabaseContext());
 
-            if (!settings.BackupOnExit) return true;
+            if (!settingHelper.BackupOnExit) return true;
 
             try
             {
-                var directory = FileHelper.GetCurrentBackupDirectoryPath(settings.BackupDirectory);
+                var directory = FileHelper.GetCurrentBackupDirectoryPath(settingHelper.BackupDirectory);
 
                 FileHelper.CreateDirectory(directory);
 
                 FileHelper.WriteCsv(
                     FileHelper.GetItemsBackupPath(directory),
-                    ExportHelper.GetExportItems(this.Database.GetStorageCards()));
+                    ExportHelper.GetExportItems(this.DatabaseHelper.GetStorageCards()));
 
                 FileHelper.WriteCsv(
                     FileHelper.GetSuppliersBackupPath(directory),
-                    ExportHelper.GetExportSuppliers(this.Database.GetStorageCardSuppliers()));
+                    ExportHelper.GetExportSuppliers(this.DatabaseHelper.GetStorageCardSuppliers()));
             }
             catch (Exception e)
             {
@@ -244,27 +244,27 @@
                 {
                     this.Accounts.Clear();
 
-                    foreach (var account in this.Database.GetAccounts())
+                    foreach (var account in this.DatabaseHelper.GetAccounts())
                         this.Accounts.Add(account);
 
                     this.Categories.Clear();
 
-                    foreach (var category in this.Database.GetCategories())
+                    foreach (var category in this.DatabaseHelper.GetCategories())
                         this.Categories.Add(category);
 
                     this.Customers.Clear();
 
-                    foreach (var customer in this.Database.GetCustomers())
+                    foreach (var customer in this.DatabaseHelper.GetCustomers())
                         this.Customers.Add(customer);
 
                     this.StorageCards.Clear();
 
-                    foreach (var storageCard in this.Database.GetStorageCards())
+                    foreach (var storageCard in this.DatabaseHelper.GetStorageCards())
                         this.StorageCards.Add(storageCard);
 
                     this.Stores.Clear();
 
-                    foreach (var store in this.Database.GetStores())
+                    foreach (var store in this.DatabaseHelper.GetStores())
                         this.Stores.Add(store);
                 });
             });

@@ -12,10 +12,10 @@
 
         public override void Execute(object parameter)
         {
-            var storageCardSupplier = this.SuppliersViewModel.Database.GetStorageCardSupplier(
+            var storageCardSupplier = this.SuppliersViewModel.DatabaseHelper.GetStorageCardSupplier(
                 this.SuppliersViewModel.SelectedStorageCard, (Supplier)parameter);
-            this.SuppliersViewModel.Database.DeleteStorageCardSupplier(storageCardSupplier);
-            this.SuppliersViewModel.Database.SaveChanges();
+            this.SuppliersViewModel.DatabaseHelper.DeleteStorageCardSupplier(storageCardSupplier);
+            this.SuppliersViewModel.DatabaseHelper.SaveChanges();
             this.SuppliersViewModel.LoadSuppliersAsync();
             this.SuppliersViewModel.LastActionStatus = "Dodavatel byl odebrán.";
         }

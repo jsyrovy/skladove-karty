@@ -18,7 +18,7 @@
             if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
                 return;
 
-            this.Settings = new SettingHelper(new DatabaseContext());
+            this.SettingHelper = new SettingHelper(new DatabaseContext());
 
             this.ImportCommand = new ImportCommand(this);
             this.ExportCommand = new ExportCommand(this);
@@ -28,13 +28,13 @@
             this.SetBackupDirectoryCommand = new SetBackupDirectoryCommand(this);
             this.OpenPathCommand = new OpenPathCommand(this);
 
-            this.backupDirectory = this.Settings.BackupDirectory;
-            this.backupOnExit = this.Settings.BackupOnExit;
+            this.backupDirectory = this.SettingHelper.BackupDirectory;
+            this.backupOnExit = this.SettingHelper.BackupOnExit;
 
             this.LoadBackupDirectoriesAsync();
         }
 
-        public SettingHelper Settings { get; private set; }
+        public SettingHelper SettingHelper { get; private set; }
 
         public ObservableCollection<string> BackupDirectories { get; } = new();
 
@@ -48,7 +48,7 @@
             set
             {
                 this.backupDirectory = value;
-                this.Settings.BackupDirectory = value;
+                this.SettingHelper.BackupDirectory = value;
                 this.OnPropertyChanged(nameof(this.BackupDirectory));
             }
         }
@@ -63,7 +63,7 @@
             set
             {
                 this.backupOnExit = value;
-                this.Settings.BackupOnExit = value;
+                this.SettingHelper.BackupOnExit = value;
                 this.OnPropertyChanged(nameof(this.BackupOnExit));
             }
         }
@@ -93,7 +93,7 @@
                 {
                     this.BackupDirectories.Clear();
 
-                    foreach (var directory in FileHelper.GetBackupDirectoriesPaths(this.Settings.BackupDirectory))
+                    foreach (var directory in FileHelper.GetBackupDirectoriesPaths(this.SettingHelper.BackupDirectory))
                         this.BackupDirectories.Add(directory);
                 });
             });

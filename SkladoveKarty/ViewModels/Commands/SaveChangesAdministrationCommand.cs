@@ -9,7 +9,7 @@
 
         public override void Execute(object parameter)
         {
-            this.AdministrationViewModel.Database.SaveChanges();
+            this.AdministrationViewModel.DatabaseHelper.SaveChanges();
             this.AdministrationViewModel.LastActionStatus = "Položky byly aktualizovány.";
         }
     }

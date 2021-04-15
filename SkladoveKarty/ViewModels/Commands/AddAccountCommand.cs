@@ -17,8 +17,8 @@
         public override void Execute(object parameter)
         {
             this.AdministrationViewModel.NewAccount.DateTime = DateTime.Now;
-            this.AdministrationViewModel.Database.Add(this.AdministrationViewModel.NewAccount);
-            this.AdministrationViewModel.Database.SaveChanges();
+            this.AdministrationViewModel.DatabaseHelper.Add(this.AdministrationViewModel.NewAccount);
+            this.AdministrationViewModel.DatabaseHelper.SaveChanges();
             this.AdministrationViewModel.LoadAccountsAsync(this.AdministrationViewModel.NewAccount);
             this.AdministrationViewModel.NewAccount = new();
             this.AdministrationViewModel.LastActionStatus = "Účet byl přidán.";

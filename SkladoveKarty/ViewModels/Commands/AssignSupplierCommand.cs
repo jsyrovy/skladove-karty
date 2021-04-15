@@ -15,12 +15,12 @@
             var storageCardSupplier = new StorageCardSupplier
             {
                 DateTime = DateTime.Now,
-                StorageCard = this.SuppliersViewModel.Database.GetStorageCard(this.SuppliersViewModel.SelectedStorageCard.Id),
+                StorageCard = this.SuppliersViewModel.DatabaseHelper.GetStorageCard(this.SuppliersViewModel.SelectedStorageCard.Id),
                 Supplier = (Supplier)parameter,
             };
 
-            this.SuppliersViewModel.Database.Add(storageCardSupplier);
-            this.SuppliersViewModel.Database.SaveChanges();
+            this.SuppliersViewModel.DatabaseHelper.Add(storageCardSupplier);
+            this.SuppliersViewModel.DatabaseHelper.SaveChanges();
             this.SuppliersViewModel.LoadSuppliersAsync();
             this.SuppliersViewModel.LastActionStatus = "Dodavatel byl vybrán.";
         }

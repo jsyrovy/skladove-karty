@@ -19,15 +19,15 @@
         {
             if (this.MainViewModel.SelectedStorageCard?.Id == 0)
             {
-                this.MainViewModel.Database.Add(this.MainViewModel.SelectedStorageCard);
-                this.MainViewModel.Database.SaveChanges();
+                this.MainViewModel.DatabaseHelper.Add(this.MainViewModel.SelectedStorageCard);
+                this.MainViewModel.DatabaseHelper.SaveChanges();
                 this.MainViewModel.SelectedStorageCard = null;
                 this.MainViewModel.LastActionStatus = "Skladová karta byla přidána.";
                 this.MainViewModel.LoadAllAsync();
                 return;
             }
 
-            this.MainViewModel.Database.SaveChanges();
+            this.MainViewModel.DatabaseHelper.SaveChanges();
             this.MainViewModel.CalculateStorageCardReports();
             this.MainViewModel.LastActionStatus = "Položky byla aktualizovány.";
         }

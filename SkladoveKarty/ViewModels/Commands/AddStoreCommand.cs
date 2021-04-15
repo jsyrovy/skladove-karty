@@ -17,8 +17,8 @@
         public override void Execute(object parameter)
         {
             this.AdministrationViewModel.NewStore.DateTime = DateTime.Now;
-            this.AdministrationViewModel.Database.Add(this.AdministrationViewModel.NewStore);
-            this.AdministrationViewModel.Database.SaveChanges();
+            this.AdministrationViewModel.DatabaseHelper.Add(this.AdministrationViewModel.NewStore);
+            this.AdministrationViewModel.DatabaseHelper.SaveChanges();
             this.AdministrationViewModel.LoadStoresAsync(this.AdministrationViewModel.NewStore);
             this.AdministrationViewModel.NewStore = new();
             this.AdministrationViewModel.LastActionStatus = "Sklad byl přidán.";

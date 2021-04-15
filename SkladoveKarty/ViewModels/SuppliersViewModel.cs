@@ -47,7 +47,7 @@
                 {
                     this.AssignedSuppliers.Clear();
 
-                    foreach (var storageCardSupplier in this.Database.GetStorageCardSuppliers(this.SelectedStorageCard))
+                    foreach (var storageCardSupplier in this.DatabaseHelper.GetStorageCardSuppliers(this.SelectedStorageCard))
                         this.AssignedSuppliers.Add(storageCardSupplier.Supplier);
                 });
             });
@@ -61,7 +61,7 @@
                 {
                     this.AvailableSuppliers.Clear();
 
-                    foreach (var supplier in this.Database.GetSuppliers())
+                    foreach (var supplier in this.DatabaseHelper.GetSuppliers())
                     {
                         if (!this.AssignedSuppliers.Where(a => a.Id == supplier.Id).Any())
                             this.AvailableSuppliers.Add(supplier);

@@ -19,11 +19,11 @@
 
                 FileHelper.WriteCsv(
                     FileHelper.ExportItemsFilePath,
-                    ExportHelper.GetExportItems(this.SettingsViewModel.Database.GetStorageCards()));
+                    ExportHelper.GetExportItems(this.SettingsViewModel.DatabaseHelper.GetStorageCards()));
 
                 FileHelper.WriteCsv(
                     FileHelper.ExportSuppliersFilePath,
-                    ExportHelper.GetExportSuppliers(this.SettingsViewModel.Database.GetStorageCardSuppliers()));
+                    ExportHelper.GetExportSuppliers(this.SettingsViewModel.DatabaseHelper.GetStorageCardSuppliers()));
 
                 this.SettingsViewModel.LastActionStatus = $"Data byly exportovány do '{FileHelper.ExportDirectoryPath}'.";
             }

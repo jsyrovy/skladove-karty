@@ -21,11 +21,11 @@
 
                 FileHelper.WriteCsv(
                     FileHelper.GetItemsBackupPath(directory),
-                    ExportHelper.GetExportItems(this.SettingsViewModel.Database.GetStorageCards()));
+                    ExportHelper.GetExportItems(this.SettingsViewModel.DatabaseHelper.GetStorageCards()));
 
                 FileHelper.WriteCsv(
                     FileHelper.GetSuppliersBackupPath(directory),
-                    ExportHelper.GetExportSuppliers(this.SettingsViewModel.Database.GetStorageCardSuppliers()));
+                    ExportHelper.GetExportSuppliers(this.SettingsViewModel.DatabaseHelper.GetStorageCardSuppliers()));
 
                 this.SettingsViewModel.LoadBackupDirectoriesAsync();
 

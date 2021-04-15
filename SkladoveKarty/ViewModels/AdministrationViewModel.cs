@@ -250,7 +250,7 @@
                 {
                     this.Accounts.Clear();
 
-                    foreach (var account in this.Database.GetAccounts())
+                    foreach (var account in this.DatabaseHelper.GetAccounts())
                         this.Accounts.Add(account);
 
                     if (accountToSelect != null)
@@ -267,7 +267,7 @@
                 {
                     this.Categories.Clear();
 
-                    foreach (var category in this.Database.GetCategories())
+                    foreach (var category in this.DatabaseHelper.GetCategories())
                         this.Categories.Add(category);
 
                     if (categoryToSelect != null)
@@ -284,7 +284,7 @@
                 {
                     this.Customers.Clear();
 
-                    foreach (var customer in this.Database.GetCustomers())
+                    foreach (var customer in this.DatabaseHelper.GetCustomers())
                         this.Customers.Add(customer);
 
                     if (customerToSelect != null)
@@ -301,7 +301,7 @@
                 {
                     this.Stores.Clear();
 
-                    foreach (var store in this.Database.GetStores())
+                    foreach (var store in this.DatabaseHelper.GetStores())
                         this.Stores.Add(store);
 
                     if (storeToSelect != null)
@@ -318,7 +318,7 @@
                 {
                     this.Suppliers.Clear();
 
-                    foreach (var supplier in this.Database.GetSuppliers())
+                    foreach (var supplier in this.DatabaseHelper.GetSuppliers())
                         this.Suppliers.Add(supplier);
 
                     if (supplierToSelect != null)
