@@ -11,11 +11,14 @@
         public BaseViewModel()
         {
             this.DatabaseHelper = DatabaseHelper.GetInstance(new DatabaseContext());
+            this.SettingHelper = SettingHelper.GetInstance(new DatabaseContext());
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public DatabaseHelper DatabaseHelper { get; private set; }
+
+        public SettingHelper SettingHelper { get; private set; }
 
         public string LastActionStatus
         {

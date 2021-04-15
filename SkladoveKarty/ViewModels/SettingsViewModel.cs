@@ -18,8 +18,6 @@
             if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
                 return;
 
-            this.SettingHelper = new SettingHelper(new DatabaseContext());
-
             this.ImportCommand = new ImportCommand(this);
             this.ExportCommand = new ExportCommand(this);
 
@@ -33,8 +31,6 @@
 
             this.LoadBackupDirectoriesAsync();
         }
-
-        public SettingHelper SettingHelper { get; private set; }
 
         public ObservableCollection<string> BackupDirectories { get; } = new();
 

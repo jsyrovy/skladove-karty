@@ -10,6 +10,7 @@
         public const string BackupOnExitName = "BACKUP-ON-EXIT";
 
         private readonly IDatabaseContext databaseContext;
+        private static Lazy<SettingHelper> instance;
         private string backupDirectory;
         private bool backupOnExit;
 
@@ -47,6 +48,14 @@
                 this.backupOnExit = value;
                 this.SaveValue(BackupOnExitName, value);
             }
+        }
+
+        public static SettingHelper GetInstance(IDatabaseContext databaseContext)
+        {
+            if (instance == null)
+                instance = new Lazy<SettingHelper>(() => new SettingHelper(databaseContext));
+
+            return instance.Value;
         }
 
         private T GetValue<T>(string name)

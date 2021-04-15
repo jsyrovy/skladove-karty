@@ -181,13 +181,11 @@
 
         public bool OnClosing()
         {
-            var settingHelper = new SettingHelper(new DatabaseContext());
-
-            if (!settingHelper.BackupOnExit) return true;
+            if (!this.SettingHelper.BackupOnExit) return true;
 
             try
             {
-                var directory = FileHelper.GetCurrentBackupDirectoryPath(settingHelper.BackupDirectory);
+                var directory = FileHelper.GetCurrentBackupDirectoryPath(this.SettingHelper.BackupDirectory);
 
                 FileHelper.CreateDirectory(directory);
 

@@ -25,11 +25,6 @@
             return instance.Value;
         }
 
-        public static void CloseInstance()
-        {
-            instance = null;
-        }
-
         public Account GetAccount(string name, List<Account> addedAccounts = null)
         {
             return addedAccounts?.Where(a => a.Name == name).SingleOrDefault()
