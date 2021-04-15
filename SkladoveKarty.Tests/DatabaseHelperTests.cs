@@ -454,6 +454,25 @@
         }
 
         [Test]
+        public void DeleteAll_WhenCalled_DeleteAll()
+        {
+            this.AddTestData();
+
+            var databaseHelper = new DatabaseHelper(this.context);
+            databaseHelper.DeleteAll();
+            this.context.SaveChanges();
+
+            Assert.That(this.context.Accounts.Count, Is.Zero);
+            Assert.That(this.context.Categories.Count, Is.Zero);
+            Assert.That(this.context.Customers.Count, Is.Zero);
+            Assert.That(this.context.Items.Count, Is.Zero);
+            Assert.That(this.context.StorageCards.Count, Is.Zero);
+            Assert.That(this.context.StorageCardSuppliers.Count, Is.Zero);
+            Assert.That(this.context.Stores.Count, Is.Zero);
+            Assert.That(this.context.Suppliers.Count, Is.Zero);
+        }
+
+        [Test]
         public void GetAccount_DoesntExist_ReturnNull()
         {
             this.AddTestData();
