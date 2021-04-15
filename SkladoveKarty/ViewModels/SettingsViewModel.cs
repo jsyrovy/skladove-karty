@@ -2,6 +2,7 @@
 {
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Windows;
     using SkladoveKarty.Models;
@@ -89,7 +90,7 @@
                 {
                     this.BackupDirectories.Clear();
 
-                    foreach (var directory in FileHelper.GetBackupDirectoriesPaths(this.SettingHelper.BackupDirectory))
+                    foreach (var directory in FileHelper.GetBackupDirectoriesPaths(this.SettingHelper.BackupDirectory).OrderByDescending(d => d))
                         this.BackupDirectories.Add(directory);
                 });
             });

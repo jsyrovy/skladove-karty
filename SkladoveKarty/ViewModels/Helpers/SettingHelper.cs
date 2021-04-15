@@ -9,8 +9,8 @@
         public const string BackupDirectoryName = "BACKUP-DIRECTORY";
         public const string BackupOnExitName = "BACKUP-ON-EXIT";
 
-        private readonly IDatabaseContext databaseContext;
         private static Lazy<SettingHelper> instance;
+        private readonly IDatabaseContext databaseContext;
         private string backupDirectory;
         private bool backupOnExit;
 
