@@ -16,6 +16,8 @@
             if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
                 return;
 
+            this.Settings = new SettingHelper(new DatabaseContext());
+
             this.ImportCommand = new ImportCommand(this);
             this.ExportCommand = new ExportCommand(this);
 
@@ -27,7 +29,7 @@
             this.backupOnExit = this.Settings.BackupOnExit;
         }
 
-        public SettingHelper Settings { get; } = new(new DatabaseContext());
+        public SettingHelper Settings { get; private set; }
 
         public string BackupDirectory
         {

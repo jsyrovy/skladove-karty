@@ -8,9 +8,14 @@
     {
         private string lastActionStatus;
 
+        public BaseViewModel()
+        {
+            this.Database = new(new DatabaseContext());
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public DatabaseHelper Database { get; } = new(new DatabaseContext());
+        public DatabaseHelper Database { get; private set; }
 
         public string LastActionStatus
         {
