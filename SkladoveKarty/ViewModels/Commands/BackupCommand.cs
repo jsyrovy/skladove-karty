@@ -15,17 +15,19 @@
         {
             try
             {
-                FileHelper.CreateDirectory(this.SettingsViewModel.BackupDirectory);
+                var directory = FileHelper.GetCurrentBackupDirectoryPath(this.SettingsViewModel.BackupDirectory);
+
+                FileHelper.CreateDirectory(directory);
 
                 FileHelper.WriteCsv(
-                    FileHelper.GetFilePathWithTimestamp("items", ".csv", this.SettingsViewModel.BackupDirectory),
+                    FileHelper.GetItemsBackupPath(directory),
                     ExportHelper.GetExportItems(this.SettingsViewModel.Database.GetStorageCards()));
 
                 FileHelper.WriteCsv(
-                    FileHelper.GetFilePathWithTimestamp("suppliers", ".csv", this.SettingsViewModel.BackupDirectory),
+                    FileHelper.GetSuppliersBackupPath(directory),
                     ExportHelper.GetExportSuppliers(this.SettingsViewModel.Database.GetStorageCardSuppliers()));
 
-                this.SettingsViewModel.LastActionStatus = $"Data byly zálohovány do '{this.SettingsViewModel.BackupDirectory}'.";
+                this.SettingsViewModel.LastActionStatus = $"Data byly zálohovány do '{directory}'.";
             }
             catch (Exception e)
             {

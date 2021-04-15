@@ -15,6 +15,7 @@
         private const string ItemsFileName = "items.csv";
         private const string SuppliersFileName = "suppliers.csv";
         private const string StorageCardTemplateFileName = "StorageCard.Mustache";
+        private const string DateTimeFormat = "yyyy-MM-dd-HH-mm-ss";
 
         public static string ImportDirectoryPath => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "import");
 
@@ -34,11 +35,9 @@
 
         public static string DefaultBackupDirectoryPath => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "backup");
 
-        public static string GetFilePathWithTimestamp(string fileName, string fileExtension, string directoryPath = null)
+        public static string GetExportStarageCardFilePath(string storageCardName)
         {
-            return Path.Combine(
-                directoryPath ?? Path.GetTempPath(),
-                $"{GetValidFileName(fileName)}_{DateTime.Now:yyyy-MM-dd-HH-mm-ss}{fileExtension}");
+            return Path.Combine(Path.GetTempPath(), $"{GetValidFileName(storageCardName)}_{DateTime.Now.ToString(DateTimeFormat)}.html");
         }
 
         public static void CreateDirectory(string path)
@@ -107,6 +106,21 @@
                 name = name.Replace(invalidChar.ToString(), string.Empty);
 
             return name;
+        }
+
+        public static string GetCurrentBackupDirectoryPath(string backupDirectoryPath = null)
+        {
+            return Path.Combine(backupDirectoryPath ?? DefaultBackupDirectoryPath, DateTime.Now.ToString(DateTimeFormat));
+        }
+
+        public static string GetItemsBackupPath(string backupDirectoryPath = null)
+        {
+            return Path.Combine(backupDirectoryPath ?? DefaultBackupDirectoryPath, ItemsFileName);
+        }
+
+        public static string GetSuppliersBackupPath(string backupDirectoryPath = null)
+        {
+            return Path.Combine(backupDirectoryPath ?? DefaultBackupDirectoryPath, SuppliersFileName);
         }
     }
 }

@@ -27,7 +27,7 @@
 
                 var template = FileHelper.ReadText(FileHelper.StorageCardTemplateFilePath);
                 var html = HtmlHelper.Generate(template, this.MainViewModel.SelectedStorageCard);
-                var path = FileHelper.GetFilePathWithTimestamp(this.MainViewModel.SelectedStorageCard.Name, ".html");
+                var path = FileHelper.GetExportStarageCardFilePath(this.MainViewModel.SelectedStorageCard.Name);
 
                 FileHelper.WriteText(path, html);
                 FileHelper.Open(path);

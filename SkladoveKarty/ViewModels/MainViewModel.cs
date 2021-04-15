@@ -187,15 +187,16 @@
 
             try
             {
-                // TODO: remove duplicity (BackupCommand)
-                FileHelper.CreateDirectory(settings.BackupDirectory);
+                var directory = FileHelper.GetCurrentBackupDirectoryPath(settings.BackupDirectory);
+
+                FileHelper.CreateDirectory(directory);
 
                 FileHelper.WriteCsv(
-                    FileHelper.GetFilePathWithTimestamp("items", ".csv", settings.BackupDirectory),
+                    FileHelper.GetItemsBackupPath(directory),
                     ExportHelper.GetExportItems(this.Database.GetStorageCards()));
 
                 FileHelper.WriteCsv(
-                    FileHelper.GetFilePathWithTimestamp("suppliers", ".csv", settings.BackupDirectory),
+                    FileHelper.GetSuppliersBackupPath(directory),
                     ExportHelper.GetExportSuppliers(this.Database.GetStorageCardSuppliers()));
             }
             catch (Exception e)
