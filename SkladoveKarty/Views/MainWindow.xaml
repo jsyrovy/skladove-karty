@@ -19,7 +19,7 @@
     </Window.Resources>
 
     <Window.DataContext>
-        <vm:MainViewModel />
+        <StaticResource ResourceKey="vm" />
     </Window.DataContext>
 
     <DockPanel>
