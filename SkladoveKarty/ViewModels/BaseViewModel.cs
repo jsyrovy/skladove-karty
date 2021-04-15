@@ -10,7 +10,7 @@
 
         public BaseViewModel()
         {
-            this.Database = new(new DatabaseContext());
+            this.Database = DatabaseHelper.GetInstance(new DatabaseContext());
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -9,11 +9,25 @@
 
     public class DatabaseHelper
     {
+        private static Lazy<DatabaseHelper> instance;
         private readonly IDatabaseContext databaseContext;
 
         public DatabaseHelper(IDatabaseContext databaseContext)
         {
             this.databaseContext = databaseContext;
+        }
+
+        public static DatabaseHelper GetInstance(IDatabaseContext databaseContext)
+        {
+            if (instance == null)
+                instance = new Lazy<DatabaseHelper>(() => new DatabaseHelper(databaseContext));
+
+            return instance.Value;
+        }
+
+        public static void CloseInstance()
+        {
+            instance = null;
         }
 
         public Account GetAccount(string name, List<Account> addedAccounts = null)
